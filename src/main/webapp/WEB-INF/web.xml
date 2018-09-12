@@ -39,7 +39,7 @@
     <filter-class>com.bookstore.filter.CorsFilter</filter-class>
     <init-param>
       <param-name>allowOrigin</param-name>
-      <param-value>http://localhost,null,http://192.168.1.138:8080</param-value>
+      <param-value>http://localhost,null,http://192.168.1.136:8080</param-value>
     </init-param>
     <init-param>
       <param-name>allowMethods</param-name>
