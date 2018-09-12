@@ -47,15 +47,20 @@ public class TestController extends BaseApiController {
         if (username == null || username.trim().length() == 0) return onBadResp("姓名不能为空");
         if (password == null || password.trim().length() == 0) return onBadResp("密码不能为空");
 
+        String filePath = "";
+        if (file != null && !file.isEmpty()) {
+            filePath = fileUploadUtils.getWordPath(file);
+            if (filePath == null) return onBadResp("该文件不符合格式");
+        }
+
         Test test = new Test();
         test.setUserName(username);
         test.setPassword(password);
-
-        String filePath = "";
-
+        test.setFile(filePath.trim());
 
         if (testService.insert(test) > 0) {
             if (StringUtils.isNotEmpty(filePath)) fileUploadUtils.saveFile(file, filePath);
+            test.setFile(filePath);
             return onSuccessRep("添加成功");
         }
         return onBadResp("添加失败");
