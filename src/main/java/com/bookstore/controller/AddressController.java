@@ -32,7 +32,7 @@ public class AddressController extends BaseApiController {
 
     }
 
-    @GetMapping("/insert")
+    @PostMapping("/insert")
     public Map<String,Object> insert(@RequestParam String name,@RequestParam String area,@RequestParam String detailed,
                                      @RequestParam String code,@RequestParam String phone,@RequestParam Long user_id){
         if (name !=null && name.trim().length() == 0) return onBadResp("联系人不能为空");
@@ -50,7 +50,7 @@ public class AddressController extends BaseApiController {
         if (addressService.insert(address)>0) return  onSuccessRep("添加成功");
         return onBadResp("添加失败");
     }
-    @GetMapping ("/updateById")
+    @PostMapping ("/updateById")
     public Map<String,Object> updateById(@RequestParam Long id,@RequestParam Long user_id,@RequestParam String name,@RequestParam String area,@RequestParam String detailed,
                                          @RequestParam String code,@RequestParam String phone){
         if (name !=null && name.trim().length() == 0) return onBadResp("联系人不能为空");
@@ -70,7 +70,7 @@ public class AddressController extends BaseApiController {
         if (addressService.updateById(address)>0) return  onSuccessRep("修改成功");
         return onBadResp("修改失败");
     }
-    @GetMapping ("/deleteById")
+    @PostMapping ("/deleteById")
     public Map<String,Object> deleteById(@RequestParam Long id){
         addressService.deleteById(id);
         return onSuccessRep("删除成功");
