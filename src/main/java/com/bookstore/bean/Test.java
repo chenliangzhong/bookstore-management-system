@@ -5,6 +5,7 @@ public class Test {
     private Long id;
     private String userName;
     private String password;
+    private String file;
 
     public Long getId() {
         return id;
@@ -28,5 +29,13 @@ public class Test {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }
