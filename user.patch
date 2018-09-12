@@ -1,0 +1,15 @@
+Index: src/main/java/com/bookstore/bean/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/bookstore/bean/User.java	(revision )
++++ src/main/java/com/bookstore/bean/User.java	(revision )
+@@ -0,0 +1,7 @@
++package com.bookstore.bean;
++
++/**
++ * Created by Administrator on 2018/9/11.
++ */
++public class User {
++}
