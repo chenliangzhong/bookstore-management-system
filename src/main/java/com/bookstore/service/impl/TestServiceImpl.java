@@ -18,14 +18,4 @@ public class TestServiceImpl implements TestService {
     public List<Test> select() {
         return testDao.select();
     }
-
-    @Override
-    public int updateById(Test test) {
-        return testDao.updateById(test);
-    }
-
-    @Override
-    public int insert(Test test) {
-        return testDao.insert(test);
-    }
 }
