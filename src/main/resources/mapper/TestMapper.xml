@@ -3,6 +3,40 @@
 <mapper namespace="com.bookstore.dao.TestDao">
 
     <select id="select" resultType="com.bookstore.bean.Test">
-        SELECT * FROM tb_test
+        SELECT * FROM tb_address
     </select>
+
+    <update id="updateById" parameterType="com.bookstore.bean.Test">
+        UPDATE tb_test
+        <set>
+            <if test="userName != null">username=#{userName}</if>
+            <if test="password != null">password=#{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <insert id="insert" parameterType="com.bookstore.bean.Test" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_test(username,password,image)
+        VALUE (#{userName},#{password},#{file})
+    </insert>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
