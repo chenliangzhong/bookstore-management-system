@@ -4,14 +4,13 @@ package com.bookstore.bean;
  * Created by heanxing on 2018/9/11.
  */
 public class Address {
-    private  Long id;
+    private Long id;
     private String name;//收货人名字
     private String area;//地区
     private String detailed;//详细地址
     private String code;//邮政编码
     private String phone;//收货号码
     private Long user_id;//外键号码
-
 
     public Address() {
     }
