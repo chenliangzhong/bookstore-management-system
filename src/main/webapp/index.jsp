@@ -25,7 +25,7 @@
 描述：对数据进行更新
 参数：id,name ,area,detailed,code,phone,user_id
 
-<br/>  <li>POST:<a href="/api/address/selectByUserId">api/address/selectByUserId</a></li><br/>
+<br/>  <li>GET:<a href="/api/address/selectByUserId">api/address/selectByUserId</a></li><br/>
 描述：通过user_id查询个人收货地址
 参数：user_id
 
