@@ -1,6 +1,7 @@
 package com.bookstore.bean;
 
 
+import com.bookstore.enums.UserSex;
 
 /**
  * Created by Administrator on 2018/9/11.
@@ -10,8 +11,8 @@ public class User {
 	private String username;
 	private String password;
 	private String phone;
-	private String relname;
-	private String sex;
+	private String realname;
+	private UserSex sex;
 	private String address;
 	private String email;
 
@@ -32,10 +33,10 @@ public class User {
 	}
 
 	public void setRelname(String relname) {
-		this.relname = relname;
+		this.realname = relname;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(UserSex sex) {
 		this.sex = sex;
 	}
 
@@ -64,10 +65,10 @@ public class User {
 	}
 
 	public String getRelname() {
-		return relname;
+		return realname;
 	}
 
-	public String getSex() {
+	public UserSex getSex() {
 		return sex;
 	}
 
