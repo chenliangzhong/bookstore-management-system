@@ -1,3 +1,5 @@
+
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -35,11 +37,16 @@ public class TestControllerTest {
     public void testString()throws Exception {
         String responseString = mockMvc.perform(
 //                    get("/api/activity/list")
-                post("/test/update") // 请求的url，请求的方法是get
+post("/api/user/alterPw") // 请求的url，请求的方法是get
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
-                        .param("id", "1") // 添加参数（可以添加多个）
-                        .param("username", "中国")
-//                        .param("password", "10086")
+                        .param("id","2") // 添加参数（可以添加多个）
+//        .param("username", "测试用户1")
+        .param("password", "1234561")
+//        .param("phone", "123456")
+//        .param("realname", "12")
+//        .param("sex", "MAN")
+//        .param("address", "123456")
+//        .param("email", "123456")
         )
                 .andDo(print()) // 打印出请求和相应的内容
                 .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串
