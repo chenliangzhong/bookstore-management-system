@@ -21,7 +21,7 @@ public class MyPageInfo<T> {
     //结果集
     private List<T> list;
 
-    public MyPageInfo() {
+    public MyPageInfo(User user) {
     }
 
     public MyPageInfo(List<T> list) {
