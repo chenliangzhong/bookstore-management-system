@@ -23,13 +23,11 @@ public class AddressController extends BaseApiController {
     public Map<String,Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "5") Integer page_size){
         PageHelper.startPage(page_num,page_size);
         return onDataResp(new MyPageInfo<Address>(addressService.list()));
-
     }
 
     @GetMapping("selectByUserId")
     public Map<String,Object> selectByUserId(@RequestParam Long user_id){
         return onDataResp(addressService.selectByUserId(user_id));
-
     }
 
     @PostMapping("/insert")
@@ -75,8 +73,5 @@ public class AddressController extends BaseApiController {
         addressService.deleteById(id);
         return onSuccessRep("删除成功");
     }
-
-
-
 
 }

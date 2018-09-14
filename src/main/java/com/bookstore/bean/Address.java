@@ -12,7 +12,6 @@ public class Address {
     private String phone;//收货号码
     private Long user_id;//外键号码
 
-
     public Address() {
     }
 
