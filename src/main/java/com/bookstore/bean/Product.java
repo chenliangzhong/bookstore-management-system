@@ -9,24 +9,25 @@ import java.math.BigDecimal;
  * Created by SX-503 on 2018/9/12.
  */
 public class Product {
-    private Long Id;
+    private Long id;
     private String bookName;
-    private  String author;
+    private String author;
     private String press;
     private BigDecimal price;
     private String image;
-    private String describe;
-    private Long stock;
-    private Long status;
+    private String description;
+    private Integer stock;
+    private Integer status;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
     private Long categoryId;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getBookName() {
@@ -69,27 +70,27 @@ public class Product {
         this.image = image;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Long getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(Long stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

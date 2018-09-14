@@ -52,4 +52,26 @@ post("/api/user/alterPw") // 请求的url，请求的方法是get
                 .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串
         System.out.println("-----返回的json = " + responseString);
     }
+
+    @Test
+    public void testString1()throws Exception {
+        String responseString = mockMvc.perform(
+                post("/api/product/add") // 请求的url，请求的方法是post
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
+                        .param("book_name","1")
+                        .param("author","1")
+                        .param("press","1")
+                        .param("price","3")
+                        .param("image","1")
+                        .param("description","4")
+                        .param("stock","1")
+                        .param("status","1")
+                        .param("create_time","2018-12-4")
+                        .param("category_id","1")
+
+        )
+                .andDo(print()) // 打印出请求和相应的内容
+                .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串
+        System.out.println("-----返回的json = " + responseString);
+    }
 }

@@ -10,10 +10,10 @@
         SELECT * FROM  tb_product WHERE id=#{id}
     </select>
 
-    <insert id="insert" parameterType="com.bookstore.bean.Product" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tb_product(book_name,author,press,price,image,describe,stock,status,create_time,category_id)
-        VALUES (#{bookName},#{author},#{press},#{price},#{image},#{describe},#{stock},#{status},#{createTime},#{categoryId})
-    </insert>
+  <insert id="insert" parameterType="com.bookstore.bean.Product" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO tb_product(book_name,author,press,price,image,description,stock,status,create_time,category_id)
+      VALUES (#{bookName},#{author},#{press},#{price},#{image},#{description},#{stock},#{status},#{createTime},#{categoryId})
+  </insert>
 
     <update id="updateById" parameterType="com.bookstore.bean.Product">
         UPDATE tb_product
