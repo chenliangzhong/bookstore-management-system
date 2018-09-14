@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookstore.dao.CategoryDao">
+    <resultMap id="categoryResultMap" type="com.bookstore.bean.Category">
+        <id column="id" property="id" />
+        <result column="theory" property="theory" />
+        <result column="philosophy" property="philosophy"/>
+        <result column="sciences" property="sciences"/>
+        <result column="law" property="law"/>
+        <result column="military" property="military"/>
+    </resultMap>
+    <select id="select" resultMap="categoryResultMap" parameterType="com.bookstore.bean.Category">
+        SELECT * FROM tb_category
+    </select>
+    <insert id="insert" parameterType="com.bookstore.bean.Category" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_category(theory, philosophy, sciences, law, military) VALUES (#{theory},#{ philosophy},#{sciences},#{law},#{military})
+    </insert>
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        DELETE FROM tb_category WHERE id=#{id}
+    </delete>
+    <update id="updateById" parameterType="com.bookstore.bean.Category">
+        UPDATE tb_category
+        <set>
+            <if test="theory != null">theory=#{theory}</if>
+            <if test="philosophy != null">philosophy=#{philosophy}</if>
+            <if test="sciences != null">sciences=#{sciences}</if>
+            <if test="law != null">law=#{law}</if>
+            <if test="military != null">military=#{military}</if>
+        </set>
+        WHERE id IN
+        <foreach item="item" index="index" collection="id" open="(" close=")" separator="," >
+            #{item}
+        </foreach>
+      UPDATE tb_category SET theory=#{theory}, philosophy=#{philosophy},sciences=#{sciences},law=#{law},military=#{military} WHERE id=#{id}
+    </update>
+</mapper>
