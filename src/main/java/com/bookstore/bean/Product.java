@@ -2,7 +2,7 @@ package com.bookstore.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 import java.math.BigDecimal;
 
 /**
@@ -18,7 +18,7 @@ public class Product {
     private String describe;
     private Long stock;
     private Long status;
-    private Data createTime;
+    private Date createTime;
     private Long categoryId;
 
     public Long getId() {
@@ -94,11 +94,11 @@ public class Product {
     }
 
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    public Data getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Data createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
