@@ -2,14 +2,11 @@ package com.bookstore.controller;
 
 import com.bookstore.bean.MyPageInfo;
 import com.bookstore.bean.Product;
-import com.bookstore.exception.BadRequestException;
 import com.bookstore.service.ProductService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
@@ -50,7 +47,7 @@ public class ProductController extends BaseApiController {
         product.setDescribe(describe.trim());
         product.setStock(stock);
         product.setStatus(status);
-        product.setCreateTime((Data) create_time);
+        product.setCreateTime(create_time);
         product.setCategoryId(category_id);
 
         if (productService.insert(product) > 0) return onSuccessRep("添加成功");
@@ -86,7 +83,7 @@ public class ProductController extends BaseApiController {
        if (describe != null) product.setDescribe(describe.trim());
        if (stock != null) product.setStock(stock);
        if (status != null) product.setStatus(status);
-       if (create_time != null) product.setCreateTime((Data) create_time);
+       if (create_time != null) product.setCreateTime(create_time);
        if (category_id != null) product.setCategoryId(category_id);
 
        productService.updateById(product);
