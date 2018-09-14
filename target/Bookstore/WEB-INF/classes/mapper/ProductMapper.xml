@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookstore.dao.ProductDao">
+
+    <select id="select" resultType="com.bookstore.bean.Product">
+        SELECT * FROM tb_product
+    </select>
+
+    <select id="selectById" resultType="com.bookstore.bean.Product">
+        SELECT * FROM  tb_product WHERE id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="com.bookstore.bean.Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_product(book_name,author,press,price,image,describe,inventory,status,category_id)
+        VALUES (#{bookName},#{author},#{press},#{price},#{image},#{describe},#{inventory},#{status},#{categoryId})
+    </insert>
+
+    <update id="updateById" parameterType="com.bookstore.bean.Product">
+        UPDATE tb_product
+        <set>
+            <if test="book_name != null">book_name=#{bookName},</if>
+            <if test="author != null">author=#{author},</if>
+            <if test="press != null">press=#{press},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="image != null">image=#{image},</if>
+            <if test="describe != null">describe=#{describe},</if>
+            <if test="inventory != null">inventory=#{inventory},</if>
+            <if test="status != null">status=#{status},</if>
+            <if test="category_id != null">category_id=#{categoryId}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteBatch">
+    DELETE FROM tb_product WHERE id IN
+    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</delete>
+
+</mapper>
