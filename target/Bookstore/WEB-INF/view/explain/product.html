@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>product表说明文档</title>
+</head>
+<body>
+<h3>product产品文档</h3>
+<ul>
+    <li>
+        <P>POST：<a href="/api/product/add">/api/product/add</a></P>
+        <P>描述：添加产品信息</P>
+        <P>参数：book_name (book_name，不为空)，author (author，不为空)，
+            press (press，不为空)，price (price，不为空)，
+            image (image，不为空)，describe (describe，不为空)，inventory (inventory，不为空)，
+            status (status，不为空)，category_id (category_id，不为空)
+        </P>
+    </li>
+
+    <li>
+        <P>GET：<a href="/api/product/list">/api/product/list</a></P>
+        <P>描述：查看产品信息</P>
+        <P>参数：page_num (默认为第一页，可为空)，page_size (默认为10条数据，可为空)</P>
+    </li>
+
+    <li>
+        <P>POST：<a href="/api/product/update">/api/product/update</a></P>
+        <P>描述：根据id修改产品信息</P>
+        <P>参数：id (主键，不为空)， book_name (book_name，不为空)，author (author，不为空)，
+            press (press，不为空)，price (price，不为空)，
+            image (image，不为空)，describe (describe，不为空)，inventory (inventory，不为空)，
+            status (status，不为空)，category_id (category_id，不为空)
+        </P>
+    </li>
+
+    <li>
+        <P>POST：<a href="/api/product/delete">/api/product/delete</a></P>
+        <P>描述：根据传入id删除产品信息 (可批量删除)</P>
+        <P>参数：id</P>
+    </li>
+
+</ul>
+</body>
+</html>
