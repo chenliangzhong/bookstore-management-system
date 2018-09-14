@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookstore.dao.AddressDao">
+
+  <insert id="insert" parameterType="com.bookstore.bean.Address" useGeneratedKeys="true" keyProperty="id">
+
+      INSERT INTO  tb_address(name,area,detailed,code,phone,user_id)VALUES (#{name},#{area},#{detailed},#{code},#{phone},#{user_id})
+  </insert>
+
+    <select id="selectById" resultType="com.bookstore.bean.Address">
+        SELECT * FROM tb_address WHERE  id=#{id}
+
+    </select>
+
+    <select id="selectByUserId" resultType="com.bookstore.bean.Address">
+        SELECT * FROM tb_address WHERE  user_id=#{user_id}
+
+    </select>
+    
+    <select id="list" resultType="com.bookstore.bean.Address">
+        SELECT * FROM tb_address ORDER BY id DESC
+    </select>
+
+    <update id="updateById" parameterType="com.bookstore.bean.Address">
+          UPDATE tb_address
+          <set>
+              <if test="user_id !=null">user_id=#{user_id},</if>
+              <if test="name !=null">name=#{name},</if>
+              <if test="area !=null">area=#{area},</if>
+              <if test="detailed !=null">detailed=#{detailed},</if>
+              <if test="code !=null">code=#{code},</if>
+              <if test="phone !=null">phone=#{phone}</if>
+          </set>
+        WHERE id=#{id}
+
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE  FROM tb_address WHERE  id=#{id}
+        <!--IN-->
+        <!--<foreach collection="array" item="item" index="index" open="(" separator="," close= ")">-->
+            <!--#{item}-->
+        <!--</foreach>-->
+    </delete>
+    
+</mapper>
