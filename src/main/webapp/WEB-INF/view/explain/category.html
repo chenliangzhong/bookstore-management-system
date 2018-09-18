@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>category</title>
+</head>
+<body>
+    <h3>分类管理</h3>
+    <ul>
+        <li><p>GET：<a href="/api/category/list">/api/category/list</a> </p></li>
+        <p>描述：分页查询所有分类</p>
+        <p>参数：page_num(默认为第一页，可为空)，page_size(默认为10条数据，可为空)</p>
+
+        <li><p>POST：<a href="/api/category/add">/api/category/add</a> </p></li>
+        <p>描述：添加分类</p>
+        <p>参数：theory (theory 不为空), philosophy (philosophy 不为空), sciences (sciences 不为空), law (law 不为空), military (military 不为空)</p>
+
+        <li><p>GET：<a href="/api/category/delete">/api/category/delete</a> </p></li>
+        <p>描述：删除分类</p>
+        <p>参数：id</p>
+
+        <li><p>POST：<a href="/api/category/update">/api/category/update</a> </p></li>
+        <p>描述：修改分类</p>
+        <p>参数：theory (theory 不为空), philosophy (philosophy 不为空), sciences (sciences 不为空), law (law 不为空), military (military 不为空)</p>
+    </ul>
+</body>
+</html>
