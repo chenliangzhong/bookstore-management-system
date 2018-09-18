@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by ${邹} on 2018/9/11.
  */
 @RestController
-@RequestMapping("/category")
+@RequestMapping("api/category")
 public class CategoryController extends BaseApiController {
     @Autowired
     CategoryService categoryService;
