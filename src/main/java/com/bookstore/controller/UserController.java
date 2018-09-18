@@ -4,32 +4,15 @@ package com.bookstore.controller;
  * Created by Administrator on 2018/9/11.
  */
 
-import com.bookstore.annotation.SystemControllerLog;
 import com.bookstore.bean.MyPageInfo;
 import com.bookstore.bean.User;
 import com.bookstore.enums.UserSex;
 import com.bookstore.exception.BadRequestException;
 import com.bookstore.service.UserService;
 import com.github.pagehelper.PageHelper;
-import com.google.gson.Gson;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import sun.security.util.Password;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 @RestController
@@ -56,7 +39,7 @@ UserController extends BaseApiController {
 	}
 
 	// 注册接口
-	@RequestMapping("/register")
+	@PostMapping("/register")
 	public Map<String, Object> register(@RequestParam String username, @RequestParam String password,
 										@RequestParam String phone, @RequestParam String realname,
 										@RequestParam UserSex sex, @RequestParam(defaultValue = "") String address,
