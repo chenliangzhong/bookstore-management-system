@@ -37,4 +37,9 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.updateById( category );
     }
 
+    @Override
+    public List<Category> listByName(String name) {
+        return categoryDao.listByName( name );
+    }
+
 }

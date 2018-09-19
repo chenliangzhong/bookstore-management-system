@@ -1,6 +1,7 @@
 package com.bookstore.dao;
 
 import com.bookstore.bean.Category;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,8 +16,11 @@ public interface CategoryDao {
     // 增
     int insert(Category category);
     // 删
-    int deleteById(Long id);
+    int deleteById( Long id);
     // 改
     int updateById(Category category);
+    // 模糊查询
+    List<Category> listByName(@Param( "name" ) String name);
+
 
 }
