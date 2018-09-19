@@ -17,7 +17,8 @@ public interface CategoryService {
     // 删
     int deleteById(Long id);
     // 改
-//    int updateById(Category category,Long... id);
     int updateById(Category category);
+    // 模糊查询
+    List<Category> listByName(String name);
 
 }

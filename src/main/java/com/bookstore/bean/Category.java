@@ -5,11 +5,7 @@ package com.bookstore.bean;
  */
 public class Category {
     private Long id;
-    private String theory;
-    private String philosophy;
-    private String sciences;
-    private String law;
-    private String military;
+    private String name;
 
     public Long getId() {
         return id;
@@ -19,55 +15,19 @@ public class Category {
         this.id = id;
     }
 
-    public String getTheory() {
-        return theory;
+    public String getName() {
+        return name;
     }
 
-    public void setTheory(String theory) {
-        this.theory = theory;
-    }
-
-    public String getPhilosophy() {
-        return philosophy;
-    }
-
-    public void setPhilosophy(String philosophy) {
-        this.philosophy = philosophy;
-    }
-
-    public String getSciences() {
-        return sciences;
-    }
-
-    public void setSciences(String sciences) {
-        this.sciences = sciences;
-    }
-
-    public String getLaw() {
-        return law;
-    }
-
-    public void setLaw(String law) {
-        this.law = law;
-    }
-
-    public String getMilitary() {
-        return military;
-    }
-
-    public void setMilitary(String military) {
-        this.military = military;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
-                ", theory='" + theory + '\'' +
-                ", philosophy='" + philosophy + '\'' +
-                ", sciences='" + sciences + '\'' +
-                ", law='" + law + '\'' +
-                ", military='" + military + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

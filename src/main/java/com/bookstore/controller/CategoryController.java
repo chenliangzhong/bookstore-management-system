@@ -18,7 +18,7 @@ public class CategoryController extends BaseApiController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/list")
+    @GetMapping("/show")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size)
     {
         PageHelper.startPage(page_num, page_size);
@@ -26,20 +26,10 @@ public class CategoryController extends BaseApiController {
     }
 
     @PostMapping("/add")
-    public Map<String,Object> add(@RequestParam String theory, @RequestParam String philosophy,
-                                  @RequestParam String sciences, @RequestParam String law,
-                                  @RequestParam String military){
-        if (theory == null || theory.trim().length() == 0)return onBadResp( "马克思主义不能为空" );
-        if (philosophy == null || philosophy.trim().length() == 0)return onBadResp( "哲学、宗教不能为空" );
-        if (sciences == null || sciences.trim().length() == 0)return onBadResp( "社会科学总论不能为空" );
-        if (law == null || law.trim().length() == 0)return onBadResp( "政治、法律不能为空" );
-        if (military == null || military.trim().length() == 0)return onBadResp( "军事不能为空" );
+    public Map<String,Object> add(@RequestParam String name){
+        if (name == null || name.trim().length() == 0)return onBadResp( "分类名不能为空" );
         Category category = new Category();
-        category.setTheory( theory );
-        category.setPhilosophy( philosophy );
-        category.setSciences( sciences );
-        category.setLaw( law );
-        category.setMilitary( military );
+        category.setName( name );
         categoryService.insert( category );
         return onRespWithId( "保存成功",category.getId() );
     }
@@ -52,25 +42,18 @@ public class CategoryController extends BaseApiController {
     }
 
     @PostMapping("update")
-    public Map<String,Object> update(@RequestParam Long id,@RequestParam String theory,
-                                     @RequestParam String philosophy,@RequestParam String sciences,
-                                     @RequestParam String law,@RequestParam String military){
+    public Map<String,Object> update(@RequestParam Long id,@RequestParam String name){
         Category category = new Category();
-        System.out.println( id );
-        System.out.println( theory );
-        System.out.println( philosophy );
-        System.out.println( sciences );
-        System.out.println( law );
-        System.out.println( military );
         category.setId( id );
-        if (theory != null)category.setTheory( theory.trim() );
-        if ( philosophy != null)category.setPhilosophy( philosophy.trim() );
-        if (sciences != null)category.setSciences( sciences.trim() );
-        if (law != null)category.setLaw( law.trim() );
-        if (military != null)category.setMilitary( military.trim() );
+        if (name != null)category.setName( name.trim() );
         categoryService.updateById( category);
         return onSuccessRep( "修改成功" );
     }
 
+    @GetMapping ("/list")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, String name) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Category>(categoryService.listByName(name)));
+    }
 
 }
