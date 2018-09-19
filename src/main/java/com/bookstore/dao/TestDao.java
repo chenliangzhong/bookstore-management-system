@@ -9,8 +9,4 @@ import java.util.List;
 public interface TestDao {
 
     List<Test> select();
-
-    int updateById(Test test);
-
-    int insert(Test test);
 }

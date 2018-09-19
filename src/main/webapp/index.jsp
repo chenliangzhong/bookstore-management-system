@@ -7,10 +7,6 @@
 <ul>
     <li><a href="/explain/test">说明页面</a></li>
     <li><a href="/test/list">用户查询</a></li>
-    <li><a href="/explain/product">产品管理接口</a></li>
-    <li><a href="/explain/address">收货地址管理接口</a></li>
-    <li><a href="/explain/category">分类接口</a> </li>
-    <li><a href="/explain/user">用户接口</a> </li>
 </ul>
 </body>
 </html>
