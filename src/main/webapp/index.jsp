@@ -5,8 +5,7 @@
 </head>
 <body>
 <ul>
-    <li><a href="/explain/test">说明页面</a></li>
-    <li><a href="/test/list">用户查询</a></li>
+    <li><a href="/explain/user">用户文档</a></li>
 </ul>
 </body>
 </html>
