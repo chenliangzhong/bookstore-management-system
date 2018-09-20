@@ -73,12 +73,12 @@ public class ProductController extends BaseApiController{
         if (create_date != null) product.setCreateDate(create_date);
         if (category_id != null) product.setCategoryId(category_id);
 
-        productService.updateById(product);
-        return onSuccessRep("修改成功");
+        if (productService.updateById(product) > 0){onSuccessRep("修改成功");}
+        return onSuccessRep("修改失败");
     }
 
     // 查
-    @GetMapping("/select")
+    @GetMapping("/list")
     public MyPageInfo<Product> select(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize)
     {
         PageHelper.startPage(pageNo,pageSize);
