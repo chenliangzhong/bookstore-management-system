@@ -20,11 +20,11 @@
         <set>
             <if test="name != null">name=#{name},</if>
             <if test="subtitle != null">subtitle=#{subtitle},</if>
-            <if test="original_price != null">original_price=#{originalPrice},</if>
-            <if test="promote_price != null">promote_price=#{promotePrice},</if>
+            <if test="originalPrice != null">original_price=#{originalPrice},</if>
+            <if test="promotePrice != null">promote_price=#{promotePrice},</if>
             <if test="stock != null">stock=#{stock},</if>
-            <if test="create_date != null">create_date=#{createDate},</if>
-            <if test="category_id != null">category_id=#{categoryId},</if>
+            <if test="createDate != null">create_date=#{createDate},</if>
+            <if test="categoryId != null">category_id=#{categoryId}</if>
 
         </set>
         WHERE id=#{id}

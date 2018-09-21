@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>product接口说明</title>
+</head>
+<body>
+<h3></h3>
+<ul>
+    <li>
+        <p>POST：<a href="/api/product/add">/api/product/add</a></p>
+        <p>描述：添加商品接口</p>
+        <p>参数: name(名字) ，subtitle(小标题)，original_price(原价格)，promote_price(优惠价格)，stock(库存)，create_date(时间，格式：'yyyy-MM-dd')，category_id(外键,指向用户表)</p>
+        <form action="/api/product/add" method="post">
+            <table>
+                <tr>
+                    <td>名字：</td>
+                    <td><input type="text" name="name"/></td>
+                </tr>
+                <tr>
+                    <td>小标题：</td>
+                    <td><input type="text" name="subtitle"/></td>
+                </tr>
+                <tr>
+                    <td>原价格：</td>
+                    <td><input type="text" name="original_price"/></td>
+                </tr>
+                <tr>
+                    <td>优惠价格：</td>
+                    <td><input type="text" name="promote_price"/></td>
+                </tr>
+                <tr>
+                    <td>库存：</td>
+                    <td><input type="text" name="stock"/></td>
+                </tr>
+                <tr>
+                    <td>时间：</td>
+                    <td><input type="text" name="create_date"/></td>
+                </tr>
+                <tr>
+                    <td>外键,指向用户表：</td>
+                    <td><input type="text" name="category_id"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交"/></td>
+                </tr>
+            </table>
+        </form>
+    </li>
+
+    <li>
+        <p>GET：<a href="/api/product/list">/api/product/list</a></p>
+        <p>描述: 查看首页商品列表</p>
+        <p>参数：page_num(默认为第一页，可为空)，page_size(默认为10条数据，可为空) </p>
+    </li>
+
+    <li>
+        <p>POST：<a href="/api/product/update">/api/product/update</a></p>
+        <p>描述: 根据id修改内容参数</p>
+        <p>参数: id(主键)，，subtitle(小标题)，original_price(原价格)，promote_price(优惠价格)，stock(库存)，create_date(时间，格式：'yyyy-MM-dd')，category_id(外键,指向用户表)</p>
+        <form action="/api/product/update" method="post">
+            <table>
+                <tr>
+                    <td>id：</td>
+                    <td><input type="text" name="id"/></td>
+                </tr>
+                <tr>
+                    <td>名字：</td>
+                    <td><input type="text" name="name"/></td>
+                </tr>
+                <tr>
+                    <td>小标题：</td>
+                    <td><input type="text" name="subtitle"/></td>
+                </tr>
+                <tr>
+                    <td>原价格：</td>
+                    <td><input type="text" name="original_price"/></td>
+                </tr>
+                <tr>
+                    <td>优惠价格：</td>
+                    <td><input type="text" name="promote_price"/></td>
+                </tr>
+                <tr>
+                    <td>库存：</td>
+                    <td><input type="text" name="stock"/></td>
+                </tr>
+                <tr>
+                    <td>时间：</td>
+                    <td><input type="text" name="create_date"/></td>
+                </tr>
+                <tr>
+                    <td>外键,指向用户表：</td>
+                    <td><input type="text" name="category_id"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交"/></td>
+                </tr>
+            </table>
+        </form>
+    </li>
+
+    <li>
+        <p>POST：<a href="/api/product/delete">/api/product/delete</a></p>
+        <p>描述: 根据传入批量id删除对应的商品</p>
+        <p>参数: id</p>
+        <form action="/api/product/delete" method="post">
+            <table>
+                <tr>
+                    <td>id：</td>
+                    <td><input type="text" name="id"/></td>
+                </tr>
+                <tr>
+                    <td>id：</td>
+                    <td><input type="text" name="id"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交"/></td>
+                </tr>
+            </table>
+        </form>
+    </li>
+</ul>
+</body>
+</html>
