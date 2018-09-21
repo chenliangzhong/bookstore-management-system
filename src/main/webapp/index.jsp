@@ -6,6 +6,7 @@
 <body>
 <ul>
     <li><a href="/explain/user">用户文档</a></li>
+    <%--<li><a href="/explain/test">Test文档</a></li>--%>
 </ul>
 </body>
 </html>

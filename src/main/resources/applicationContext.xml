@@ -17,6 +17,10 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
     <mvc:annotation-driven />
 
+    <bean class="com.bookstore.util.FileUploadUtils">
+        <property name="basePath" value="../webapps/Bookstore/file" />
+    </bean>
+
     <beans profile="test"  >
         <context:property-placeholder location="classpath*:jdbc-test.properties" />
     </beans>
