@@ -17,34 +17,19 @@
     </style>
 </head>
 <body>
-    <ul>
-       <li>
-           <form action="/upload/add" method="post"  enctype="multipart/form-data">
-               <table>
 
-                   <tr>
-                       <td>附件：</td>
-                       <td><input type="file" name="file"/></td>
-                   </tr>
-                   <tr>
-                   <td><input type="submit" value="提交"/></td>
-                   </tr>
-               </table>
-           </form>
-       </li>
-
-    </ul>
 
     <div id="qrcodeTable"></div>
 
     <script>
         var host = window.location.host;
+
         jQuery('#qrcodeTable').qrcode({
-            width: 180, //生成的二维码的宽度
-            height: 180, //生成的二维码的高度
+            width: 200, //生成的二维码的宽度
+            height: 200, //生成的二维码的高度
             render	: "table",
             correctLevel:0,
-            text	: "http://"+host+"/download/word/20180920220758936_915958.apk"
+            text	: "http://192.168.1.138:8081/app/20180920132651189_469256.apk"
         });
     </script>
 </body>

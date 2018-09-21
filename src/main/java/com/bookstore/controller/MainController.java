@@ -10,4 +10,7 @@ public class MainController extends BaseController {
     public String explainpage(@PathVariable String page) {
         return "/explain/" + page;
     }
+
+    @GetMapping("/index/{page}")
+    public String Indec(@PathVariable String page) {return page;}
 }

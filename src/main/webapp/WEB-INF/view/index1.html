@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<title>Document</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    	<script type="text/javascript" src="js/jquery.qrcode.js"></script>
+    	<script type="text/javascript" src="js/qrcode.js"></script>
+  <style>
+		body{
+            background-color: #9f8f8f;
+		}
+        a{
+        	font-size: 14px;
+            color:#eee;
+        }
+        a:hover{
+            text-decoration: none;
+            color: #fff;
+        }
+   
+ /*   .show-grid{
+  
+            position: absolute; top: 0; left: 0; 
+            right: 0; 
+            z-index: 10;
+            margin-top: 20px;
+            margin-bottom: -90px;
+            font-size: 16px; font-weight: bold;
+        }
+        .span2{
+            
+            float: left;
+         margin-left: 100px;
+           
+           
+        }
+        .span10{
+            position: relative;
+            left: 900px;
+           float: left;
+           text-align: right;
+        }*/
+
+     #demo img{
+     	width: 100%;
+        height: 100%;
+        /*height: 100vh; 高度按照屏幕来改变*/
+		overflow:hidden;
+     	background-repeat: no-repeat;  
+        background-position: center;  
+        -webkit-background-size:cover;
+		-moz-background-size:cover;
+		background-size:100% 100%;
+    }
+    .carousel-control-prev-icon{
+    	width: 50px;
+    	height: 120px;
+    }
+    .carousel-control-next-icon{
+    	width: 50px;
+    	height: 120px;
+    }
+    .white_content {
+		display: none;
+		position: absolute;
+		top: 20%;
+		left: 35%;
+		width: 30%;
+		height: 60%;
+		
+		background-color: white;
+		z-index:1002;
+		overflow: auto;
+	}
+	.top{
+		display: block;
+		position: absolute;
+		top: 20px;
+		left: 10%;
+		width: 80%;
+		height: 5%;
+		z-index:7;
+	
+	}
+	.left{
+		float: left;
+	}
+	.right{
+		
+		float: left;
+		position: absolute;
+		right: 1px;
+	}
+
+	#qrcodeTable{
+		display: block;
+		position: absolute;
+		top: 20%;
+		left: 30%;
+		width: 50%;
+		height: 60%;
+		z-index:2;
+		overflow: auto;
+	}
+  </style>
+  <script type="text/javascript">
+//弹出隐藏层
+function ShowDiv(show_div,bg_div){
+document.getElementById(show_div).style.display='block';
+document.getElementById(bg_div).style.display='block' ;
+var bgdiv = document.getElementById(bg_div);
+bgdiv.style.width = document.body.scrollWidth;
+// bgdiv.style.height = $(document).height();
+$("#"+bg_div).height($(document).height());
+};
+//关闭弹出层
+function CloseDiv(show_div,bg_div)
+{
+document.getElementById(show_div).style.display='none';
+document.getElementById(bg_div).style.display='none';
+};
+</script>
+</head>
+<body >
+<!-- <div container-fluid>
+    <div class="row-fluid show-grid">
+         <div class="span2"><a href="#"><img src="img/logo.png" style="width: 30px;height: 20px;" alt="">&nbsp;卓越书店</a></div>
+         <div class="span10">
+	        
+	         <a href=""><img src="img/android.png" style="width: 80px; height:35px" alt=""></a>
+	         <img onclick="ShowDiv('MyDiv')"  src="img/erweima.png" style="width: 80px; height:35px ;" alt="">
+	     </div>
+    </div> --> 
+    <div class="top">
+    	<div>
+			<div class="left"><a href="#"><img src="img/logo.png" style="width: 30px;height: 20px;" alt="">&nbsp;卓越书店</a></div>
+	        <div class="right"><a href=""><img src="img/android.png" style="width: 80px; height:35px" alt=""></a>
+		     <img onclick="ShowDiv('MyDiv')"  src="img/erweima.png" style="width: 80px; height:35px ;" alt="">
+		    </div>
+		</div>
+    </div>      
+</div>  
+	<div id="demo" class="carousel slide" data-ride="carousel">
+        
+        <!-- 指示符 -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+            <li data-target="#demo" data-slide-to="3"></li>
+        </ul>
+ 
+        <!-- 轮播图片 -->
+        <div class="carousel-inner">
+            <div class="carousel-item active carousel-bg1">
+                <img src="img/examples/lun01.png" >
+            </div>
+            <div class="carousel-item carousel-bg2">
+                <img src="img/examples/lun02.png" >
+            </div>
+            <div class="carousel-item carousel-bg3">
+                <img src="img/examples/lun03.png" >
+            </div>
+            <div class="carousel-item carousel-bg4">
+                <img src="img/examples/lun02.png" >
+            </div>
+        </div>
+        <!-- 左右切换按钮 -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    <!-- 轮播图结束 -->
+
+   <div id="MyDiv" class="white_content">
+        <div style="text-align: right; cursor: default; height: 40px;" id="move">
+        <span style="font-size: 16px;" onclick="CloseDiv('MyDiv')">关闭</span>
+        </div>
+         <div id="qrcodeTable"></div>
+
+    </div>
+
+
+    <script>
+        var host = window.location.host;
+
+        jQuery('#qrcodeTable').qrcode({
+            width: 200, //生成的二维码的宽度
+            height: 200, //生成的二维码的高度
+            render	: "table",
+            correctLevel:0,
+            text	: "http://"+host+"/app/20180920132651189_469256.apk"
+        });
+    </script>
+</body>
+</html>
