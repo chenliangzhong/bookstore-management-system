@@ -5,8 +5,8 @@
 </head>
 <body>
 <ul>
-    <li><a href="/explain/category">分类接口</a> </li>
-    <li><a href="/explain/property">产品属性接口</a> </li>
+    <li><a href="/explain/category">分类文档</a> </li>
+    <li><a href="/explain/property">产品属性文档</a> </li>
     <li><a href="/explain/user">用户说明文档</a></li>
     <li><a href="/explain/product">商品说明文档</a></li>
 </ul>

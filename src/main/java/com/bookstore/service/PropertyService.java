@@ -11,4 +11,7 @@ import java.util.List;
 @Repository
 public interface PropertyService {
     List<Property> select();
+    int deleteById(Long id);
+    int updateById(Property property);
+    int insert(Property property);
 }

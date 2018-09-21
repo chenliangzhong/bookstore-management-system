@@ -5,10 +5,7 @@ import com.bookstore.bean.Property;
 import com.bookstore.service.PropertyService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -25,4 +22,32 @@ public class PropertyController extends BaseApiController {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Property>(propertyService.select()));
     }
+    @GetMapping("delete")
+    public Map<String,Object> delete(@RequestParam Long id){
+        propertyService.deleteById( id );
+        return onSuccessRep( "删除成功" );
+    }
+    @PostMapping("update")
+    public Map<String,Object> update(@RequestParam Long id,@RequestParam String name,@RequestParam Long category_id){
+        Property property = new Property();
+        property.setId( id );
+        if (name != null)property.setName( name.trim() );
+        propertyService.updateById( property);
+        return onSuccessRep( "修改成功" );
+    }
+
+    @PostMapping("/add")
+    public Map<String, Object> add(@RequestParam String name, @RequestParam Long category_id) {
+
+        if (name == null || name.trim().length() == 0) return onBadResp("name 不能为空");
+        if (category_id == null) return onBadResp("category_id 不能为空");
+
+        Property property = new Property();
+        property.setName(name.trim());
+        property.setCategory_id(category_id);
+
+        if (propertyService.insert(property) > 0) return onSuccessRep("添加成功");
+        return onBadResp("添加失败");
+    }
+
 }
