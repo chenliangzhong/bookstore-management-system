@@ -19,4 +19,20 @@ public class PropertyServiceImpl implements PropertyService {
     public List<Property> select() {
         return propertyDao.select();
     }
+
+    @Override
+    public int deleteById(Long id) {
+        return propertyDao.deleteById( id );
+    }
+
+    @Override
+    public int updateById(Property property) {
+        return propertyDao.updateById( property );
+    }
+
+    @Override
+    public int insert(Property property) {
+        return propertyDao.insert( property );
+    }
+
 }
