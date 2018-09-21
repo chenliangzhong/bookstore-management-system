@@ -24,7 +24,7 @@ public class FileUploadUtils {
     public static final String DATA_PATH = "/data/";
 
     private static final String[] IMAGE_SUFFIX = {"jpeg", "jpg", "png", "gif"};
-    private static final String[] WORD_SUFFIX = {"txt", "doc", "docx"};
+    private static final String[] WORD_SUFFIX = {"txt", "doc", "docx","jpeg", "jpg", "png", "gif","apk"};
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
     private String basePath = "";
