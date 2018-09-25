@@ -7,6 +7,7 @@ package com.bookstore.bean;
 public class Property {
     private Long id;
     private String name;
+    private Long categoryId;
 
     public Long getCategoryId() {
         return categoryId;
@@ -15,8 +16,6 @@ public class Property {
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
-
-    private Long categoryId;
 
     public void setCategory_id(Long category_id) {
         this.categoryId = category_id;

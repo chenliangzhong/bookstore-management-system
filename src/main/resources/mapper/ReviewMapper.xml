@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookstore.dao.ReviewDao">
+    <select id="select" resultType="com.bookstore.bean.Review" >
+        SELECT * FROM tb_review
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long" >
+        DELETE FROM tb_review WHERE id=#{id}
+    </delete>
+    <update id="updateById" parameterType="com.bookstore.bean.Review">
+        UPDATE tb_review
+        <set>
+            <if test="content != null">content=#{content},</if>
+            <if test="createDate != null">create_date=#{createDate},</if>
+            <if test="userId != null">user_id=#{userId},</if>
+            <if test="productId != null">product_id=#{productId},</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <insert id="insert" parameterType="com.bookstore.bean.Review" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_review(content, create_date, user_id, product_id)
+        VALUES (#{content},#{createDate},#{userId},#{productId})
+    </insert>
+</mapper>
