@@ -54,7 +54,7 @@ public class ProductImageController extends BaseApiController{
     // 批量删
     @GetMapping("/delete")
     public Map<String, Object> delete(@RequestParam Long[] id, HttpSession session){
-        String path = session.getServletContext().getRealPath("../");
+        String path = fileUploadUtils.getBasePath();
         File file = new File(path + "Bookstore/file/download/word");
         System.out.println(path);
         productImageService.deleteBatch(id);

@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bookstore.dao.ProductDao">
+    <resultMap id="productMap" type="com.bookstore.bean.Product">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="subtitle" column="subtitle"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="promotePrice" column="promote_price"/>
+        <result property="stock" column="stock"/>
+        <result property="createDate" column="create_date"/>
+        <result property="categoryId" column="category_id"/>
+        <!--<association property="category" column="category_id" select="com.bookstore.dao.CategoryDao.selectById"/>-->
+    </resultMap>
 
-    <select id="select" resultType="com.bookstore.bean.Product">
-        SELECT * FROM tb_product
+    <select id="selectByCategoryId" resultMap="productMap" parameterType="java.lang.Long">
+        SELECT * FROM tb_product p WHERE p.category_id = #{id}
     </select>
 
     <select id="selectById" resultType="com.bookstore.bean.Product">
