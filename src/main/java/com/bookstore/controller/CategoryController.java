@@ -13,12 +13,12 @@ import java.util.Map;
  * Created by ${邹} on 2018/9/11.
  */
 @RestController
-@RequestMapping("api/category")
+@RequestMapping("/api/category")
 public class CategoryController extends BaseApiController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/show")
+    @GetMapping("/list")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size)
     {
         PageHelper.startPage(page_num, page_size);
@@ -37,7 +37,6 @@ public class CategoryController extends BaseApiController {
     @GetMapping("delete")
     public Map<String,Object> delete(@RequestParam Long id){
         categoryService.deleteById( id );
-        System.out.println( id );
         return onSuccessRep( "删除成功" );
     }
 
@@ -50,10 +49,15 @@ public class CategoryController extends BaseApiController {
         return onSuccessRep( "修改成功" );
     }
 
-    @GetMapping ("/list")
-    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, String name) {
+    @GetMapping ("/show")
+    public Map<String, Object> show(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Category>(categoryService.listByName(name)));
     }
 
+    @GetMapping ("/selectById/{id}")
+    public Map<String, Object> selectById(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @PathVariable Long id) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Category>(categoryService.selectById(id)));
+    }
 }

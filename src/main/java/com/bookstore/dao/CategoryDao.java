@@ -22,5 +22,5 @@ public interface CategoryDao {
     // 模糊查询
     List<Category> listByName(@Param("name") String name);
 
-
+    List<Category> selectById(Long id);
 }
