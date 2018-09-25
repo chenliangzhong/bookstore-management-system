@@ -21,4 +21,5 @@ public interface CategoryService {
     // 模糊查询
     List<Category> listByName(String name);
 
+    List<Category> selectById(Long id);
 }

@@ -4,22 +4,32 @@
     <resultMap id="categoryResultMap" type="com.bookstore.bean.Category">
         <id column="id" property="id" />
         <result column="name" property="name" />
+        <collection property="products" column="id" select="com.bookstore.dao.ProductDao.selectByCategoryId"/>
     </resultMap>
+
     <select id="select" resultMap="categoryResultMap" parameterType="com.bookstore.bean.Category">
         SELECT * FROM tb_category
     </select>
+
     <insert id="insert" parameterType="com.bookstore.bean.Category" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tb_category(name) VALUES (#{name})
     </insert>
+
     <delete id="deleteById" parameterType="java.lang.Long" >
         DELETE FROM tb_category WHERE id=#{id}
     </delete>
+
     <update id="updateById" parameterType="com.bookstore.bean.Category">
       UPDATE tb_category SET name=#{name} WHERE id=#{id}
     </update>
+
     <select id="listByName" resultMap="categoryResultMap" parameterType="java.lang.String">
         SELECT * FROM tb_category
         <if test="name != null">WHERE tb_category.name LIKE #{name}"%"</if>
         ORDER BY id DESC
+    </select>
+
+    <select id="selectById" resultMap="categoryResultMap" parameterType="java.lang.Long">
+        SELECT * FROM tb_category WHERE id = #{id}
     </select>
 </mapper>
