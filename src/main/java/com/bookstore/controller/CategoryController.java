@@ -18,7 +18,7 @@ public class CategoryController extends BaseApiController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/show")
+    @GetMapping("/list")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size)
     {
         PageHelper.startPage(page_num, page_size);
@@ -49,8 +49,8 @@ public class CategoryController extends BaseApiController {
         return onSuccessRep( "修改成功" );
     }
 
-    @GetMapping ("/list")
-    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, String name) {
+    @GetMapping ("/show")
+    public Map<String, Object> show(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Category>(categoryService.listByName(name)));
     }
