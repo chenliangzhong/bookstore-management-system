@@ -3,14 +3,34 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>说明</title>
+    <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.qrcode.js"></script>
+    <script type="text/javascript" src="/js/qrcode.js"></script>
+
+    <style>
+        div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -200px;
+        }
+    </style>
 </head>
 <body>
-    <h3>操作说明</h3>
-    <ul>
-        <li>配置Tomcat模式为：-Dspring.profiles.active="dev"</li>
-        <li>数据库：数据库名（bookstore），ip地址（192.168.1.136），端口（3306），用户名（root），密码：（zhong）</li>
-        <li>项目规则跟以前的阳江教育系统规则一样</li>
-    </ul>
+
+
+    <div id="qrcodeTable"></div>
+
+    <script>
+        var host = window.location.host;
+
+        jQuery('#qrcodeTable').qrcode({
+            width: 200, //生成的二维码的宽度
+            height: 200, //生成的二维码的高度
+            render	: "table",
+            correctLevel:0,
+            text	: "http://192.168.1.138:8081/app/20180920132651189_469256.apk"
+        });
+    </script>
 </body>
 </html>
-
