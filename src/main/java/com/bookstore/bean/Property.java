@@ -7,19 +7,22 @@ package com.bookstore.bean;
 public class Property {
     private Long id;
     private String name;
-    private Category category;
 
-    public Long getId() {
-        return id;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    @Override
-    public String toString() {
-        return "Property{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", category=" + category +
-                '}';
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    private Long categoryId;
+
+    public void setCategory_id(Long category_id) {
+        this.categoryId = category_id;
+    }
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -34,11 +37,12 @@ public class Property {
         this.name = name;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    @Override
+    public String toString() {
+        return "Property{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category_id=" + categoryId +
+                '}';
     }
 }

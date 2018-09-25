@@ -12,4 +12,10 @@ import java.util.List;
 public interface PropertyDao {
     // 查询属性
     List<Property> select();
+
+    int deleteById(Long id);
+
+    int updateById(Property property);
+
+    int insert(Property property);
 }
