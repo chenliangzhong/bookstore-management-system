@@ -1,7 +1,7 @@
 <!-- status为不记录log4j本身的日志 -->
 <configuration status="OFF">
     <properties>
-        <property name="LOG_HOME">C:/logs</property>
+        <property name="LOG_HOME">../webapps/Bookstore/logs</property>
         <property name="FILE_NAME">mylog</property>
     </properties>
     <appenders>
