@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> select() {
-        return productDao.select();
+    public List<Product> selectByCategoryId(Long id) {
+        return productDao.selectByCategoryId(id);
     }
 
     @Override
@@ -40,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int deleteBatch(Long... id) {
+        if (id == null || id.length == 0) return 0;
         return productDao.deleteBatch(id);
     }
 }

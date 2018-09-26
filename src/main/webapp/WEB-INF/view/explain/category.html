@@ -7,7 +7,7 @@
 <body>
     <h3>分类管理</h3>
     <ul>
-        <li><p>GET：<a href="/api/category/show">/api/category/list</a> </p></li>
+        <li><p>GET：<a href="/api/category/list">/api/category/list</a> </p></li>
         <p>描述：分页查询所有分类</p>
         <p>参数：page_num(默认为第一页，可为空)，page_size(默认为10条数据，可为空)</p>
 
@@ -24,9 +24,13 @@
         <p>描述：修改分类</p>
         <p>参数：name (分类名称,不为空)</p>
 
-        <li><p>GET：<a href="/api/category/list">/api/category/list</a> </p></li>
+        <li><p>GET：<a href="/api/category/show">/api/category/show</a> </p></li>
         <p>描述：通过name模糊查询</p>
         <p>参数：name (分类名称,不为空)，page_num(默认为第一页，可为空)，page_size(默认为10条数据，可为空)</p>
+
+        <li><p>GET：<a href="/api/category/selectById/{id}">/api/category/selectById/{id}</a> </p></li>
+        <p>描述：根据id查询分类</p>
+        <p>参数：id(主键，不为空)，page_num(默认为第一页，可为空)，page_size(默认为10条数据，可为空)</p>
     </ul>
 </body>
 </html>

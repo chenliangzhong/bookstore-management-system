@@ -49,7 +49,7 @@
 
      #demo img{
      	width: 100%;
-        height: 100%;
+        height: 100vh;
         /*height: 100vh; 高度按照屏幕来改变*/
 		overflow:hidden;
      	background-repeat: no-repeat;  
@@ -66,18 +66,24 @@
     	width: 50px;
     	height: 120px;
     }
-    .white_content {
-		display: none;
-		position: absolute;
-		top: 20%;
-		left: 35%;
-		width: 30%;
-		height: 60%;
-		
-		background-color: white;
-		z-index:1002;
-		overflow: auto;
-	}
+
+	.white_content::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+    .white_content::-webkit-scrollbar-track {
+            -webkit-box-shadow: white;
+            border-radius: 0;
+        }
+    .white_content::-webkit-scrollbar-thumb {
+            border-radius: 0;
+            background: white;
+            -webkit-box-shadow: white;
+        }
+    .white_content::-webkit-scrollbar-thumb:window-inactive {
+            background: white;
+        }
 	.top{
 		display: block;
 		position: absolute;
@@ -97,34 +103,42 @@
 		position: absolute;
 		right: 1px;
 	}
-
-	#qrcodeTable{
-		display: block;
+	.white_content {
+		display: none;
 		position: absolute;
 		top: 20%;
-		left: 30%;
-		width: 50%;
-		height: 60%;
+		left: 35%;
+		width: 300px;
+		height: 300px;
+		background-color: white;
+		z-index:1002;
+		overflow: auto;
+	}
+	#qrcodeTable{
+		
+		
+		margin: 35px 35px 40px 50px;
+		display: block;
 		z-index:2;
 		overflow: auto;
 	}
   </style>
   <script type="text/javascript">
 //弹出隐藏层
-function ShowDiv(show_div,bg_div){
-document.getElementById(show_div).style.display='block';
-document.getElementById(bg_div).style.display='block' ;
-var bgdiv = document.getElementById(bg_div);
-bgdiv.style.width = document.body.scrollWidth;
-// bgdiv.style.height = $(document).height();
-$("#"+bg_div).height($(document).height());
-};
-//关闭弹出层
-function CloseDiv(show_div,bg_div)
-{
-document.getElementById(show_div).style.display='none';
-document.getElementById(bg_div).style.display='none';
-};
+	function ShowDiv(show_div,bg_div){
+	document.getElementById(show_div).style.display='block';
+	document.getElementById(bg_div).style.display='block' ;
+	var bgdiv = document.getElementById(bg_div);
+	bgdiv.style.width = document.body.scrollWidth;
+	// bgdiv.style.height = $(document).height();
+	$("#"+bg_div).height($(document).height());
+	};
+	//关闭弹出层
+	function CloseDiv(show_div,bg_div)
+	{
+	document.getElementById(show_div).style.display='none';
+	document.getElementById(bg_div).style.display='none';
+	};
 </script>
 </head>
 <body >
@@ -159,16 +173,16 @@ document.getElementById(bg_div).style.display='none';
         <!-- 轮播图片 -->
         <div class="carousel-inner">
             <div class="carousel-item active carousel-bg1">
-                <img src="img/examples/lun01.png" >
+                <img src="img/examples/lun01.jpg" >
             </div>
             <div class="carousel-item carousel-bg2">
-                <img src="img/examples/lun02.png" >
+                <img src="img/examples/lun02.jpg" >
             </div>
             <div class="carousel-item carousel-bg3">
-                <img src="img/examples/lun03.png" >
+                <img src="img/examples/lun03.jpg" >
             </div>
             <div class="carousel-item carousel-bg4">
-                <img src="img/examples/lun02.png" >
+                <img src="img/examples/lun02.jpg" >
             </div>
         </div>
         <!-- 左右切换按钮 -->
@@ -182,17 +196,18 @@ document.getElementById(bg_div).style.display='none';
     <!-- 轮播图结束 -->
 
    <div id="MyDiv" class="white_content">
-        <div style="text-align: right; cursor: default; height: 40px;" id="move">
-        <span style="font-size: 16px;" onclick="CloseDiv('MyDiv')">关闭</span>
-        </div>
-         <div id="qrcodeTable"></div>
+        
+         <div id="qrcodeTable">
+			<div style="text-align: right; cursor: default; " id="move">
+       			 <span style="font-size: 16px;" onclick="CloseDiv('MyDiv')">关闭</span>
+        	</div>
+         </div>
 
-    </div>
+    </div> 
 
 
     <script>
         var host = window.location.host;
-
         jQuery('#qrcodeTable').qrcode({
             width: 200, //生成的二维码的宽度
             height: 200, //生成的二维码的高度
@@ -200,6 +215,6 @@ document.getElementById(bg_div).style.display='none';
             correctLevel:0,
             text	: "http://"+host+"/app/20180920132651189_469256.apk"
         });
-    </script>
+    </script> 
 </body>
 </html>

@@ -11,11 +11,11 @@
         <p>POST：<a href="/api/productImage/add">/api/productImage/add</a></p>
         <p>描述：添加商品图片接口</p>
         <p>参数: picture(产品图片) ，product_id(外键，指向产品)</p>
-        <form action="/api/productImage/add" method="post">
+        <form action="/api/productImage/add" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td>产品图片：</td>
-                    <td><input type="text" name="picture"/></td>
+                    <td><input type="file" name="file"/></td>
                 </tr>
                 <tr>
                     <td>外键，指向产品：</td>
@@ -39,20 +39,22 @@
         <p>POST：<a href="/api/productImage/update">/api/productImage/update</a></p>
         <p>描述: 根据id修改商品图片参数</p>
         <p>参数: id(主键)，，subtitle(小标题)，original_price(原价格)，promote_price(优惠价格)，stock(库存)，create_date(时间，格式：'yyyy-MM-dd')，category_id(外键,指向用户表)</p>
-        <form action="/api/productImage/update" method="post">
+        <form action="/api/productImage/update" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
-                    <td>id：</td>
-                    <td><input type="text" name="id"/></td>
-                </tr>
-                <tr>
                     <td>产品图片：</td>
-                    <td><input type="text" name="picture"/></td>
+                    <td><input type="file" name="file"/></td>
                 </tr>
                 <tr>
                     <td>外键，指向产品：</td>
                     <td><input type="text" name="product_id"/></td>
                 </tr>
+
+                <tr>
+                    <td>外键，指向产品：</td>
+                    <td><input type="text" name="id"/></td>
+                </tr>
+
                 <tr>
                     <td><input type="submit" value="提交"/></td>
                 </tr>
