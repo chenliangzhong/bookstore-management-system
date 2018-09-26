@@ -13,16 +13,12 @@
 
     <li><p>GET：<a href="/api/review/delete">/api/review/delete</a> </p></li>
     <p>描述：删除评论</p>
-    <p>参数:id(id，不为空)</p>
+    <p>参数:id(主键，不为空)</p>
     <p>注：有外键约束不能删</p>
-
-    <li><p>POST：<a href="/api/review/update">/api/review/update</a> </p></li>
-    <p>描述：修改评论</p>
-    <p>参数:id(id，不为空)，content(content,不为空),createDate(createDate,不为空,时间格式为“yyyy-MM-dd”)，userId(userId,不为空),productId(productId,不为空)</p>
 
     <li><p>POST：<a href="/api/review/add">/api/review/add</a> </p></li>
     <p>描述：添加评论</p>
-    <p>参数: content(content,不为空),createDate(createDate,不为空,时间格式为“yyyy-MM-dd”)，userId(userId,不为空),productId(productId,不为空)</p>
+    <p>参数: content(评价内容,不为空)，userId(外键(指向用户表),不为空),productId(外键(指向产品表),不为空)</p>
 </ul>
 </body>
 </html>

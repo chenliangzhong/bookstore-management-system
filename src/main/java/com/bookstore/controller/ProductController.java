@@ -1,17 +1,13 @@
 package com.bookstore.controller;
 
-import com.bookstore.bean.Category;
 import com.bookstore.bean.MyPageInfo;
 import com.bookstore.bean.Product;
 import com.bookstore.service.ProductService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
