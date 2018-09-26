@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>propety</title>
+</head>
+<body>
+<h3>产品属性</h3>
+<ul>
+    <li><p>GET：<a href="/api/propertyValue/list">/api/propertyValue/list</a> </p></li>
+    <p>描述：分页查询产品属性值</p>
+    <p>参数：page_num(默认为第一页，可为空)，page_size(默认为10条数据，可为空)</p>
+
+    <li><p>POST：<a href="/api/propertyValue/delete">/api/propertyValue/delete</a> </p></li>
+    <p>描述：删除品属性</p>
+    <p>参数:id(主键，不为空)</p>
+
+    <li><p>POST：<a href="/api/propertyValue/update">/api/propertyValue/update</a> </p></li>
+    <p>描述：修改品属性</p>
+    <p>参数:id(id，不为空)，value(属性值,不为空)，product_id(外键，指向产品表id不为空)，property_id(外键，指向属性表id不为空)</p>
+
+    <li><p>POST：<a href="/api/propertyValue/add">/api/propertyValue/add</a> </p></li>
+    <p>描述：添加品属性值</p>
+    <p>参数: value(属性值，不为空)，product_id(外键，指向产品表id不为空)，property_id(外键，指向属性表id不为空)</p>
+</ul>
+</body>
+</html>
