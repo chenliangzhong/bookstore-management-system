@@ -12,7 +12,7 @@ public interface ProductImageService {
 
     int insert(ProductImage productImage);
 
-    Product selectById(Long id);
+    ProductImage selectById(Long... id);
 
     List<ProductImage> select();
 

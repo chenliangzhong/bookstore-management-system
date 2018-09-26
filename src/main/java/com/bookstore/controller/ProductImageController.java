@@ -41,7 +41,7 @@ public class ProductImageController extends BaseApiController{
         if (file != null && !file.isEmpty()) {
             filePath = fileUploadUtils.getWordPath(file);
             if (filePath == null) return onBadResp("该文件不符合格式");
-            productImage.setPicture(filePath);
+            productImage.setPicture(fileUploadUtils.getBasePath() + filePath);
         }
         if (productImageService.insert(productImage) > 0) {
             if (StringUtils.isNotEmpty(filePath)) fileUploadUtils.saveFile(file, filePath);
@@ -51,19 +51,23 @@ public class ProductImageController extends BaseApiController{
     }
 
     // 批量删
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public Map<String, Object> delete(@RequestParam Long[] id, HttpSession session){
-        String path = fileUploadUtils.getBasePath();
-        File file = new File(path + "Bookstore/file/download/word");
-        System.out.println(path);
-        productImageService.deleteBatch(id);
-        return onSuccessRep("删除成功");
+        String picture = productImageService.selectById(id).getPicture();
+        File file = new File(picture);
+        if (productImageService.deleteBatch(id) > 0 && file.delete()) {
+            return onSuccessRep("删除成功");
+        }
+        return onBadResp("删除失败");
     }
 
     // 改
     @PostMapping("/update")
     public Map<String, Object> update(@RequestParam Long id, @RequestParam(required = false)CommonsMultipartFile file, Long product_id )
     {
+        String picture = productImageService.selectById(id).getPicture();
+        File file1 = new File(picture);
+
         ProductImage productImage = new ProductImage();
         productImage.setId(id);
         if (product_id != null) productImage.setProductId(product_id);
@@ -73,9 +77,9 @@ public class ProductImageController extends BaseApiController{
         if (file != null && !file.isEmpty()) {
             filePath = fileUploadUtils.getWordPath(file);
             if (filePath == null) return onBadResp("该文件不符合格式");
-            productImage.setPicture(filePath);
+            productImage.setPicture(fileUploadUtils.getBasePath() + filePath);
         }
-        if (productImageService.updateById(productImage) > 0) {
+        if (productImageService.updateById(productImage) > 0 && file1.delete()) {
             if (StringUtils.isNotEmpty(filePath)) fileUploadUtils.saveFile(file, filePath);
             return onSuccessRep("修改成功");
         }
