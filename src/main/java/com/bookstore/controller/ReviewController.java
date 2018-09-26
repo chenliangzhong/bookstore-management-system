@@ -5,7 +5,6 @@ import com.bookstore.bean.Review;
 import com.bookstore.service.ReviewService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -29,31 +28,17 @@ public class ReviewController extends BaseApiController{
         reviewService.deleteById( id );
         return onSuccessRep( "删除成功" );
     }
-    @PostMapping("update")
-    public Map<String,Object> update(@RequestParam Long id, @RequestParam String content, @DateTimeFormat(pattern = "yyyy-MM-dd")Date createDate,
-                                     @RequestParam Long userId,@RequestParam Long productId ){
-        Review review = new Review();
-        review.setId( id );
-        if (content != null)review.setContent( content);
-        if (createDate != null)review.setCreateDate( createDate );
-        if (userId != null)review.setUserId( userId );
-        if (productId != null)review.setProductId( productId );
-        reviewService.updateById( review );
-        return onSuccessRep( "修改成功" );
-    }
 
     @PostMapping("/add")
-    public Map<String, Object> add(@RequestParam String content, @DateTimeFormat(pattern = "yyyy-MM-dd")Date createDate,
-                                   @RequestParam Long userId,@RequestParam Long productId) {
+    public Map<String, Object> add(@RequestParam String content,@RequestParam Long userId,@RequestParam Long productId) {
 
         if (content == null || content.trim().length() == 0) return onBadResp("content 不能为空");
-        if (createDate == null) return onBadResp("createDate 不能为空");
         if (userId == null) return onBadResp("userId 不能为空");
         if (productId == null ) return onBadResp("productId 不能为空");
 
         Review review = new Review();
         review.setContent( content );
-        review.setCreateDate( createDate );
+        review.setCreateDate( new Date() );
         review.setUserId( userId );
         review.setProductId( productId );
 
