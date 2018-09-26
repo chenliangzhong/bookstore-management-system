@@ -30,6 +30,6 @@
     </select>
 
     <select id="selectById" resultMap="categoryResultMap" parameterType="java.lang.Long">
-        SELECT * FROM tb_category WHERE id = #{id}
+        SELECT * FROM t b_category WHERE id = #{id}
     </select>
 </mapper>
