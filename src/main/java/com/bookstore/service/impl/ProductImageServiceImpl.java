@@ -24,7 +24,7 @@ public class ProductImageServiceImpl implements ProductImageService{
     }
 
     @Override
-    public Product selectById(Long id) {
+    public ProductImage selectById(Long... id) {
         return productImageDao.selectById(id);
     }
 

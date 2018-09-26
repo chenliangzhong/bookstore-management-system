@@ -7,7 +7,10 @@
     </select>
 
     <select id="selectById" resultType="com.bookstore.bean.ProductImage">
-        SELECT * FROM  tb_product_image WHERE id=#{id}
+        SELECT * FROM  tb_product_image WHERE id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
     <insert id="insert" parameterType="com.bookstore.bean.ProductImage" useGeneratedKeys="true" keyProperty="id">
