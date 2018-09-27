@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookstore.dao.OrderDao">
+    <resultMap id="orderResultMap" type="com.bookstore.bean.Order">
+        <id column="id" property="id"/>
+        <result column="order_code" property="order_code"/>
+        <result column="address" property="address"/>
+        <result column="user_message" property="user_message"/>
+        <result column="receivre" property="receivre"/>
+        <result column="create_date" property="create_date"/>
+        <result column="pay_date" property="pay_date"/>
+        <result column="delivery_date" property="delivery_date"/>
+        <result column="confirm_date" property="confirm_date"/>
+        <result column="status" property="status"/>
+        <result column="user_id" property="user_id"/>
+        <association property="user" javaType="com.bookstore.bean.User">
+            <id column="uid" property="id"/>
+            <result column="name" property="username"/>
+        </association>
+    </resultMap>
+    <resultMap id="dorderItemResultMap" type="com.bookstore.bean.Order">
+        <id column="id" property="id"/>
+        <result column="order_code" property="order_code"/>
+        <result column="address" property="address"/>
+        <result column="user_message" property="user_message"/>
+        <result column="receivre" property="receivre"/>
+        <result column="create_date" property="create_date"/>
+        <result column="pay_date" property="pay_date"/>
+        <result column="delivery_date" property="delivery_date"/>
+        <result column="confirm_date" property="confirm_date"/>
+        <result column="status" property="status"/>
+        <result column="user_id" property="user_id"/>
+        <collection property="orderItems" column="id" select="com.bookstore.dao.OrderItemDao.selectByOrderItemId"></collection>
+    </resultMap>
+
+    <select id="select" resultMap="dorderItemResultMap" parameterType="java.lang.Long">
+        SELECT * FROM  tb_order WHERE id=#{id}
+    </select>
+
+    <select id="selectByOrderId" parameterType="java.lang.Long" resultMap="orderResultMap">
+        SELECT * FROM  tb_order o WHERE o.user_id=#{id}
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="orderResultMap">
+        SELECT o.order_code,o.create_date,o.confirm_date,o.delivery_date,o.confirm_date,o.status,u.name
+        FROM  tb_order o LEFT JOIN tb_user u  ON o.user_id=u.id
+        WHERE o.id=#{id}
+    </select>
+
+    <select id="selectList" resultMap="orderResultMap">
+        SELECT o.*,u.name FROM tb_order o,tb_user u WHERE o.user_id=u.id
+    </select>
+
+  <insert id="insert" parameterType="com.bookstore.bean.Order" useGeneratedKeys="true" keyProperty="id">
+
+      INSERT INTO  tb_order(user_id,address,receivre,mobile,order_code,user_message,create_date,status)
+      VALUES(#{user_id},#{address},#{receivre},#{mobile},#{order_code},#{user_message},#{create_date},#{status})
+  </insert>
+
+    <select id="selectByStatus" resultType="com.bookstore.bean.Order">
+        SELECT * FROM tb_order WHERE status=#{status}
+    </select>
+
+    <update id="updateById" parameterType="com.bookstore.bean.Order">
+        UPDATE tb_order
+        <set>
+            <if test="pay_date !=null">pay_date=#{pay_date},</if>
+            <if test="confirm_date !=null">confirm_date=#{confirm_date},</if>
+            <if test="delivery_date !=null">delivery_date=#{delivery_date},</if>
+            <if test="status !=null">status=#{status}</if>
+        </set>
+        WHERE id=#{id}
+
+    </update>
+
+    
+</mapper>
