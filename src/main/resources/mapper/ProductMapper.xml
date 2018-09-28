@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bookstore.dao.ProductDao">
-    <resultMap id="findProductResultMap" type="com.bookstore.bean.Product">
-        <id column="id" property="id"/>
-        <result column="name" property="name"/>
-        <result column="subtitle" property="subtitle"/>
-        <result column="originalPrice" property="original_price"/>
-        <result column="promotePrice" property="promote_price"/>
-        <result column="stock" property="stock"/>
-        <result column="createDate" property="create_date"/>
-        <result column="categoryId" property="category_id"/>
-    </resultMap>
 
     <select id="select" resultType="com.bookstore.bean.Product">
         SELECT * FROM tb_product
