@@ -14,4 +14,5 @@ public interface PropertyService {
     int deleteById(Long id);
     int updateById(Property property);
     int insert(Property property);
+    List<Property> selectById(Long id);
 }
