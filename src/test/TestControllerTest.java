@@ -40,10 +40,15 @@ public class TestControllerTest {
     public void testString()throws Exception {
         String responseString = mockMvc.perform(
 //                    get("/api/user/login")
-post("/api/user/login") // 请求的url，请求的方法是get
+            post("/api/product/add") // 请求的url，请求的方法是get
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
-        .param("mobile_phone", "18888888888")
-        .param("password", "123456")
+                .param("name", "3")
+                .param("subtitle", "222")
+                .param("original_price", "44")
+                .param("promote_price", "44")
+                .param("stock", "4")
+                .param("category_id","2")
+
         )
                 .andDo(print()) // 打印出请求和相应的内容
                 .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串
@@ -53,22 +58,15 @@ post("/api/user/login") // 请求的url，请求的方法是get
     @Test
     public void testString1()throws Exception {
         String responseString = mockMvc.perform(
-                post("/api/user/delete") // 请求的url，请求的方法是post
+                post("/app/upload") // 请求的url，请求的方法是post
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
-                        .param("id","2")
-                        .param("password","12345")
+                .param("version","1.0")
+                .param("developer","XC")
+
         )
                 .andDo(print()) // 打印出请求和相应的内容
                 .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串
         System.out.println("-----返回的json = " + responseString);
     }
-
-    private SqlSessionFactory sqlSessionFactory = null;
-
-    @Before
-    public void init() throws IOException {
-        sqlSessionFactory = new SqlSessionFactoryBuilder().build( Resources.getResourceAsStream("SqlMapConfig.xml"));
-    }
-
 
 }

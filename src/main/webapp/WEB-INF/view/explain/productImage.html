@@ -5,23 +5,22 @@
     <title>productImage接口说明</title>
 </head>
 <body>
-<h3></h3>
+<h3>商品图片接口说明</h3>
 <ul>
     <li>
         <p>POST：<a href="/api/productImage/add">/api/productImage/add</a></p>
         <p>描述：添加商品图片接口</p>
-        <p>参数: picture(产品图片) ，product_id(外键，指向产品)</p>
-        <form action="/api/productImage/add" method="post">
+        <p>参数: file(产品图片，不为空) ，product_id(外键，指向产品，不为空)</p>
+        <form action="/api/productImage/add" method="post"  enctype="multipart/form-data">
             <table>
                 <tr>
-                    <td>产品图片：</td>
-                    <td><input type="text" name="picture"/></td>
+                    <td>附件：</td>
+                    <td><input type="file" name="file"/></td>
                 </tr>
                 <tr>
-                    <td>外键，指向产品：</td>
+                    <td>主题：</td>
                     <td><input type="text" name="product_id"/></td>
                 </tr>
-
                 <tr>
                     <td><input type="submit" value="提交"/></td>
                 </tr>
@@ -38,19 +37,19 @@
     <li>
         <p>POST：<a href="/api/productImage/update">/api/productImage/update</a></p>
         <p>描述: 根据id修改商品图片参数</p>
-        <p>参数: id(主键)，，subtitle(小标题)，original_price(原价格)，promote_price(优惠价格)，stock(库存)，create_date(时间，格式：'yyyy-MM-dd')，category_id(外键,指向用户表)</p>
-        <form action="/api/productImage/update" method="post">
+        <p>参数: id(主键，不为空)，file(文件，为空)，product_id(外键，指向产品表，不为空)</p>
+        <form action="/api/productImage/update" method="post"  enctype="multipart/form-data">
             <table>
                 <tr>
-                    <td>id：</td>
+                    <td>附件：</td>
+                    <td><input type="file" name="file"/></td>
+                </tr>
+                <tr>
+                    <td>主题：</td>
                     <td><input type="text" name="id"/></td>
                 </tr>
                 <tr>
-                    <td>产品图片：</td>
-                    <td><input type="text" name="picture"/></td>
-                </tr>
-                <tr>
-                    <td>外键，指向产品：</td>
+                    <td>主题：</td>
                     <td><input type="text" name="product_id"/></td>
                 </tr>
                 <tr>
@@ -64,21 +63,6 @@
         <p>POST：<a href="/api/productImage/delete">/api/productImage/delete</a></p>
         <p>描述: 根据传入批量id删除对应的商品图片</p>
         <p>参数: id</p>
-        <form action="/api/productImage/delete" method="post">
-            <table>
-                <tr>
-                    <td>id：</td>
-                    <td><input type="text" name="id"/></td>
-                </tr>
-                <tr>
-                    <td>id：</td>
-                    <td><input type="text" name="id"/></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="提交"/></td>
-                </tr>
-            </table>
-        </form>
     </li>
 </ul>
 </body>

@@ -1,13 +1,17 @@
 package com.bookstore.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by SX-503 on 2018/9/19.
  */
+@JsonIgnoreProperties(value = {"handler"})
 public class Product {
     private Long id ;
     private String name;
@@ -15,9 +19,11 @@ public class Product {
     private BigDecimal originalPrice;
     private BigDecimal promotePrice;
     private Integer stock;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createDate;
     private Long categoryId;
+    private Category category;
 
     public Long getId() {
         return id;
@@ -67,7 +73,6 @@ public class Product {
         this.stock = stock;
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getCreateDate() {
         return createDate;
     }
@@ -82,5 +87,13 @@ public class Product {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
