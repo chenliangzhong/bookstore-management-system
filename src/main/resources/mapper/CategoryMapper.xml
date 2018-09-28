@@ -15,7 +15,7 @@
         INSERT INTO tb_category(name) VALUES (#{name})
     </insert>
 
-    <delete id="deleteById" parameterType="java.lang.Long" >
+    <delete id="deleteById" parameterType="java.lang.Long">
         DELETE FROM tb_category WHERE id=#{id}
     </delete>
 
@@ -30,6 +30,6 @@
     </select>
 
     <select id="selectById" resultMap="categoryResultMap" parameterType="java.lang.Long">
-        SELECT * FROM t b_category WHERE id = #{id}
+        SELECT * FROM tb_category WHERE id = #{id}
     </select>
 </mapper>

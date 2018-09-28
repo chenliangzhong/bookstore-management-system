@@ -17,6 +17,10 @@
         SELECT * FROM tb_product p WHERE p.category_id = #{id}
     </select>
 
+    <select id="select" resultMap="productMap" parameterType="java.lang.Long">
+        SELECT * FROM tb_product
+    </select>
+
     <select id="selectById" resultType="com.bookstore.bean.Product">
         SELECT * FROM  tb_product WHERE id=#{id}
     </select>

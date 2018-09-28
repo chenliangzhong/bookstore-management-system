@@ -53,6 +53,12 @@ public class ProductController extends BaseApiController{
         return onSuccessRep("删除成功");
     }
 
+    @GetMapping ("/list")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Product>(productService.select()));
+    }
+
     // 改
     @PostMapping("/update")
     public Map<String, Object> update(@RequestParam Long id, String name, String subtitle, BigDecimal original_price,
@@ -70,7 +76,7 @@ public class ProductController extends BaseApiController{
         if (stock != null) product.setStock(stock);
         if (category_id != null) product.setCategoryId(category_id);
         if (productService.updateById(product) > 0){onSuccessRep("修改成功");}
-        return onSuccessRep("修改失败");
+        return onBadResp("修改失败");
     }
 
     // 查

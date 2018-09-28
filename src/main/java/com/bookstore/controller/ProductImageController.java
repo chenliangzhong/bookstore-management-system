@@ -1,5 +1,6 @@
 package com.bookstore.controller;
 
+import com.bookstore.bean.DownloadFile;
 import com.bookstore.bean.MyPageInfo;
 import com.bookstore.bean.ProductImage;
 import com.bookstore.service.ProductImageService;
@@ -7,9 +8,12 @@ import com.bookstore.util.FileUploadUtils;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.Map;
@@ -39,7 +43,7 @@ public class ProductImageController extends BaseApiController{
         productImage.setProductId(product_id);
 
         if (file != null && !file.isEmpty()) {
-            filePath = fileUploadUtils.getWordPath(file);
+            filePath = fileUploadUtils.getImagePath(file);
             if (filePath == null) return onBadResp("该文件不符合格式");
             productImage.setPicture(fileUploadUtils.getBasePath() + filePath);
         }
@@ -55,7 +59,7 @@ public class ProductImageController extends BaseApiController{
     public Map<String, Object> delete(@RequestParam Long[] id, HttpSession session){
         String picture = productImageService.selectById(id).getPicture();
         File file = new File(picture);
-        if (productImageService.deleteBatch(id) > 0 && file.delete()) {
+        if (file.delete() && productImageService.deleteBatch(id) > 0) {
             return onSuccessRep("删除成功");
         }
         return onBadResp("删除失败");
@@ -75,7 +79,7 @@ public class ProductImageController extends BaseApiController{
         String filePath = "";
 
         if (file != null && !file.isEmpty()) {
-            filePath = fileUploadUtils.getWordPath(file);
+            filePath = fileUploadUtils.getImagePath(file);
             if (filePath == null) return onBadResp("该文件不符合格式");
             productImage.setPicture(fileUploadUtils.getBasePath() + filePath);
         }

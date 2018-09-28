@@ -15,6 +15,8 @@ public interface ProductDao {
 
     Product selectById(Long id);
 
+    List<Product> select();
+
     List<Product> selectByCategoryId(Long id);
 
     int updateById(Product product);
