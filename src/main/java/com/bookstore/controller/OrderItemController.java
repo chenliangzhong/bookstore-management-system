@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,22 +25,23 @@ public class OrderItemController extends BaseApiController {
     @Autowired
     OrderItemService orderItemService;
 
+
+    @GetMapping("/selectById")
+    public Map<String,Object> selectById (@RequestParam Long id){
+        return onDataResp(orderItemService.selectById(id));
+    }
+
     @GetMapping("/selectByOrderItemId")
     public MyPageInfo<OrderItem> selectByOrderItemId (@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize, @RequestParam Long id){
         PageHelper.startPage(pageNo,pageSize);
         return new MyPageInfo<OrderItem>(orderItemService.selectByOrderItemId(id));
     }
-
-
-    @GetMapping("/selectById")
+    @GetMapping("/selectByProductId")
     public Map<String,Object> selectByProductId(@RequestParam Long id){
-        return onDataResp(orderItemService.selectById(id));
+        return onDataResp(orderItemService.selectByProductId(id));
     }
-    @RequestMapping("/list")
-    public Map<String,Object> list(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize){
-        PageHelper.startPage(pageNo,pageSize);
-        return (Map<String, Object>) new MyPageInfo<OrderItem>(orderItemService.list());
-    }
+
+
 
 
 

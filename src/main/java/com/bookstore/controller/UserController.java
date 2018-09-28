@@ -89,4 +89,8 @@ public class UserController extends  BaseApiController{
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<User>(userService.select(id)));
     }
+    @GetMapping("/selectById")
+    public Map<String, Object> selectById(@RequestParam Long id){
+        return onDataResp(userService.selectById(id));
+    }
 }

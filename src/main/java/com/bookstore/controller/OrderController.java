@@ -8,10 +8,7 @@ import com.bookstore.service.OrderService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.Map;
@@ -31,24 +28,17 @@ public class OrderController  extends BaseApiController{
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Order>(orderService.select(id)));
     }
-
-
     @GetMapping("/selectlist")
     public MyPageInfo<Order> selectlist(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize)
     {
         PageHelper.startPage(pageNo,pageSize);
         return new MyPageInfo<Order>(orderService.selectList());
     }
-
     @GetMapping("/selectByOrderId")
     public MyPageInfo<Order> selectByOrderId (@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize,@RequestParam Long id){
         PageHelper.startPage(pageNo,pageSize);
         return new MyPageInfo<Order>(orderService.selectByOrderId(id));
     }
-
-
-
-
     @GetMapping("/selectById")
     public Map<String,Object> selectById(@RequestParam Long id){
        return onDataResp(orderService.selectById(id));
@@ -64,6 +54,7 @@ public class OrderController  extends BaseApiController{
         if (order_code != null && order_code.trim().length() == 0) return onBadResp("订单编号不能为空");
         if (create_date == null) return onBadResp("创建时间不能为空");
         Order order = new Order();
+        OrderItem orderItem= new OrderItem();
         order.setUser_id(user_id);
         order.setOrder_code(order_code);
         order.setAddress(address);
@@ -87,7 +78,7 @@ public class OrderController  extends BaseApiController{
         return onBadResp("支付失败");
     }
     //发货
-    @GetMapping("/delivery")
+    @PostMapping("/delivery")
     public Map<String,Object> shipments(@RequestParam Long id, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date delivery_date){
         if (delivery_date == null) return onBadResp("创建时间不能为空");
         Order order=new Order();
@@ -97,7 +88,7 @@ public class OrderController  extends BaseApiController{
         if (orderService.updateById(order)>0) return onSuccessRep("发货成功");
         return onBadResp("发货失败");
     }
-    @GetMapping("/confirm")
+    @PostMapping("/confirm")
     public Map<String,Object> confirm(@RequestParam Long id, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date confirm_date){
         if (confirm_date == null) return onBadResp("创建时间不能为空");
         Order order=new Order();
@@ -107,7 +98,7 @@ public class OrderController  extends BaseApiController{
         if (orderService.updateById(order)>0) return onSuccessRep("收货成功");
         return onBadResp("收货失败");
     }
-    @GetMapping("/cancel")
+    @PostMapping("/cancel")
     public Map<String,Object> cancel (@RequestParam Long id){
         Order order=new Order();
         order.setId(id);

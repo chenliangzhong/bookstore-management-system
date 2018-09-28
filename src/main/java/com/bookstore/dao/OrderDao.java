@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface OrderDao {
+
     int insert(Order order);
 
     List<Order> selectList();

@@ -11,9 +11,10 @@ public interface OrderItemService {
 
     int insert(OrderItem orderitem);
 
-    List<OrderItem> list();
 
     List<OrderItem> selectByOrderItemId(Long id);
+
+    OrderItem selectByProductId(Long id);
 
     OrderItem selectById (Long id);
 

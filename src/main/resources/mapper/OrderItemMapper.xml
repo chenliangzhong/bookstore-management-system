@@ -6,12 +6,41 @@
         <result column="number" property="number"/>
         <result column="aorder_id" property="order_id"/>
         <result column="product_id" property="product_id"/>
-        <association property="product" column="id" select="com.bookstore.dao.ProductDao.selectById">
+        <result column="total" property="total"/>
+        <association property="product" column="id" select="com.bookstore.dao.ProductDao.selectById"></association>
+    </resultMap>
+
+    <resultMap id="findProductResultMap" type="com.bookstore.bean.OrderItem">
+        <id column="id" property="id"/>
+        <result column="number" property="number"/>
+        <result column="aorder_id" property="order_id"/>
+        <result column="product_id" property="product_id"/>
+        <result column="total" property="total"/>
+        <association property="product" javaType="com.bookstore.bean.Product">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="subtitle" property="subtitle"/>
+            <result column="original_price" property="originalPrice"/>
+            <result column="promote_price" property="promotePrice" />
+            <result column="stock" property="stock"/>
+            <result column="create_date" property="createDate"/>
+            <result column="category_id" property="categoryId"/>
         </association>
     </resultMap>
 
+    <select id="selectById" parameterType="java.lang.Long" resultMap="findProductResultMap">
+        SELECT o.*,p.name,p.subtitle,p.promote_price
+        FROM  tb_orderitem o LEFT JOIN tb_product p ON o.product_id=p.id
+        WHERE o.id=#{id}
+    </select>
+
     <select id="selectByOrderItemId" parameterType="java.lang.Long" resultMap="findorderItemResultMap">
     SELECT * FROM  tb_orderitem o WHERE o.order_id=#{id}
+    </select>
+
+    <select id="selectByProductId" parameterType="java.lang.Long" resultMap="findProductResultMap">
+        SELECT * FROM  tb_orderitem o WHERE  o.product_id=#{id}
+
     </select>
 
   <insert id="insert" parameterType="com.bookstore.bean.OrderItem" useGeneratedKeys="true" keyProperty="id">

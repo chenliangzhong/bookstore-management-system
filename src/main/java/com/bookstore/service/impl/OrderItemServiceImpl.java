@@ -20,14 +20,16 @@ public class OrderItemServiceImpl implements OrderItemService {
         return orderItemDao.insert(orderitem);
     }
 
-    @Override
-    public List<OrderItem> list() {
-        return orderItemDao.list();
-    }
+
 
     @Override
     public List<OrderItem> selectByOrderItemId(Long id) {
         return orderItemDao.selectByOrderItemId(id);
+    }
+
+    @Override
+    public OrderItem selectByProductId(Long id) {
+        return orderItemDao.selectByProductId(id);
     }
 
 

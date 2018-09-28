@@ -13,11 +13,11 @@ public interface OrderItemDao {
 
     int insert(OrderItem orderitem);
 
-    List<OrderItem> list();
-
     List<OrderItem> selectByOrderItemId(Long id);
 
     OrderItem selectById (Long id);
+
+    OrderItem selectByProductId(Long id);
 
     int updateById(OrderItem orderitem);
 

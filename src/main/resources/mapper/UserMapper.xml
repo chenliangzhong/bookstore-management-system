@@ -24,7 +24,7 @@
         SELECT * FROM tb_user WHERE mobile_phone=#{mobile_phone}
     </select>
 
-    <select id="selectById" resultType="com.bookstore.bean.User" parameterType="java.lang.Long">
+    <select id="selectById" resultMap="findOrderResultMap" parameterType="java.lang.Long">
         SELECT  * FROM  tb_user WHERE id=#{id}
     </select>
 

@@ -94,5 +94,9 @@ public class ProductController extends BaseApiController{
         return  new MyPageInfo<Product>((List<Product>) productService.selectByProductId(id));
 
     }
+    @GetMapping("/selectById")
+    public Map<String,Object> selectById(@RequestParam Long id){
+        return onDataResp(productService.selectById(id));
+    }
 
 }

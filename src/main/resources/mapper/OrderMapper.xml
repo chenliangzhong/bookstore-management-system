@@ -18,7 +18,8 @@
             <result column="name" property="username"/>
         </association>
     </resultMap>
-    <resultMap id="dorderItemResultMap" type="com.bookstore.bean.Order">
+
+    <resultMap id="orderItemResultMap" type="com.bookstore.bean.Order">
         <id column="id" property="id"/>
         <result column="order_code" property="order_code"/>
         <result column="address" property="address"/>
@@ -30,19 +31,24 @@
         <result column="confirm_date" property="confirm_date"/>
         <result column="status" property="status"/>
         <result column="user_id" property="user_id"/>
-        <collection property="orderItems" column="id" select="com.bookstore.dao.OrderItemDao.selectByOrderItemId"></collection>
+        <collection property="orderItems" column="id" select="com.bookstore.dao.OrderItemDao.selectByOrderItemId">
+    </collection>
     </resultMap>
 
-    <select id="select" resultMap="dorderItemResultMap" parameterType="java.lang.Long">
+    <select id="select" resultMap="orderItemResultMap" parameterType="java.lang.Long">
         SELECT * FROM  tb_order WHERE id=#{id}
     </select>
+
+
+
+    <select id="list"></select>
 
     <select id="selectByOrderId" parameterType="java.lang.Long" resultMap="orderResultMap">
         SELECT * FROM  tb_order o WHERE o.user_id=#{id}
     </select>
 
     <select id="selectById" parameterType="java.lang.Long" resultMap="orderResultMap">
-        SELECT o.order_code,o.create_date,o.confirm_date,o.delivery_date,o.confirm_date,o.status,u.name
+        SELECT o.*,u.name
         FROM  tb_order o LEFT JOIN tb_user u  ON o.user_id=u.id
         WHERE o.id=#{id}
     </select>
