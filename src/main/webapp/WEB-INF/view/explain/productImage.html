@@ -11,6 +11,21 @@
         <p>POST：<a href="/api/productImage/add">/api/productImage/add</a></p>
         <p>描述：添加商品图片接口</p>
         <p>参数: file(产品图片，不为空) ，product_id(外键，指向产品，不为空)</p>
+        <form action="/api/productImage/add" method="post"  enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>附件：</td>
+                    <td><input type="file" name="file"/></td>
+                </tr>
+                <tr>
+                    <td>主题：</td>
+                    <td><input type="text" name="product_id"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交"/></td>
+                </tr>
+            </table>
+        </form>
     </li>
 
     <li>
@@ -23,6 +38,25 @@
         <p>POST：<a href="/api/productImage/update">/api/productImage/update</a></p>
         <p>描述: 根据id修改商品图片参数</p>
         <p>参数: id(主键，不为空)，file(文件，为空)，product_id(外键，指向产品表，不为空)</p>
+        <form action="/api/productImage/update" method="post"  enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>附件：</td>
+                    <td><input type="file" name="file"/></td>
+                </tr>
+                <tr>
+                    <td>主题：</td>
+                    <td><input type="text" name="id"/></td>
+                </tr>
+                <tr>
+                    <td>主题：</td>
+                    <td><input type="text" name="product_id"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交"/></td>
+                </tr>
+            </table>
+        </form>
     </li>
 
     <li>
@@ -31,6 +65,5 @@
         <p>参数: id</p>
     </li>
 </ul>
-    <!--<div><img src="/root/Bookstore/file/download/word/20180926142428626_874828.jpg"/></div>-->
 </body>
 </html>

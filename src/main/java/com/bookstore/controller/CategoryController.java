@@ -34,13 +34,13 @@ public class CategoryController extends BaseApiController {
         return onRespWithId( "保存成功",category.getId() );
     }
 
-    @GetMapping("delete")
+    @PostMapping("/delete")
     public Map<String,Object> delete(@RequestParam Long id){
-        categoryService.deleteById( id );
+        categoryService.deleteById(id);
         return onSuccessRep( "删除成功" );
     }
 
-    @PostMapping("update")
+    @PostMapping("/update")
     public Map<String,Object> update(@RequestParam Long id,@RequestParam String name){
         Category category = new Category();
         category.setId( id );

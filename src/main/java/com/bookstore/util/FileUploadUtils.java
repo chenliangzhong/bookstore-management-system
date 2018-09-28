@@ -17,14 +17,15 @@ import java.util.Random;
 
 public class FileUploadUtils {
 
-    private static final String DOWNLOAD_PATH = "/download";
-    public static final String DOWNLOAD_IMAGE_PATH = DOWNLOAD_PATH + "/image/";
-    public static final String DOWNLOAD_WORD_PATH = DOWNLOAD_PATH + "/word/";
+    private static final String DOWNLOAD_PATH = "/app";
+    private static final String UPLOAD_PATH="/image";
+    public static final String UPLOAD_IMAGE_PATH = UPLOAD_PATH + "/upload/";
+    public static final String DOWNLOAD_APP_PATH = DOWNLOAD_PATH + "/download/";
     public static final String DOWNLOAD_FILE_PATH = DOWNLOAD_PATH + "/file/";
     public static final String DATA_PATH = "/data/";
 
     private static final String[] IMAGE_SUFFIX = {"jpeg", "jpg", "png", "gif"};
-    private static final String[] WORD_SUFFIX = {"txt", "doc", "docx","jpeg", "jpg", "png", "gif","apk"};
+    private static final String[] APP_SUFFIX = {"apk"};
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
     private String basePath = "";
@@ -114,7 +115,7 @@ public class FileUploadUtils {
      * @return 返回null代表该文件不符合格式
      */
     public String getImagePath(MultipartFile file) {
-        return getFilePath(file, DOWNLOAD_IMAGE_PATH, IMAGE_SUFFIX);
+        return getFilePath(file, UPLOAD_IMAGE_PATH, IMAGE_SUFFIX);
     }
 
     /**
@@ -122,8 +123,8 @@ public class FileUploadUtils {
      * @param file
      * @return 返回null代表该文件不符合格式
      */
-    public String getWordPath(MultipartFile file) {
-        return getFilePath(file, DOWNLOAD_WORD_PATH, WORD_SUFFIX);
+    public String getAppPath(MultipartFile file) {
+        return getFilePath(file, DOWNLOAD_APP_PATH, APP_SUFFIX);
     }
 
     public String getBasePath() {

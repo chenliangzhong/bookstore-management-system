@@ -24,22 +24,22 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public int insert(Category category) {
-        return categoryDao.insert( category );
+        return categoryDao.insert(category);
     }
 
     @Override
     public int deleteById(Long id) {
-        return categoryDao.deleteById( id );
+        return categoryDao.deleteById(id);
     }
 
     @Override
     public int updateById(Category category) {
-        return categoryDao.updateById( category );
+        return categoryDao.updateById(category);
     }
 
     @Override
     public List<Category> listByName(String name) {
-        return categoryDao.listByName( name );
+        return categoryDao.listByName(name);
     }
 
     @Override

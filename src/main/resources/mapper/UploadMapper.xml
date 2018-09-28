@@ -3,8 +3,29 @@
 <mapper namespace="com.bookstore.dao.UploadDao">
 
     <insert id="insert" parameterType="com.bookstore.bean.Upload" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tb_upload(download_id)
-        VALUES (#{file.id})
+        INSERT INTO tb_upload(version,fileurl,filename,developer)
+        VALUES (#{version},#{fileUri},#{fileName},#{developer})
     </insert>
+    
+    <select id="selectByFileUri" resultType="com.bookstore.bean.Upload">
+        SELECT * FROM tb_upload
+    </select>
+
+    <select id="selectById" resultType="com.bookstore.bean.Upload">
+        SELECT * FROM tb_upload WHERE id = #{id}
+    </select>
+
+    <select id="selectByDeveloper" resultType="com.bookstore.bean.Upload" parameterType="java.lang.String">
+        SELECT * FROM tb_upload WHERE developer = #{developer}
+    </select>
+
+    <update id="update" parameterType="com.bookstore.bean.Upload">
+        UPDATE tb_upload
+        <set>
+            <if test="version != null">version=#{version},</if>
+            <if test="fileName != null">filename=#{fileName}</if>
+            <if test="fileUri != null">fileurl=#{fileUri}</if>
+        </set>
+    </update>
 
 </mapper>
