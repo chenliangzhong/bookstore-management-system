@@ -35,4 +35,9 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyDao.insert( property );
     }
 
+    @Override
+    public List<Property> selectById(Long id) {
+        return propertyDao.selectById( id );
+    }
+
 }

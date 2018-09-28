@@ -18,4 +18,6 @@ public interface PropertyDao {
     int updateById(Property property);
 
     int insert(Property property);
+
+    List<Property> selectById(Long id);
 }

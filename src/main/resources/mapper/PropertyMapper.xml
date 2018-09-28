@@ -24,4 +24,8 @@
         INSERT INTO tb_property(name,category_id)
         VALUES (#{name},#{categoryId})
     </insert>
+
+    <select id="selectById" resultType="com.bookstore.bean.Property" >
+        SELECT * FROM tb_property WHERE id=#{id}
+    </select>
 </mapper>
