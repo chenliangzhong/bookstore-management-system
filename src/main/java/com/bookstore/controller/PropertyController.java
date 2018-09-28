@@ -50,4 +50,9 @@ public class PropertyController extends BaseApiController {
         return onBadResp("添加失败");
     }
 
+
+    @GetMapping ("/selectById/{id}")
+    public Map<String, Object> selectById(@PathVariable Long id) {
+        return onDataResp(propertyService.selectById( id ));
+    }
 }
