@@ -21,7 +21,7 @@
         SELECT * FROM tb_product
     </select>
 
-    <select id="selectById" resultType="com.bookstore.bean.Product">
+    <select id="selectById" resultType="com.bookstore.bean.Product" parameterType="java.lang.Long">
         SELECT * FROM  tb_product WHERE id=#{id}
     </select>
 
@@ -40,7 +40,6 @@
             <if test="stock != null">stock=#{stock},</if>
             <if test="createDate != null">create_date=#{createDate},</if>
             <if test="categoryId != null">category_id=#{categoryId}</if>
-
         </set>
         WHERE id=#{id}
     </update>

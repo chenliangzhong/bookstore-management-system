@@ -13,6 +13,8 @@ public interface UserDao {
 
     List<User> list();
 
+    List<User> select (Long id);
+
     User selectById(Long id);
 
     User selectByUname(String username);

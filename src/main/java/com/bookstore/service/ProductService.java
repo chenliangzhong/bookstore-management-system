@@ -14,6 +14,8 @@ public interface ProductService {
 
     List<Product> selectByCategoryId(Long id);
 
+    Product selectByProductId(Long id);
+
     int updateById(Product product);
 
     int deleteBatch(Long... id);

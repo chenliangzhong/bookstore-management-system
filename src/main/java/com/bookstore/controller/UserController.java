@@ -82,4 +82,15 @@ public class UserController extends  BaseApiController{
         if (userService.updateById(student) > 0) return onSuccessRep("修改密码成功");
         throw new BadRequestException("修改密码错误");
     }
+
+
+    @GetMapping("/select")
+    public Map<String, Object> select(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size,@RequestParam Long id){
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<User>(userService.select(id)));
+    }
+    @GetMapping("/selectById")
+    public Map<String, Object> selectById(@RequestParam Long id){
+        return onDataResp(userService.selectById(id));
+    }
 }

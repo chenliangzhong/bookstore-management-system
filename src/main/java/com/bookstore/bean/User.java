@@ -1,5 +1,10 @@
 package com.bookstore.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
+
+@JsonIgnoreProperties(value = {"handler"})
 public class User {
 
     private Long id;
@@ -7,6 +12,19 @@ public class User {
     private String mobile_phone;
     private String password;
     private String email;
+    private List<Order> orders;//用户创建订单列表
+
+    public User() {
+    }
+
+    public User(Long id, String username, String mobile_phone, String password, String email, List<Order> orders) {
+        this.id = id;
+        this.username = username;
+        this.mobile_phone = mobile_phone;
+        this.password = password;
+        this.email = email;
+        this.orders = orders;
+    }
 
     public Long getId() {
         return id;
@@ -47,4 +65,15 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }
+
+
+

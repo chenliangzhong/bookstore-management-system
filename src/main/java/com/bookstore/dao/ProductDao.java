@@ -17,7 +17,11 @@ public interface ProductDao {
 
     List<Product> select();
 
+//<<<<<<< master
+    Product selectByProductId(Long id);
+//=======
     List<Product> selectByCategoryId(Long id);
+//>>>>>>> master
 
     int updateById(Product product);
 
