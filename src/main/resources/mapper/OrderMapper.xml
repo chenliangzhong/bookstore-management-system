@@ -32,13 +32,12 @@
         <result column="status" property="status"/>
         <result column="user_id" property="user_id"/>
         <collection property="orderItems" column="id" select="com.bookstore.dao.OrderItemDao.selectByOrderItemId">
-    </collection>
+         </collection>
     </resultMap>
 
     <select id="select" resultMap="orderItemResultMap" parameterType="java.lang.Long">
         SELECT * FROM  tb_order WHERE id=#{id}
     </select>
-
 
 
     <select id="list"></select>

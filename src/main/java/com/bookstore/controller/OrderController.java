@@ -1,9 +1,6 @@
 package com.bookstore.controller;
 
-import com.bookstore.bean.MyPageInfo;
-import com.bookstore.bean.Order;
-import com.bookstore.bean.OrderItem;
-import com.bookstore.bean.User;
+import com.bookstore.bean.*;
 import com.bookstore.service.OrderService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +25,13 @@ public class OrderController  extends BaseApiController{
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Order>(orderService.select(id)));
     }
-    @GetMapping("/selectlist")
-    public MyPageInfo<Order> selectlist(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize)
-    {
-        PageHelper.startPage(pageNo,pageSize);
-        return new MyPageInfo<Order>(orderService.selectList());
+    @GetMapping ("/selectlist")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Order>(orderService.selectList()));
     }
-    @GetMapping("/selectByOrderId")
+
+        @GetMapping("/selectByOrderId")
     public MyPageInfo<Order> selectByOrderId (@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize,@RequestParam Long id){
         PageHelper.startPage(pageNo,pageSize);
         return new MyPageInfo<Order>(orderService.selectByOrderId(id));
