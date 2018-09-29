@@ -19,4 +19,8 @@ public interface ProductImageService {
     int updateById(ProductImage productImage);
 
     int deleteBatch(Long... id);
+
+    ProductImage listByProductId(Long product_id);
+
+    ProductImage listById(Long id);
 }

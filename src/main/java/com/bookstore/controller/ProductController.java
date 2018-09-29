@@ -61,6 +61,11 @@ public class ProductController extends BaseApiController{
         return onDataResp(new MyPageInfo<Product>(productService.select()));
     }
 
+    @GetMapping("/show/{id}")
+    public Map<String,Object> show(@PathVariable Long id) {
+        return onDataResp(productService.selectById(id));
+    }
+
     // 改
     @PostMapping("/update")
     public Map<String, Object> update(@RequestParam Long id, String name, String subtitle, BigDecimal original_price,

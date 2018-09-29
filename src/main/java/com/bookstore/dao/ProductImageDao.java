@@ -2,6 +2,7 @@ package com.bookstore.dao;
 
 import com.bookstore.bean.Product;
 import com.bookstore.bean.ProductImage;
+import com.bookstore.service.ProductImageService;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface ProductImageDao {
     int updateById(ProductImage productImage);
 
     int deleteBatch(Long... id);
+
+    ProductImage listByProductId(Long product_id);
+
+    ProductImage listById(Long id);
 }

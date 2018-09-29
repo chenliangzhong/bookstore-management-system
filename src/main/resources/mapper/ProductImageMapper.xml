@@ -13,6 +13,14 @@
         </foreach>
     </select>
 
+    <select id="listByProductId" resultType="com.bookstore.bean.ProductImage">
+        SELECT * FROM tb_product_image WHERE product_id = #{product_id}
+    </select>
+
+    <select id="listById" resultType="com.bookstore.bean.ProductImage">
+        SELECT * FROM tb_product_image WHERE id = #{id}
+    </select>
+
     <insert id="insert" parameterType="com.bookstore.bean.ProductImage" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tb_product_image(picture,product_id)
         VALUES (#{picture},#{productId})
