@@ -43,4 +43,14 @@ public class ProductImageServiceImpl implements ProductImageService{
     public int deleteBatch(Long... id) {
         return productImageDao.deleteBatch(id);
     }
+
+    @Override
+    public ProductImage listByProductId(Long product_id) {
+        return productImageDao.listByProductId(product_id);
+    }
+
+    @Override
+    public ProductImage listById(Long id) {
+        return productImageDao.listById(id);
+    }
 }

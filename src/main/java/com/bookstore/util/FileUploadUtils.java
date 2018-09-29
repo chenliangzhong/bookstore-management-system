@@ -20,7 +20,9 @@ public class FileUploadUtils {
     private static final String DOWNLOAD_PATH = "/app";
     private static final String UPLOAD_PATH="/image";
     public static final String UPLOAD_IMAGE_PATH = UPLOAD_PATH + "/upload/";
-    public static final String DOWNLOAD_APP_PATH = DOWNLOAD_PATH + "/download/";
+    public static final String DOWNLOAD_APP_PATH = DOWNLOAD_PATH + "/download";
+    public static final String DOWNLOAD_LM_APP_PATH = DOWNLOAD_APP_PATH + "/LM/";
+    public static final String DOWNLOAD_XC_APP_PATH = DOWNLOAD_APP_PATH + "/XC/";
     public static final String DOWNLOAD_FILE_PATH = DOWNLOAD_PATH + "/file/";
     public static final String DATA_PATH = "/data/";
 
@@ -123,8 +125,12 @@ public class FileUploadUtils {
      * @param file
      * @return 返回null代表该文件不符合格式
      */
-    public String getAppPath(MultipartFile file) {
-        return getFilePath(file, DOWNLOAD_APP_PATH, APP_SUFFIX);
+    public String getLMAppPath(MultipartFile file) {
+        return getFilePath(file, DOWNLOAD_LM_APP_PATH, APP_SUFFIX);
+    }
+
+    public String getXCAppPath(MultipartFile file) {
+        return getFilePath(file, DOWNLOAD_XC_APP_PATH, APP_SUFFIX);
     }
 
     public String getBasePath() {

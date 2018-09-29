@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 
 /**
@@ -33,8 +36,6 @@ public class ProductImageController extends BaseApiController{
     // 增
     @PostMapping("/add")
     public Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam Long product_id) {
-
-        if (file == null) return onBadResp("picture 不能为空");
         if (product_id == null) return onBadResp("subtitle 不能为空");
 
         String filePath = "";
@@ -92,9 +93,32 @@ public class ProductImageController extends BaseApiController{
 
     // 查
     @GetMapping("/list")
-    public MyPageInfo<ProductImage> select(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize)
+    public Map<String, Object> select(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize)
     {
         PageHelper.startPage(pageNo,pageSize);
-        return new MyPageInfo<ProductImage>(productImageService.select());
+        return onDataResp(new MyPageInfo<ProductImage>(productImageService.select()));
     }
+
+    @GetMapping("/listByProductId/{product_id}")
+    public void list(@PathVariable Long product_id, HttpServletResponse response) throws IOException {
+        String path = productImageService.listByProductId(product_id).getPicture();
+        File file = new File(path);
+        if (file.exists()){
+            FileInputStream in = new FileInputStream(file);
+            OutputStream os = response.getOutputStream();
+            byte[] b = new byte[1024];
+            while (in.read(b) != -1) {
+                os.write(b);
+            }
+            in.close();
+            os.flush();
+            os.close();
+        }
+    }
+
+    @GetMapping("/listById/{id}")
+    public Map<String, Object> listById(@PathVariable Long id) {
+        return onDataResp(productImageService.listById(id));
+    }
+
 }
