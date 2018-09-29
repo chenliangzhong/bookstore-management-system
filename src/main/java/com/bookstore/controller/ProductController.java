@@ -1,6 +1,7 @@
 package com.bookstore.controller;
 
 import com.bookstore.bean.MyPageInfo;
+import com.bookstore.bean.OrderItem;
 import com.bookstore.bean.Product;
 import com.bookstore.service.ProductService;
 import com.github.pagehelper.PageHelper;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -90,6 +92,18 @@ public class ProductController extends BaseApiController{
     {
         PageHelper.startPage(pageNo,pageSize);
         return new MyPageInfo<Product>(productService.selectByCategoryId(id));
+    }
+
+
+    @GetMapping("/selectByProductId")
+    public MyPageInfo<Product> selectByProductId (@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize,@RequestParam Long id){
+        PageHelper.startPage(pageNo,pageSize);
+        return  new MyPageInfo<Product>((List<Product>) productService.selectByProductId(id));
+
+    }
+    @GetMapping("/selectById")
+    public Map<String,Object> selectById(@RequestParam Long id){
+        return onDataResp(productService.selectById(id));
     }
 
 }

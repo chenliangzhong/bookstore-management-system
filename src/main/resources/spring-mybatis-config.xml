@@ -59,4 +59,14 @@
 			<property name="returnPageInfo" value="none" />
 		</plugin>
 	</plugins>
+	<!--<typeAliases>-->
+		<!--<typeAlias type="com.bookstore.bean.User" alias="User"/>-->
+		<!--<typeAlias type="com.bookstore.bean.Product" alias="Product"/>-->
+		<!--<typeAlias type="com.bookstore.bean.Order" alias="Order"/>-->
+		<!--<typeAlias type="com.bookstore.bean.OrderItem" alias="OrderItem"/>-->
+	<!--</typeAliases>-->
+	<!--<mappers>-->
+		<!--<package name="com.bookstore.dao"/>-->
+	<!--</mappers>-->
+
 </configuration>

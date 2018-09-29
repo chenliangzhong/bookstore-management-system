@@ -33,6 +33,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product selectByProductId(Long id) {
+        return productDao.selectByProductId(id);
+    }
+
+
+    @Override
     public int updateById(Product product) {
         if (product == null) return 0;
         return productDao.updateById(product);
