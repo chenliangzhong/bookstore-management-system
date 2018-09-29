@@ -1,15 +1,22 @@
 package com.bookstore.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @JsonIgnoreProperties(value = {"handler"})
 public class Upload {
 
     private Long id;
-    private String version;
+    private Double version;
     private String fileName;
     private String  fileUrl;
     private String developer;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date turnoverTime;
 
     public Long getId() {
         return id;
@@ -19,11 +26,11 @@ public class Upload {
         this.id = id;
     }
 
-    public String getVersion() {
+    public Double getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(Double version) {
         this.version = version;
     }
 
@@ -49,5 +56,13 @@ public class Upload {
 
     public void setDeveloper(String developer) {
         this.developer = developer;
+    }
+
+    public Date getTurnoverTime() {
+        return turnoverTime;
+    }
+
+    public void setTurnoverTime(Date turnoverTime) {
+        this.turnoverTime = turnoverTime;
     }
 }

@@ -40,15 +40,11 @@ public class TestControllerTest {
     public void testString()throws Exception {
         String responseString = mockMvc.perform(
 //                    get("/api/user/login")
-            post("/api/product/add") // 请求的url，请求的方法是get
+            post("/api/propertyValue/add") // 请求的url，请求的方法是get
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
-                .param("name", "3")
-                .param("subtitle", "222")
-                .param("original_price", "44")
-                .param("promote_price", "44")
-                .param("stock", "4")
-                .param("category_id","2")
-
+                .param("value", "3")
+                .param("product_id", "5")
+                .param("property_id", "12")
         )
                 .andDo(print()) // 打印出请求和相应的内容
                 .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串

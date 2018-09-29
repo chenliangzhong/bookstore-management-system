@@ -1,10 +1,10 @@
 package com.bookstore.controller;
 
-import com.bookstore.bean.DownloadFile;
+import com.bookstore.bean.MyPageInfo;
 import com.bookstore.bean.Upload;
-import com.bookstore.service.DownloadFileService;
 import com.bookstore.service.UploadService;
 import com.bookstore.util.FileUploadUtils;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.sql.ResultSet;
+import java.util.Date;
 import java.util.Map;
 
 @RestController
@@ -32,10 +30,16 @@ public class UploadController extends BaseApiController {
     @Autowired
     FileUploadUtils fileUploadUtils;
 
-    @PostMapping("/upload")
-    public  Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam String version,@RequestParam String developer) {
+    @GetMapping ("/list")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Upload>(uploadService.select()));
+    }
 
-        if (version == null || version.trim().length() == 0) return onBadResp ("版本号不能为空");
+    @PostMapping("/upload")
+    public  Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam Double version,@RequestParam String developer) {
+
+        if (version == null) return onBadResp ("版本号不能为空");
         if (developer == null || developer.trim().length() == 0) return onBadResp ("研发者不能为空");
 
         if (developer.equalsIgnoreCase("LM") || developer.equalsIgnoreCase("XC")){
@@ -43,9 +47,13 @@ public class UploadController extends BaseApiController {
             Upload upload = new Upload();
             upload.setVersion(version);
             upload.setDeveloper(developer.toLowerCase());
+            upload.setTurnoverTime(new Date());
 
             if (file != null && !file.isEmpty()) {
-                filePath = fileUploadUtils.getAppPath(file);
+                if (developer.equalsIgnoreCase("LM"))
+                    filePath = fileUploadUtils.getLMAppPath(file);
+                if (developer.equalsIgnoreCase("XC"))
+                    filePath = fileUploadUtils.getXCAppPath(file);
                 if (filePath == null) return onBadResp("该文件不符合格式");
                 upload.setFileUrl(filePath);
                 upload.setFileName(file.getOriginalFilename());
@@ -54,7 +62,7 @@ public class UploadController extends BaseApiController {
             if (uploadService.selectByDeveloper(developer.toLowerCase()) == null) {
                 if (uploadService.insert(upload) > 0) {
                     if (StringUtils.isNotEmpty(filePath)) fileUploadUtils.saveFile(file, filePath);
-                    return onSuccessRep("更新成功");
+                    return onSuccessRep("更新成功1");
                 }
             }
 
@@ -62,10 +70,8 @@ public class UploadController extends BaseApiController {
             File file1 = new File(fileUploadUtils.getBasePath() + uploadService.selectById(id).getFileUrl());
 
             if (uploadService.update(upload) > 0 && file1.delete()) {
-                if (uploadService.insert(upload) > 0) {
                     if (StringUtils.isNotEmpty(filePath)) fileUploadUtils.saveFile(file, filePath);
-                    return onSuccessRep("更新成功");
-                }
+                    return onSuccessRep("更新成功2");
             }
                 return onBadResp("更新失败");
         }else {
@@ -73,10 +79,25 @@ public class UploadController extends BaseApiController {
         }
     }
 
-    @GetMapping("/download")
-    public ResponseEntity<byte[]> download(HttpServletRequest request, HttpServletResponse response) {
-        String fileUri = request.getRequestURI();
-        Upload file = uploadService.selectByFileUri(fileUri);
+    @GetMapping("/download/LM/**")
+    public ResponseEntity<byte[]> downloadLM(HttpServletRequest request, HttpServletResponse response) {
+
+        Upload file = uploadService.selectByDeveloper("LM");
+        if (file == null) return null;
+
+        response.reset();
+        try {
+            return downloadFile(fileUploadUtils.getBasePath() + file.getFileUrl(),file.getFileName(),response);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GetMapping("/download/XC/**")
+    public ResponseEntity<byte[]> downloadXC(HttpServletRequest request, HttpServletResponse response) {
+
+        Upload file = uploadService.selectByDeveloper("XC");
         if (file == null) return null;
 
         response.reset();
