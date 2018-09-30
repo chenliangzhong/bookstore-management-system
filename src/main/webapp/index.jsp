@@ -14,15 +14,7 @@
     <li><a href="/explain/order">订单文档</a></li>
     <li><a href="/explain/orderitem">订单项文档</a></li>
     <li><a href="/explain/review">评论文档</a></li>
-//<<<<<<< master
-    <li><a href="/explain/test">二维码下载文档</a></li>
-//=======
-//<<<<<<< HEAD
     <li><a href="/explain/test">APP更新文档</a></li>
-//=======
-
-//>>>>>>> master
-
 </ul>
     <%--<jsp:forward page="/index/index1"></jsp:forward>--%>
 </body>
