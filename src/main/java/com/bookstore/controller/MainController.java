@@ -13,4 +13,7 @@ public class MainController extends BaseController {
 
     @GetMapping("/index/{page}")
     public String Indec(@PathVariable String page) {return page;}
+
+    @GetMapping("/bookstore/admin")
+    public String admin() {return "/admin/index";}
 }

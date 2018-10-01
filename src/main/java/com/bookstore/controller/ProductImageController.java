@@ -46,7 +46,7 @@ public class ProductImageController extends BaseApiController{
         if (file != null && !file.isEmpty()) {
             filePath = fileUploadUtils.getImagePath(file);
             if (filePath == null) return onBadResp("该文件不符合格式");
-            productImage.setPicture(fileUploadUtils.getBasePath() + filePath);
+            productImage.setPicture(filePath);
         }
         if (productImageService.insert(productImage) > 0) {
             if (StringUtils.isNotEmpty(filePath)) fileUploadUtils.saveFile(file, filePath);

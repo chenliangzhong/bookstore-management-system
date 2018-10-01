@@ -15,4 +15,6 @@ public interface PropertyValueService {
 	List<PropertyValue> list();
 
 	int insert(PropertyValue propertyValue);
+
+    PropertyValue selectById(Long id);
 }

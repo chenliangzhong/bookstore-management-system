@@ -26,7 +26,7 @@ public class UserController extends  BaseApiController{
         user.setPassword(password);
         if (userService.selectByUname(mobile_phone) != null && userService.selectByUname(mobile_phone).getPassword().equals(password.trim()))
             return onSuccessRep("登录成功");
-        throw new BadRequestException("账号或密码错误");
+        return onBadResp("账号或密码错误");
     }
 
     @PostMapping("/register")
@@ -42,7 +42,7 @@ public class UserController extends  BaseApiController{
         user.setEmail(email);
         if (userService.selectByUname(user.getUsername()) != null ) return onBadResp(user.getUsername() + "已经存在，不能重复注册");
             userService.insert(user);
-        return onRespWithId("注册成功", user.getId());
+        return onDataResp("注册成功");
     }
 
     // 分页显示，查询用户
@@ -80,7 +80,7 @@ public class UserController extends  BaseApiController{
         student.setId(id);
         student.setPassword(password);
         if (userService.updateById(student) > 0) return onSuccessRep("修改密码成功");
-        throw new BadRequestException("修改密码错误");
+        return onBadResp("修改密码错误");
     }
 
 

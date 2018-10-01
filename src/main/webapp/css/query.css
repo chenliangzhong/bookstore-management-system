@@ -1,0 +1,24 @@
+body{
+	margin:0px;
+	padding:0px;
+	text-align: center;
+}
+#table{
+	width: 90%;
+	height: 200px;
+	background-color: #fff;
+	border:1px solid #eee;
+    box-shadow: #eee 0.5px 0.5px 2px 1px ;
+}
+#table tr{
+	height: 50px;
+	background-color: #f0f0f0;
+}
+#table tr:hover{
+	background-color: #fff;
+}
+.t{
+	height: 45px;
+	background-color: #d1e9ec;
+}
+
