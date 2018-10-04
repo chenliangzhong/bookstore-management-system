@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>注册页面</title>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<span>注册</span>
+<form id="register-form" >
+    <table>
+        <tr>
+            <td>账号：</td>
+            <td><input type="text" name="mobile_phone"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="text" name="password"></td>
+        </tr>
+        <tr>
+            <td>邮箱：</td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="注册" onclick="register()"></td>
+        </tr>
+    </table>
+</form>
+<a href="/login">返回</a>
+
+<script type="text/javascript">
+    function register() {
+        $.ajax({
+            url: "/api/user/register",
+            type: "post",
+            data: $("#register-form").serialize(),
+            dataType: "json",
+            cache: false,
+            beforeSend: function() {
+            },
+            complete: function() {
+            },
+            success: function (result) {
+                alert(result.msg);
+                if (result.code == 200) {
+                    window.location.href = "/login";
+                }
+            },error: function (result) {
+                alert("网络连接出错！");
+            }
+        });
+    }
+</script>
+</body>
+</html>

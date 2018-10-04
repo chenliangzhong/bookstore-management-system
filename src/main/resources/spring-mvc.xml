@@ -88,4 +88,15 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd http://www.springfr
 	<context:component-scan base-package="com.bookstore.aop"/>
 	<!--&lt;!&ndash; 启动AspectJ支持   只对扫描过的bean有效&ndash;&gt;-->
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
+
+	<!-- Shiro生命周期处理器 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+	<!-- 开启shiro注解 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
 </beans>
