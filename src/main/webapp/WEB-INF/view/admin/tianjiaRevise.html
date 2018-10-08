@@ -16,7 +16,8 @@
         <div id="subject-update">
             <h3>信息修改</h3>
             <form id="subject-update-form">
-                <input name="id" value="" type="hidden">
+                <input name="id" value="" type="hidden"/>
+                <input autocomplete="off" name="category_id" value="" type="hidden"/>
                 <table>
                     <tr>
                         <td>名字：</td>
@@ -52,12 +53,6 @@
                         <td>时间：</td>
                         <td>
                             <input autocomplete="off" name="create_date" value="" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>外键，指向用户表：</td>
-                        <td>
-                            <input autocomplete="off" name="category_id" value="" type="text">
                         </td>
                     </tr>
                 </table>

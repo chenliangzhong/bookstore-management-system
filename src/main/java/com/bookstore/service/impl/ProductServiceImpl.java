@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> selectByCategoryId(Long id) {
-        return productDao.selectByCategoryId(id);
+    public List<Product> selectByCategoryId(Long category_id) {
+        return productDao.selectByCategoryId(category_id);
     }
 
     @Override

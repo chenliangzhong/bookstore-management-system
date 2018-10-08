@@ -35,7 +35,10 @@
     <update id="updateById" parameterType="com.bookstore.bean.User">
         UPDATE tb_user
         <set>
-            <if test="password != null">password=#{password}</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="username != null">name=#{username},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="mobile_phone != null">mobile_phone=#{mobile_phone}</if>
         </set>
         WHERE id=#{id}
     </update>

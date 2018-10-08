@@ -47,10 +47,16 @@ public class MainController extends BaseController {
         return getPageURI(request, model);
     }
 
+    @GetMapping("/category/{category_id}/{property}")
+    public String categorySelectProperty(@PathVariable Long category_id, @PathVariable String property, Model model) {
+        model.addAttribute("category_id", category_id);
+        return "/admin/" + property;
+    }
+
     private String getPageURI(String uri, HttpServletRequest request, Model model) {
-        uri = uri == null ? (request.getRequestURI() + "_include") : uri + "_include";
+//        uri = uri == null ? (request.getRequestURI() + "_include") : uri + "_include";
         model.addAttribute("currentUser", request.getSession().getAttribute(UserManager.CURRENT_USER));
-        model.addAttribute("includePage", uri + ".html");
+//        model.addAttribute("includePage", uri + ".html");
 
         Subject subject = SecurityUtils.getSubject();
         if (subject.hasRole(RoleType.ADMIN)) {

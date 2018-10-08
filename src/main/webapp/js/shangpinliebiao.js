@@ -1,4 +1,4 @@
-var basePath = "http://192.168.1.138:8080";
+
 
 $(function () {
     getData(1);
@@ -7,7 +7,7 @@ $(function () {
 function getData(page_num) {
     var _data = "page_num=" + page_num + "&page_size=10";
     $.ajax({
-        url: "http://192.168.1.138:8080/api/category/list",
+        url: "/api/category/list",
         type: "get",
         dataType: "json",
         cache: false,
@@ -35,6 +35,7 @@ function initData(data) {
         "<th>主键</th>" +
         "<th>分类的名称</th>" +
         "<th >属性管理</th>" +
+        "<th >产品管理</th>" +
         "<th >修改</th>" +
         "<th >删除</th>" +
         "</tr>";
@@ -42,7 +43,8 @@ function initData(data) {
         tr_str += "<tr data-id='" + list[i].id + "'>" +
             '<td class="cc">' + list[i].id + '</td>' +
             '<td class="cc">' + list[i].name + '</td>' +
-            "<td  class='cc'>&nbsp&nbsp<a  href='#' onclick='showActivityBox(this)'>详情</a></td>" +
+            '<td  class="cc">&nbsp&nbsp<a href="/category/' + list[i].id + '/query">详情</a></td>' +
+            '<td  class="cc">&nbsp&nbsp<a href="/category/' + list[i].id + '/fenleiliebiao">详情</a></td>' +
             "<td  class='cc'>&nbsp&nbsp<a  href='#'>修改</a></td>" +
             "<td  class='cc'>&nbsp&nbsp<a  href='#'  onclick='deleteItem(this)'>删除</a></td>" +
             '</td>'
@@ -72,7 +74,7 @@ function deleteItem(item) {
         var data = "";
         data += "id=" + id;
         $.ajax({
-            url: "http://192.168.1.138:8080/api/category/delete",
+            url: "/api/category/delete",
             type: "post",
             dataType: "json",
             cache: false,
@@ -88,7 +90,6 @@ function deleteItem(item) {
                     var tr = $(item).closest("tr");
                     tr.remove();
                 }
-
             }
 
         });
@@ -98,4 +99,12 @@ function deleteItem(item) {
 function showActivityBox(item) {
     window.location.href = "fenleiliebiao.html?id=" + $(item).closest("tr").data("id");
     return;
+}
+
+function openPage(item) {
+    openUrl($(item).data("url"));
+}
+
+function openUrl(url) {
+    window.location.href = url ;
 }

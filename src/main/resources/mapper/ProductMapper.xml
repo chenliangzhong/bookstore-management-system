@@ -14,7 +14,7 @@
     </resultMap>
 
     <select id="selectByCategoryId" resultMap="productMap" parameterType="java.lang.Long">
-        SELECT * FROM tb_product p WHERE p.category_id = #{id}
+        SELECT * FROM tb_product p WHERE p.category_id = #{category_id}
     </select>
 
     <select id="select" resultMap="productMap" parameterType="java.lang.Long">

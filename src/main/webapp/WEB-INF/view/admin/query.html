@@ -15,10 +15,12 @@
 			//查看第一页
 			getData(1);
 		});
+		var propertyXhr;
 		function getData(page_num){
+		    if (propertyXhr) propertyXhr.abort();
 			var _data = "page_num=" + page_num + "&page_size=10";
-			$.ajax({
-				url:"/api/property/list",
+            propertyXhr=$.ajax({
+				url:"/api/property/selectByCategoryId/$!category_id",
 				type:"get",
 				dataType:"json",
 				cache:false,//去掉缓存
@@ -38,9 +40,7 @@
 			var tr_str = "<tr >" + 
 				
 				"<th class='t'>主键</th>"+
-				"<th class='t'>商品名称</th>"+
-				"<th class='t'>外键</th>"+
-				
+				"<th class='t'>属性名称</th>"+
 				"<th class='t'>修改</th>"+
 				"<th class='t'>删除</th>"+
 
@@ -49,8 +49,6 @@
 				tr_str += "<tr  data-id='"+list[i].id+"'>" +		
 					"<td >" + list[i].id + "</td>" +
 					"<td >" + list[i].name + "</td>" +
-					"<td >" + list[i].category_id + "</td>" +
-					
 					"<td><a  href='#' onclick='showActivityUpdateBox(this)'>修改</td>" +
 					"<td><a  href='#' onclick='deleteItem(this)' >删除</td>"+
 					"</tr>";
@@ -78,10 +76,10 @@
 var activityXhr;
     var updateTr;
     function showActivityUpdateBox(item) {
+        if (activityXhr) activityXhr.abort();
     	$(".activity-update-box").show();
          var tr=$(item).closest("tr");
         update_id = tr.data("id");
-        if (activityXhr) activityXhr.abort();
         	activityXhr = $.ajax({
             url:"/api/property/selectById/" +update_id,
             type: "get",
@@ -99,13 +97,12 @@ var activityXhr;
 							console.log("name: " + data[x].name);
 							console.log("category_id: " + data[x].category_id);
 						}
-						
+
 
 						
 						for(x in data){
 						$("#container").append('<p>'+ "主键：" +"<input type='text' name='id'   value='"+data[x].id  +"'>"+ '</p>');
 						$("#container").append('<p>'+"商品名称："+"<input type='text' name='name' value='"+data[x].name +"'>" + '</p>');
-						$("#container").append('<p>'+ "外键："+"<input type='text'  name='category_id' value='"+data[x].category_id +"'>"+ '</p>');
 							}
 					}
 					
@@ -134,7 +131,7 @@ var activityXhr;
                     var dialog = $("#activity-update-dialog");
                 updateTr.children("#id").text(dialog.find("input[name=id]").val());
                 updateTr.children("#name").text(dialog.find("input[name=name]").val());
-                updateTr.children("#category_id").text(dialog.find("input[name=category_id]").val());                       
+                updateTr.children("#category_id").text(dialog.find("input[name=category_id]").val());
                 } else {
                     
                 }
@@ -190,7 +187,7 @@ var activityXhr;
 	<div >
 
 		<table   cellspacing="0" cellpadding="0" align="center" id="table">
-			<div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px;">产品属性</div><a href="add.html" target="main">增加</a>
+			<div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px;">产品属性</div><a href="add" target="main">增加</a>
 		</table>
 
 		<div align="center">

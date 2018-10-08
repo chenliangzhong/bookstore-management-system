@@ -63,21 +63,20 @@
 	</script>
 	<div id="container">
 		<form action="" id="tianjia" enctype="multipart/form-data">
-		<table width="1100px" border="1px" align="center">
-			<tr>
-				<td colspan="4">添加商品</td>
-			</tr>
-			<tr align="center">
-				
-				<td align="right">属性名称：</td>
-				<td align="left"><input type="text" name="name" autocomplete="off"></td>
-				<td align="right">外键：</td>
-				<td align="left"><input type="text" name="category_id" value="5" autocomplete="off"></td>
-			</tr>
-			<tr align="center">
-					<td colspan="4"><input onclick="requestjson()" type="button" value="提交">&nbsp;<input type="reset" >&nbsp;<a href="query.html">返回</a></td>
+			<input type="hidden" name="category_id" value="$!category_id">
+			<table width="1100px" border="1px" align="center">
+				<tr>
+					<td colspan="4">添加商品</td>
 				</tr>
-		</table>
+				<tr align="center">
+
+					<td align="right">属性名称：</td>
+					<td align="left"><input type="text" name="name" autocomplete="off"></td>
+				</tr>
+				<tr align="center">
+						<td colspan="4"><input onclick="requestjson()" type="button" value="提交">&nbsp;<input type="reset" >&nbsp;<a href="query.html">返回</a></td>
+					</tr>
+			</table>
 		</form>
 	</div>
 </body>

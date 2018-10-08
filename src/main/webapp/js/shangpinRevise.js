@@ -7,13 +7,13 @@ function getQueryVariable(variable) {
     }
 }
 $(function () {
-    showActivityBox(getQueryVariable("id"));
+    updateProductBox(getQueryVariable("id"));
 });
 
-function showActivityBox(id) {
+function updateProductBox(id) {
 
     $.ajax({
-        url: "http://192.168.1.138:8080/api/product/show/" + id,
+        url: "/api/product/show/" + id,
         type: "get",
         dataType: "JSON",
         cache: false,
@@ -50,7 +50,7 @@ function showActivityBox(id) {
 
 function subjectUpdate() {
     $.ajax({
-        url: "http://192.168.1.138:8080/api/product/update",
+        url: "/api/product/update",
         type: "post",
         data: $("#subject-update-form").serialize(),
         dataType: "json",

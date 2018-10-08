@@ -150,17 +150,22 @@ public class UserController extends  BaseApiController{
 
     //修改密码接口  ok
     @PostMapping("/update/pwd")
-    public Map<String, Object> alterPw(@RequestParam String password, @RequestParam String new_password, HttpServletRequest request) {
+    public Map<String, Object> alterPw(@RequestParam String password, @RequestParam String new_password, @RequestParam String re_password,  HttpServletRequest request) {
         if (password == null || password.trim().length() == 0) return onBadResp ("原密码长度必须大于零");
         if (new_password == null || new_password.trim().length() == 0) return onBadResp ("新密码长度必须大于零");
-        User user = userService.selectById(UserManager.getUser(request).getId());
-        if (user == null || !user.getPassword().equals(Md5Utils.encrypt(user.getMobile_phone(), password.trim()))) return onBadResp("密码修改失败");
+        if (new_password.equals(re_password)) {
+            User user = userService.selectById(UserManager.getUser(request).getId());
+            if (user == null || !user.getPassword().equals(Md5Utils.encrypt(user.getMobile_phone(), password.trim())))
+                return onBadResp("密码修改失败");
 
-        User updateUser = new User();
-        updateUser.setId(user.getId());
-        updateUser.setPassword(Md5Utils.encrypt(user.getMobile_phone(), new_password.trim()));
-        userService.updateById (updateUser);
-        return onSuccessRep(" 密码修改成功");
+            User updateUser = new User();
+            updateUser.setId(user.getId());
+            updateUser.setPassword(Md5Utils.encrypt(user.getMobile_phone(), new_password.trim()));
+            userService.updateById(updateUser);
+            return onSuccessRep(" 密码修改成功");
+        }else {
+            return onBadResp("密码不一致");
+        }
     }
 
     @GetMapping("/current")
@@ -173,8 +178,8 @@ public class UserController extends  BaseApiController{
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<User>(userService.select(id)));
     }
-    @GetMapping("/selectById")
-    public Map<String, Object> selectById(@RequestParam Long id){
+    @GetMapping("/show/{id}")
+    public Map<String, Object> selectById(@PathVariable Long id){
         return onDataResp(userService.selectById(id));
     }
 }

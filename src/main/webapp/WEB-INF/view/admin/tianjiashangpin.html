@@ -18,6 +18,7 @@
             <h3>添加商品</h3>
             <form id="subject-personnel-post-form">
                 <input type="hidden" name="id" value="">
+                <td><input type="hidden" autocomplete="off" name="category_id" value="$!category_id "></td>
                 <table>
                     <tr>
                         <td>名字：</td>
@@ -42,10 +43,6 @@
                     <tr>
                         <td>时间：</td>
                         <td><input type="date" autocomplete="off" name="create_date" value=""></td>
-                    </tr>
-                    <tr>
-                        <td>外键，指向用户表：</td>
-                        <td><input type="text" autocomplete="off" name="category_id" value=""></td>
                     </tr>
                 </table>
             </form>
