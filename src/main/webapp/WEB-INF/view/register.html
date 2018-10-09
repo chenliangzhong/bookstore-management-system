@@ -29,8 +29,10 @@
 <a href="/login">返回</a>
 
 <script type="text/javascript">
+    var registerXHR;
     function register() {
-        $.ajax({
+        if (registerXHR) registerXHR.abort();
+        registerXHR = $.ajax({
             url: "/api/user/register",
             type: "post",
             data: $("#register-form").serialize(),

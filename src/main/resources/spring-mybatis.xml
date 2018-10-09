@@ -18,6 +18,7 @@
 		<property name="user" value="${jdbc.username}"/>
 		<property name="password" value="${jdbc.password}"/>
 		<property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+		<!--<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>-->
 		<property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
 		<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
 		<property name="acquireRetryDelay" value="${c3p0.acquireRetryDelay}"/>

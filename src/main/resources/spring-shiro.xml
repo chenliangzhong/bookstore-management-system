@@ -109,6 +109,9 @@
                 /css/** = anon
                 /js/** = anon
                 /api/unit/area/list = anon
+                /api/productImage/** = anon
+                /app/** = anon
+                /image/** = anon
                 /api/user/pubkey = anon
                 /api/user/register = anon
                 /api/user/login = anon
