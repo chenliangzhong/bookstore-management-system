@@ -41,8 +41,9 @@ public class OrderController  extends BaseApiController{
        return onDataResp(orderService.selectById(id));
     }
 
-    @GetMapping("/insert")
-    public Map<String,Object> insert(@RequestParam Long user_id,@RequestParam String address,@RequestParam String receivre,@RequestParam String mobile, @RequestParam String order_code,
+    @PostMapping("/insert")
+    public Map<String,Object> insert(@RequestParam Long user_id,@RequestParam String address,@RequestParam String receivre,
+                                     @RequestParam String mobile, @RequestParam String order_code,
                                      @RequestParam String user_message, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date create_date ) {
         if (user_message != null && user_message.trim().length() == 0) return onBadResp("联系人不能为空");
         if (address != null && address.trim().length() == 0) return onBadResp("收货地址不能为空");
