@@ -3,9 +3,13 @@
 <mapper namespace="com.bookstore.dao.UploadDao">
 
     <insert id="insert" parameterType="com.bookstore.bean.Upload" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tb_upload(version,fileurl,filename,developer)
-        VALUES (#{version},#{fileUri},#{fileName},#{developer})
+        INSERT INTO tb_upload(version,fileurl,filename,developer,turnover_time)
+        VALUES (#{version},#{fileUrl},#{fileName},#{developer},#{turnoverTime})
     </insert>
+
+    <select id="select" resultType="com.bookstore.bean.Upload">
+        SELECT * FROM tb_upload
+    </select>
     
     <select id="selectByFileUri" resultType="com.bookstore.bean.Upload">
         SELECT * FROM tb_upload
@@ -23,9 +27,11 @@
         UPDATE tb_upload
         <set>
             <if test="version != null">version=#{version},</if>
-            <if test="fileName != null">filename=#{fileName}</if>
-            <if test="fileUri != null">fileurl=#{fileUri}</if>
+            <if test="fileName != null">filename=#{fileName},</if>
+            <if test="fileUrl != null">fileurl=#{fileUrl},</if>
+            <if test="turnoverTime != null">turnover_time=#{turnoverTime}</if>
         </set>
+        WHERE developer = #{developer}
     </update>
 
 </mapper>

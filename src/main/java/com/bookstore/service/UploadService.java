@@ -15,4 +15,6 @@ public interface UploadService {
     int update(Upload upload);
 
     Upload selectByDeveloper(String developer);
+
+    List<Upload> select();
 }

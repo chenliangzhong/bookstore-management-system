@@ -33,54 +33,30 @@
     <!--</script>-->
 
     <ul>
-        <li>
-            <p>POST：<a href="/app/upload">/app/upload</a></p>
-            <p>描述：添加商品图片接口</p>
-            <p>参数: file(产品图片，不为空) ，product_id(外键，指向产品，不为空)</p>
-            <form action="/app/upload" method="post"  enctype="multipart/form-data">
-                <table>
-                    <tr>
-                        <td>附件：</td>
-                        <td><input type="file" name="file"/></td>
-                    </tr>
-                    <tr>
-                        <td>主题：</td>
-                        <td><input type="text" name="version"/></td>
-                    </tr>
-                    <tr>
-                        <td>主题：</td>
-                        <td><input type="text" name="developer"/></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="提交"/></td>
-                    </tr>
-                </table>
-            </form>
-        </li>
 
         <li>
-            <p>GET：<a href="/api/productImage/list">/api/productImage/list</a></p>
-            <p>描述: 查看首页商品图片列表</p>
+            <p>GET：<a href="/app/list">/api/app/list</a></p>
+            <p>描述: 查看列表</p>
             <p>参数：page_num(默认为第一页，可为空)，page_size(默认为10条数据，可为空) </p>
         </li>
 
         <li>
-            <p>POST：<a href="/api/productImage/update">/api/productImage/update</a></p>
-            <p>描述: 根据id修改商品图片参数</p>
-            <p>参数: id(主键，不为空)，file(文件，为空)，product_id(外键，指向产品表，不为空)</p>
-            <form action="/api/productImage/update" method="post"  enctype="multipart/form-data">
+            <p>POST：<a href="/app/upload">/app/upload</a></p>
+            <p>描述：更新app接口</p>
+            <p>参数: file(文件(格式为apk)，不为空) ，version(版本号，不为空)，developer(开发者(研发者只能填XL或XC(不分大小写))，不为空)</p>
+            <form action="/app/upload" method="post"  enctype="multipart/form-data">
                 <table>
+                    <tr>
+                        <td>版本号：</td>
+                        <td><input type="text" name="version"/></td>
+                    </tr>
+                    <tr>
+                        <td>开发者(LM或XC)：</td>
+                        <td><input type="text" name="developer"/></td>
+                    </tr>
                     <tr>
                         <td>附件：</td>
                         <td><input type="file" name="file"/></td>
-                    </tr>
-                    <tr>
-                        <td>主题：</td>
-                        <td><input type="text" name="id"/></td>
-                    </tr>
-                    <tr>
-                        <td>主题：</td>
-                        <td><input type="text" name="product_id"/></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="提交"/></td>
@@ -88,13 +64,11 @@
                 </table>
             </form>
         </li>
-
-        <li>
-            <p>POST：<a href="/api/productImage/delete">/api/productImage/delete</a></p>
-            <p>描述: 根据传入批量id删除对应的商品图片</p>
-            <p>参数: id</p>
-        </li>
+        <br>
+        <li>(LM版)下载文件路径：http://192.168.1.138:8080/app/download/LM/</li>
+        <li>(XC版)下载文件路径：http://192.168.1.138:8080/app/download/XC/</li>
     </ul>
+
 
 </body>
 </html>
