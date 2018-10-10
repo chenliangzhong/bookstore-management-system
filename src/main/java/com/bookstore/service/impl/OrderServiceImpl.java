@@ -34,9 +34,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> select(Long id) {
-        return orderDao.select(id);
+    public List<Order> select() {
+        return orderDao.select();
     }
+
 
     @Override
     public List<Order> selectByOrderId(Long id) {

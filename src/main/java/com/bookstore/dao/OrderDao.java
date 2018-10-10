@@ -19,7 +19,7 @@ public interface OrderDao {
 
     List<Order> list();
 
-    List<Order> select (Long id);
+    List<Order> select ();
 
     List<Order> selectByOrderId(Long id);
 
