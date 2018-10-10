@@ -36,16 +36,22 @@ public class UploadController extends BaseApiController {
         return onDataResp(new MyPageInfo<Upload>(uploadService.select()));
     }
 
-    @PostMapping("/upload")
-    public  Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam Double version,@RequestParam String developer) {
+    @GetMapping ("/listDeveloper/{developer}")
+    public Map<String, Object> listDeveloper(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @PathVariable String developer) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Upload>(uploadService.listDeveloper(developer.toLowerCase())));
+    }
 
-        if (version == null) return onBadResp ("版本号不能为空");
+    @PostMapping("/upload")
+    public  Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam Integer versionCode,@RequestParam String developer) {
+
+        if (versionCode == null) return onBadResp ("版本号不能为空");
         if (developer == null || developer.trim().length() == 0) return onBadResp ("研发者不能为空");
 
         if (developer.equalsIgnoreCase("LM") || developer.equalsIgnoreCase("XC")){
             String filePath = "";
             Upload upload = new Upload();
-            upload.setVersion(version);
+            upload.setVersionCode(versionCode);
             upload.setDeveloper(developer.toLowerCase());
             upload.setTurnoverTime(new Date());
 

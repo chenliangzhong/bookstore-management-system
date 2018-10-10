@@ -22,12 +22,12 @@ public class PropertyController extends BaseApiController {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Property>(propertyService.select()));
     }
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public Map<String,Object> delete(@RequestParam Long id){
         propertyService.deleteById( id );
         return onSuccessRep( "删除成功" );
     }
-    @PostMapping("update")
+    @PostMapping("/update")
     public Map<String,Object> update(@RequestParam Long id,@RequestParam String name,@RequestParam Long category_id){
         Property property = new Property();
         property.setId( id );
@@ -50,9 +50,13 @@ public class PropertyController extends BaseApiController {
         return onBadResp("添加失败");
     }
 
-
     @GetMapping ("/selectById/{id}")
     public Map<String, Object> selectById(@PathVariable Long id) {
         return onDataResp(propertyService.selectById( id ));
+    }
+
+    @GetMapping ("/selectByCategoryId/{category_id}")
+    public Map<String, Object> selectByCategoryId(@PathVariable Long category_id) {
+        return onDataResp(new MyPageInfo<Property>(propertyService.selectByCategoryId(category_id)));
     }
 }

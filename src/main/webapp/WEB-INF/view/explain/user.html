@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>user</title>
+    <script src="/js/jquery-1.9.1.min.js"></script>
 </head>
 <body>
 <h3>用户文档</h3>
@@ -20,9 +21,49 @@
     </li>
 
     <li>
-        <P>POST：<a href="/api/user/alterPw">/api/user/alterPw</a></P>
+        <P>POST：<a href="/api/user/update">/api/user/update</a></P>
+        <P>描述：修改用户信息 </P>
+        <P>参数：username (用户名，不为空)，email (邮箱，不为空)</P>
+        <form id="user-update-info-form">
+            <table>
+                <tr>
+                    <td>用户名：</td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td>邮箱：</td>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="确定" onclick="updateUserInfo()"></td>
+                </tr>
+            </table>
+        </form>
+    </li>
+
+    <li>
+        <P>POST：<a href="/api/user/update/pwd">/api/user/update/pwd</a></P>
         <P>描述：修改密码 </P>
-        <P>参数：id (主键，不为空)，password (密码，不为空)</P>
+        <P>参数：password (密码，不为空)，new_password (新密码，不为空)，re_password (重新输入密码，不为空)</P>
+        <form id="user-update-pwd-form">
+            <table>
+                <tr>
+                    <td>原密码：</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td>新密码：</td>
+                    <td><input type="password" name="new_password"></td>
+                </tr>
+                <tr>
+                    <td>重新输入密码：</td>
+                    <td><input type="password" name="re_password"></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="确定" onclick="updateUserPwd()"></td>
+                </tr>
+            </table>
+        </form>
     </li>
 
     <li>
@@ -32,7 +73,7 @@
     </li>
 
     <li>
-        <P>GET：<a href="/api/user/show">/api/user/show</a></P>
+        <P>GET：<a href="/api/user/show/{id}">/api/user/show/{id}</a></P>
         <P>描述：显示用户</P>
         <P>参数：id (主键，不为空）</P>
     </li>
@@ -48,5 +89,59 @@
         <P>参数：id (主键，不为空）</P>
     </li>
 </ul>
+
+
+    <script type="text/javascript">
+
+        var updateUserPasswordXhr;
+        function updateUserPwd() {
+            if (updateUserPasswordXhr) updateUserPasswordXhr.abort();
+            updateUserPasswordXhr = $.ajax({
+                url: "/api/user/update/pwd",
+                type: "post",
+                data: $("#user-update-pwd-form").serialize(),
+                dataType: "json",
+                cache: false,
+                beforeSend: function() {
+                },
+                complete: function() {
+                },
+                success: function (result) {
+                    alert(result.msg);
+                    if (result.code == 200) {
+
+                    }
+                },error: function (result) {
+                    alert("网络连接出错！");
+                }
+            });
+        }
+    </script>
+
+<script type="text/javascript">
+
+    var updateUserPasswordXhr;
+    function updateUserInfo() {
+        if (updateUserPasswordXhr) updateUserPasswordXhr.abort();
+        updateUserPasswordXhr = $.ajax({
+            url: "/api/user/update",
+            type: "post",
+            data: $("#user-update-info-form").serialize(),
+            dataType: "json",
+            cache: false,
+            beforeSend: function() {
+            },
+            complete: function() {
+            },
+            success: function (result) {
+                alert(result.msg);
+                if (result.code == 200) {
+                }
+            },error: function (result) {
+                alert("网络连接出错！");
+            }
+        });
+    }
+</script>
 </body>
 </html>

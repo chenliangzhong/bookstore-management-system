@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/js/jquery-1.9.1.min.js"></script>
+	<style>
+		body{
+		margin: 0px ;
+		padding:0px;
+		text-align:center;
+	}
+		#container{
+			position: relative;
+			padding-top: 20px;
+			text-align: left;
+			margin: auto;
+			background: #f1f1fc;
+			width: 1100px;
+			height: 665px;
+			font-size: 14px;
+			font-family: "微软雅黑";
+		}
+		.l1{
+			width: 500px;
+		}
+		#div1{
+			position: absolute;
+			top: 175px;
+			left: 200px;
+			width: 400px;
+			height: 80px;
+			border: 1px solid red;
+			background: pink;
+		}
+	</style>
+</head>
+<body>
+	<script>
+	function requestjson(){
+		$.ajax({
+			type:'post',
+			url:'/api/property/add',
+			data:$("#tianjia").serialize(),
+			dataType:"json",
+			cache:false,
+			xhrFields: {
+                withCredentials: true
+            },
+            success:function(result){
+            	if (result.code == 200) {
+            		window.location.href = "query.html";
+            		// alert("JJ");
+            	}else{
+            		alert(result.mag);
+            	}
+            },
+            error: function() {
+				alert("网络连接出错");
+			}
+		});
+	}
+	</script>
+	<div id="container">
+		<form action="" id="tianjia" enctype="multipart/form-data">
+			<input type="hidden" name="category_id" value="$!category_id">
+			<table width="1100px" border="1px" align="center">
+				<tr>
+					<td colspan="4">添加商品</td>
+				</tr>
+				<tr align="center">
+
+					<td align="right">属性名称：</td>
+					<td align="left"><input type="text" name="name" autocomplete="off"></td>
+				</tr>
+				<tr align="center">
+						<td colspan="4"><input onclick="requestjson()" type="button" value="提交">&nbsp;<input type="reset" >&nbsp;<a href="query.html">返回</a></td>
+					</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

@@ -31,6 +31,12 @@ public class PropertyValueController extends BaseApiController{
 		return onDataResp(new MyPageInfo<PropertyValue>(propertyValueService.list()));
 	}
 
+
+	@GetMapping ("/selectById/{id}")
+	public Map<String, Object> selectById(@PathVariable Long id) {
+		return onDataResp(propertyValueService.selectById( id ));
+	}
+
 	@PostMapping("/add")
 	public Map<String, Object> add(@RequestParam String value, @RequestParam Long product_id,@RequestParam Long property_id ) {
 
@@ -51,15 +57,15 @@ public class PropertyValueController extends BaseApiController{
 	public Map<String, Object> update(@RequestParam Long id, @RequestParam String value, @RequestParam Long product_id, @RequestParam Long property_id
 	)
 	{
-		if (value != null && value.trim().length() == 0) return onBadResp("");
+		if (value != null && value.trim().length() == 0) return onBadResp("值不能为空");
 		PropertyValue propertyvalue = new PropertyValue();
 		propertyvalue.setId(id);
 		if (value != null) propertyvalue.setValue(value.trim());
 		if (product_id != null) propertyvalue.setProductId(product_id);
 		if (property_id != null) propertyvalue.setPropertyId(property_id);
 
-		if (propertyValueService.updateById(propertyvalue) > 0){onSuccessRep("修改成功");}
-		return onSuccessRep("修改失败");
+		if (propertyValueService.updateById(propertyvalue) > 0){return onSuccessRep("修改成功");}
+		return onDataResp("修改失败");
 	}
 
 }

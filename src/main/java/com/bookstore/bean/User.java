@@ -1,5 +1,6 @@
 package com.bookstore.bean;
 
+import com.bookstore.enums.RoleTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class User {
     private String password;
     private String email;
     private List<Order> orders;//用户创建订单列表
+    private RoleTypeEnum roleTypeEnum;
 
     public User() {
     }
@@ -72,6 +74,14 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public RoleTypeEnum getRoleTypeEnum() {
+        return roleTypeEnum;
+    }
+
+    public void setRoleTypeEnum(RoleTypeEnum roleTypeEnum) {
+        this.roleTypeEnum = roleTypeEnum;
     }
 }
 

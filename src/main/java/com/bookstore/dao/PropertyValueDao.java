@@ -17,4 +17,6 @@ public interface PropertyValueDao {
 	int updateById(PropertyValue propertyvalue);
 
 	int insert(PropertyValue propertyvalue);
+
+	PropertyValue selectById(Long id);
 }

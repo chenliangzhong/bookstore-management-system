@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/js/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<form id="uploadForm"> 
+   <p>上传文件：<input type="file" name="file" /></p> 
+   <p>上传文件：<input type="text" name="product_id" /></p> 
+   <input type="button" value="上传" onclick="upload()" /> 
+</form>
+	<script>
+		function upload() { 
+		   var formData = new FormData($("#uploadForm")[0]); 
+		   $.ajax({ 
+		     url: '/api/productImage/add',
+		     type: 'POST', 
+		     data: formData, 
+		     async: false, 
+		     
+		     contentType: false, 
+		     processData: false, 
+		     cache:false,//去掉缓存
+				xhrFields:{
+					withCredentials:true
+				},
+		     success: function(data) {
+		     	if (data.code ==200) {
+							alert(data.msg);
+						}else{
+							alert(data.msg);
+						}
+		     }, 
+		     error:function(){
+						alert("网络连接错误");
+					}
+		   }); 
+		}
+	</script>
+</body>
+</html>

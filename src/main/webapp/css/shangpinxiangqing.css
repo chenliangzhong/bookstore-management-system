@@ -1,0 +1,33 @@
+#right-below {
+    width: 1300px;
+    height: 1040px;
+    padding-left: 200px;
+    background: rgba(221, 221, 221, 0.541);
+    padding-top: 80px;
+}
+
+h3 {
+    height: 35px;
+    margin: 0px;
+    padding-top: 10px;
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+table {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.cc {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.revise {
+    margin-left: 300px;
+}

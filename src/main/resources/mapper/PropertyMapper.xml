@@ -4,14 +4,17 @@
     <resultMap id="propertyResultMap" type="com.bookstore.bean.Property">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <association property="category" column="ctegory_id" select="com.bookstore.dao.PropertyDao.select" />
+        <!--<association property="category" column="ctegory_id" select="com.bookstore.dao.PropertyDao.select" />-->
     </resultMap>
+
     <select id="select" resultType="com.bookstore.bean.Property" >
         SELECT * FROM tb_property
     </select>
+
     <delete id="deleteById" parameterType="java.lang.Long" >
         DELETE FROM tb_property WHERE id=#{id}
     </delete>
+
     <update id="updateById" parameterType="com.bookstore.bean.Property">
         UPDATE tb_property
         <set>
@@ -20,6 +23,7 @@
         </set>
         WHERE id=#{id}
     </update>
+
     <insert id="insert" parameterType="com.bookstore.bean.Property" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tb_property(name,category_id)
         VALUES (#{name},#{categoryId})
@@ -27,5 +31,9 @@
 
     <select id="selectById" resultType="com.bookstore.bean.Property" >
         SELECT * FROM tb_property WHERE id=#{id}
+    </select>
+
+    <select id="selectByCategoryId" resultType="com.bookstore.bean.Property" >
+        SELECT * FROM tb_property WHERE category_id=#{category_id}
     </select>
 </mapper>

@@ -12,7 +12,7 @@ public interface ProductService {
 
     Product selectById(Long id);
 
-    List<Product> selectByCategoryId(Long id);
+    List<Product> selectByCategoryId(Long category_id);
 
     Product selectByProductId(Long id);
 

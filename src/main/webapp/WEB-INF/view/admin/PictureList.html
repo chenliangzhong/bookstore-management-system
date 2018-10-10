@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<script src="/js/jquery-1.9.1.min.js"></script>
+	<script src="/js/jquery.pagination.js"></script>
+	<style>
+
+	</style>
+</head>
+<body>
+	<script>
+		$(function(){
+			getData(1);
+		});
+		function getData(page_num){
+		
+			$.ajax({
+				url:"/api/productImage/list",
+				type:"get",
+				dataType:"json",
+				cache:false,
+				xhrFields:{
+					withCredentials:true
+				},
+				
+				success:function(result){
+					if (result.code == 200) {
+						initData(result.data);
+					}
+				}
+			});
+		}
+		function initData(data){
+            var host = window.location.host;
+			var list =data.list;
+			var tr_str="<tr>" +
+			"<th>主键</th>" +
+			"<th>图片</th>" +
+			"<th>产品外键</th>" +
+			"<th>修改</th>" +
+			"</tr>";
+			for (var i = 0; i < list.length; i++) {
+				tr_str +="tr data-id='"+list[i].id +"'>"+
+				"<td >"+list[i].id + "</td>"+
+
+				// "<td >< img src='"+ basePath + list[i].bookimage + "' /></td>"
+				"<td ><img class='l1' src=" + "http://" + host +  list[i].picture + "/>  </td>"+
+				"<td>"+ list[i].product_id + "</td>"+
+				"<td ><a  href='#' onclick='showActivityUpdateBox(this)'>修改</td>" +
+				"</tr>";
+		}
+		$("#table").html(tr_str);
+	}
+	</script>
+	<div >
+<img src="" alt="">
+		<table   cellspacing="0" cellpadding="0" align="center" id="table">
+			<div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px;">商品图片</div><a href="shangpintupian.html">上传</a>
+		</table>
+	</div>
+</body>
+</html>

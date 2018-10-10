@@ -19,4 +19,6 @@ public interface UploadDao {
     Upload selectByDeveloper(String developer);
 
     List<Upload> select();
+
+    List<Upload> listDeveloper(String developer);
 }

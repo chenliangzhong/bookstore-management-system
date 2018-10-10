@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <title>分类商品详细列表</title>
+    <link rel="stylesheet" type="text/css" href="/css/fenleiliebiao.css">
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <script src="/js/fenleiliebiao.js"></script>
+</head>
+
+<body>
+    <div id="right-below">
+        <div id="mt">分类商品详细列表</div>
+        <table width="1100px" align="center" id="table" cellspacing="0px" cellpadding="0px">
+
+        </table>
+
+        <div align="center">
+            <div class="M-box"></div>
+        </div>
+        <a  href='tianjiashangpin'>添加</a>
+    </div>
+
+    <SCRIPT>
+        $(function () {
+            showActivityBox(1);
+        });
+
+        var productXhr;
+        function showActivityBox(page_num) {
+            if (productXhr) productXhr.abort();
+            var _data = "page_num=" + page_num + "&page_size=10";
+            productXhr=$.ajax({
+                url: "/api/product/selectByCategoryId/$!category_id",
+                type: "get",
+                dataType: "json",
+                cache: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                beforeSend: function () {},
+                complete: function () {},
+                data: _data,
+                success: function (result) {
+
+                    initData(result.data);
+
+
+                }
+            });
+        }
+
+        function initData(data) {
+            var list = data.list;
+            var tr_str = "<tr>" +
+                "<th >名字</th>" +
+                "<th   >小标题</th>" +
+                "<th    >原价格</th>" +
+                "<th   >优惠价格</th>" +
+                "<th   >库存</th>" +
+                "<th   >时间</th>" +
+                "<th  >操作</th>" +
+                "</tr>";
+            for (var i = 0; i < list.length; i++) {
+                tr_str += "<tr data-id='" + list[i].id + "'>" +
+                    '<td class="cc">' + list[i].name + '</td>' +
+                    '<td class="cc">' + list[i].subtitle + '</td>' +
+                    '<td class="cc">' + list[i].original_price + '</td>' +
+                    '<td class="cc">' + list[i].promote_price + '</td>' +
+                    '<td class="cc">' + list[i].stock + '</td>' +
+                    '<td class="cc">' + list[i].create_date + '</td>' +
+                    "<td  class='cc'>&nbsp&nbsp<a  href='#' onclick='showActivityBoxx(this)'>修改</a>&nbsp&nbsp<a  href='#'  onclick='deleteItem(this)'>删除</a></td>" +
+                    '</td>'
+                "</tr>";
+            }
+
+
+            $("#table").html(tr_str);
+
+            $(".M-box").pagination({
+                pageCount: data.pages,
+                current: data.page_num,
+                callback: 'pageselectCallback',
+                prevContent: "上一页",
+                nextContent: "下一页",
+                jump: true,
+                coping: true,
+                callback: function (api) {
+                    getData(api.getCurrent())
+                }
+            });
+        }
+    </SCRIPT>
+</body>
+</html>
