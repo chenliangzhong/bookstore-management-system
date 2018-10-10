@@ -15,7 +15,7 @@ public interface OrderService {
 
     List<Order> selectList();
 
-    List<Order> select (Long id);
+    List<Order> select ();
 
     List<Order> selectByOrderId(Long id);
 

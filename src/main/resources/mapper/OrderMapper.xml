@@ -36,11 +36,10 @@
     </resultMap>
 
     <select id="select" resultMap="orderItemResultMap" parameterType="java.lang.Long">
-        SELECT * FROM  tb_order WHERE id=#{id}
+        SELECT * FROM  tb_order
     </select>
 
 
-    <select id="list"></select>
 
     <select id="selectByOrderId" parameterType="java.lang.Long" resultMap="orderResultMap">
         SELECT * FROM  tb_order o WHERE o.user_id=#{id}

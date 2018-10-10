@@ -21,9 +21,9 @@ public class OrderController  extends BaseApiController{
 
 
     @GetMapping("/select")
-    public Map<String, Object> select(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size,@RequestParam Long id){
+    public Map<String, Object> select(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size){
         PageHelper.startPage(page_num, page_size);
-        return onDataResp(new MyPageInfo<Order>(orderService.select(id)));
+        return onDataResp(new MyPageInfo<Order>(orderService.select()));
     }
     @GetMapping ("/selectlist")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size) {

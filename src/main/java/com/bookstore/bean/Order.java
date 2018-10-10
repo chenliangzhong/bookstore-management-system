@@ -28,6 +28,7 @@ public class Order {
     private Date confirm_date;
     private int status;
     private User user;//用户信息
+
     private List<OrderItem> orderItems;///订单详细
     public Order() {
     }
