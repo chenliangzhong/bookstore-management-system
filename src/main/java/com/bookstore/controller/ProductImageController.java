@@ -59,7 +59,6 @@ public class ProductImageController extends BaseApiController{
     @PostMapping("/delete")
     public Map<String, Object> delete(@RequestParam Long[] id, HttpSession session){
         String picture = productImageService.selectById(id).getPicture();
-        System.out.println(picture);
         File file = new File(fileUploadUtils.getBasePath() + picture);
         if (file.delete() && productImageService.deleteBatch(id) > 0) {
             return onSuccessRep("删除成功");
