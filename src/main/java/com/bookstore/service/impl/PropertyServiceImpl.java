@@ -40,4 +40,9 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyDao.selectById( id );
     }
 
+    @Override
+    public List<Property> selectByCategoryId(Long category_id) {
+        return propertyDao.selectByCategoryId(category_id);
+    }
+
 }

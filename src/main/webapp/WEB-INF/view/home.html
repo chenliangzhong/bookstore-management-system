@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-	<title>Document</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<script src="js/jquery.min.js"></script>
-		<script src="js/popper.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-    	<script type="text/javascript" src="js/jquery.qrcode.js"></script>
-    	<script type="text/javascript" src="js/qrcode.js"></script>
+	<title>卓越书店</title>
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/popper.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+    	<script type="text/javascript" src="/js/jquery.qrcode.js"></script>
+    	<script type="text/javascript" src="/js/qrcode.js"></script>
   <style>
 		body{
             background-color: #9f8f8f;
@@ -153,9 +153,9 @@
     </div> --> 
     <div class="top">
     	<div>
-			<div class="left"><a href="#"><img src="img/logo.png" style="width: 30px;height: 20px;" alt="">&nbsp;卓越书店</a></div>
-	        <div class="right"><a href=""><img src="img/android.png" style="width: 80px; height:35px" alt=""></a>
-		     <img onclick="ShowDiv('MyDiv')"  src="img/erweima.png" style="width: 80px; height:35px ;" alt="">
+			<div class="left"><a href="#"><img src="/img/logo.png" style="width: 30px;height: 20px;" alt="">&nbsp;卓越书店</a></div>
+	        <div class="right"><a href=""><img src="/img/android.png" style="width: 80px; height:35px" alt=""></a>
+		     <img onclick="ShowDiv('MyDiv')"  src="/img/erweima.png" style="width: 80px; height:35px ;" alt="">
 		    </div>
 		</div>
     </div>      
@@ -173,16 +173,16 @@
         <!-- 轮播图片 -->
         <div class="carousel-inner">
             <div class="carousel-item active carousel-bg1">
-                <img src="img/examples/lun01.jpg" >
+                <img src="/img/examples/lun01.jpg" >
             </div>
             <div class="carousel-item carousel-bg2">
-                <img src="img/examples/lun02.jpg" >
+                <img src="/img/examples/lun02.jpg" >
             </div>
             <div class="carousel-item carousel-bg3">
-                <img src="img/examples/lun03.jpg" >
+                <img src="/img/examples/lun03.jpg" >
             </div>
             <div class="carousel-item carousel-bg4">
-                <img src="img/examples/lun02.jpg" >
+                <img src="/img/examples/lun02.jpg" >
             </div>
         </div>
         <!-- 左右切换按钮 -->
@@ -213,7 +213,7 @@
             height: 200, //生成的二维码的高度
             render	: "table",
             correctLevel:0,
-            text	: "http://192.168.1.138:8081/app/download"
+            text	: "http://"+ host + "/app/download/XC/"
         });
     </script> 
 </body>

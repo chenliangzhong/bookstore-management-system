@@ -7,30 +7,16 @@
     <script type="text/javascript" src="/js/jquery.qrcode.js"></script>
     <script type="text/javascript" src="/js/qrcode.js"></script>
 
-    <style>
-        div{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin: -150px 0 0 -200px;
-        }
-    </style>
+    <!--<style>-->
+        <!--div{-->
+            <!--position: absolute;-->
+            <!--top: 50%;-->
+            <!--left: 50%;-->
+            <!--margin: -150px 0 0 -200px;-->
+        <!--}-->
+    <!--</style>-->
 </head>
 <body>
-
-
-    <!--<div id="qrcodeTable"></div>-->
-
-    <!--<script>-->
-        <!--var host = window.location.host;-->
-        <!--jQuery('#qrcodeTable').qrcode({-->
-            <!--width: 220, //生成的二维码的宽度-->
-            <!--height: 220, //生成的二维码的高度-->
-            <!--render	: "table",-->
-            <!--correctLevel:0,-->
-            <!--text	: "http://192.168.1.138:8081/app/download"-->
-        <!--});-->
-    <!--</script>-->
 
     <ul>
 
@@ -41,14 +27,20 @@
         </li>
 
         <li>
+            <p>GET：<a href="/app/listDeveloper/{developer}">/app/listDeveloper/{developer}</a></p>
+            <p>描述: 根据developer查看列表</p>
+            <p>参数：developer(开发者(研发者只能填XL或XC(不分大小写))，不为空)</p>
+        </li>
+
+        <li>
             <p>POST：<a href="/app/upload">/app/upload</a></p>
             <p>描述：更新app接口</p>
-            <p>参数: file(文件(格式为apk)，不为空) ，version(版本号，不为空)，developer(开发者(研发者只能填XL或XC(不分大小写))，不为空)</p>
+            <p>参数: file(文件(格式为apk)，不为空) ，versionCode(版本号，不为空)，developer(开发者(研发者只能填XL或XC(不分大小写))，不为空)</p>
             <form action="/app/upload" method="post"  enctype="multipart/form-data">
                 <table>
                     <tr>
                         <td>版本号：</td>
-                        <td><input type="text" name="version"/></td>
+                        <td><input type="text" name="versionCode"/></td>
                     </tr>
                     <tr>
                         <td>开发者(LM或XC)：</td>
@@ -70,5 +62,17 @@
     </ul>
 
 
+    <!--<div id="qrcodeTable"></div>-->
+
+    <!--<script>-->
+        <!--var host = window.location.host;-->
+        <!--jQuery('#qrcodeTable').qrcode({-->
+            <!--width: 200, //生成的二维码的宽度-->
+            <!--height: 200, //生成的二维码的高度-->
+            <!--render	: "table",-->
+            <!--correctLevel:0,-->
+            <!--text	: "http://"+ host + "/app/download/LM/20180928213211370_966205.apk"-->
+        <!--});-->
+    <!--</script>-->
 </body>
 </html>

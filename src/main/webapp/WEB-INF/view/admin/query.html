@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<title>查看产品</title>
+	<link rel="stylesheet" href="/css/query.css">
+	<script src="/js/jquery-1.9.1.min.js"></script>
+	<script src="/js/jquery.pagination.js"></script>
+</head>
+<body>
+	<!-- 分页查询 -->
+	<script>
+		$(function(){
+			//查看第一页
+			getData(1);
+		});
+		var propertyXhr;
+		function getData(page_num){
+		    if (propertyXhr) propertyXhr.abort();
+			var _data = "page_num=" + page_num + "&page_size=10";
+            propertyXhr=$.ajax({
+				url:"/api/property/selectByCategoryId/$!category_id",
+				type:"get",
+				dataType:"json",
+				cache:false,//去掉缓存
+				xhrFields:{
+					withCredentials:true
+				},
+				data:_data,
+				success: function (result) {
+					if (result.code == 200) {
+						initData(result.data);
+					}
+				}
+			});
+		}
+		function initData(data){
+			var list = data.list;
+			var tr_str = "<tr >" + 
+				
+				"<th class='t'>主键</th>"+
+				"<th class='t'>属性名称</th>"+
+				"<th class='t'>修改</th>"+
+				"<th class='t'>删除</th>"+
+
+				"</tr>";
+				for (var i = 0; i < list.length; i++) {
+				tr_str += "<tr  data-id='"+list[i].id+"'>" +		
+					"<td >" + list[i].id + "</td>" +
+					"<td >" + list[i].name + "</td>" +
+					"<td><a  href='#' onclick='showActivityUpdateBox(this)'>修改</td>" +
+					"<td><a  href='#' onclick='deleteItem(this)' >删除</td>"+
+					"</tr>";
+			}
+			$("#table").html(tr_str);
+			
+    		
+			$(".M-box").pagination({
+				pageCount: data.pages,
+				current: data.page_num,
+				callback: 'pageselectCallback',
+				prevContent: "上一页",
+				nextContent: "下一页",
+				jump: true,
+				coping: true,
+				callback: function (api) {
+					getData(api.getCurrent())
+				}
+			});
+		
+		}
+
+
+// 修改
+var activityXhr;
+    var updateTr;
+    function showActivityUpdateBox(item) {
+        if (activityXhr) activityXhr.abort();
+    	$(".activity-update-box").show();
+         var tr=$(item).closest("tr");
+        update_id = tr.data("id");
+        	activityXhr = $.ajax({
+            url:"/api/property/selectById/" +update_id,
+            type: "get",
+            dataType: "json",
+            cache: false,
+            xhrFields: {
+               withCredentials: true
+          },
+            
+            success: function (result) {
+					if (result.code == 200) {
+						var data = result.data;
+						for(x in data){
+							console.log("id: " +data[x].id);
+							console.log("name: " + data[x].name);
+							console.log("category_id: " + data[x].category_id);
+						}
+
+
+						
+						for(x in data){
+						$("#container").append('<p>'+ "主键：" +"<input type='text' name='id'   value='"+data[x].id  +"'>"+ '</p>');
+						$("#container").append('<p>'+"商品名称："+"<input type='text' name='name' value='"+data[x].name +"'>" + '</p>');
+							}
+					}
+					
+				},
+        });
+    }
+ 
+    function activityUpdate() {
+        if (activityXhr) activityXhr.abort();
+        activityXhr = $.ajax({
+            url: "/api/property/update",
+            type: "post",
+            data: new FormData($("#activity-update-form")[0]),
+            dataType: "json",
+            cache: false, // 上传文件无需缓存
+            processData: false, // 用于对data参数进行序列化处理 这里必须false
+            contentType: false, // 必须
+            async : true,
+            cache: false,//清除缓存
+            xhrFields: {//跨域
+               withCredentials: true
+          },
+            success: function (result) {
+                if (result.code == 200) {
+                	alert(result.msg);
+                    var dialog = $("#activity-update-dialog");
+                updateTr.children("#id").text(dialog.find("input[name=id]").val());
+                updateTr.children("#name").text(dialog.find("input[name=name]").val());
+                updateTr.children("#category_id").text(dialog.find("input[name=category_id]").val());
+                } else {
+                    
+                }
+            },error: function (result) {
+
+            }
+        });
+    }
+	</script>
+
+	<!-- 删除 -->
+	<script>
+		function deleteItem(item) {
+			if (confirm("确定要删除吗？")) {
+				var id = $(item).closest("tr").data("id");
+				var data = "";
+				data += "id=" + id;
+				$.ajax({
+					url: '/api/property/delete',
+					type: "get",
+					dataType: "json",
+					cache: false,
+					xhrFields: {
+						withCredentials: true
+					},
+					 beforeSend: function () {},
+					 complete: function () {},
+					data: data,
+					success: function (result) {
+						if (result.code == 200) {
+							alert(result.msg);
+							var tr = $(item).closest("tr");
+							tr.remove();
+						}
+
+					}
+
+				});
+			}
+		}
+	</script>
+
+<div class="activity-update-box" style="background: #f1f1fc;  position: fixed; width: 100%; height:100%; margin:0px; padding:0px; z-index: 900; display: none;" >
+<div id="activity-update-dialog" >
+	<form action="" id="activity-update-form">
+		<div id="container">
+		</div>
+		<input type="button" value="提交"  onclick="activityUpdate()" /><input type="button" value="取消" id="btn2" onclick="$(this).closest('.activity-update-box').hide();" />
+	</form>
+	</div>
+</div>
+
+	<div >
+
+		<table   cellspacing="0" cellpadding="0" align="center" id="table">
+			<div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px;">产品属性</div><a href="add" target="main">增加</a>
+		</table>
+
+		<div align="center">
+			<div class="M-box"></div>
+		</div>
+	</div>
+
+</body>
+</html>

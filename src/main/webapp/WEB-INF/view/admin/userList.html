@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>查询全部用户</title>
+	<link rel="stylesheet" href="/css/userList.css">
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+	<script>
+    //显示数据及分页
+      $(function(){
+            getData(1);
+        });
+        function getData(page_num){
+            var _data = "page_num=" + page_num + "&page_size=5";
+            $.ajax({
+                url:"/api/user/list",
+                type:"get",
+                dataType:"json",
+                cache:false,//去掉缓存
+                xhrFields:{
+                    withCredentials:true
+                },
+                data:_data,
+                success: function (result) {
+                    if (result.code == 200) {
+                        initData(result.data);
+                    }
+                }
+            });
+        }
+        function initData(data){
+            var list = data.list;
+            var tr_str = "<tr >" + 
+                
+                "<th class='t'>密码</th>"+
+                "<th class='t'>email</th>"+
+                "<th class='t'>查看</th>"+
+                "<th class='t'>修改</th>"+
+                "<th class='t'>删除</th>"+
+
+                "</tr>";
+                for (var i = 0; i < list.length; i++) {
+                tr_str += "<tr  data-id='"+list[i].id+"'>" +        
+                    "<td >" + list[i].password + "</td>" +
+                    "<td >" + list[i].email + "</td>" +
+                    "<td ><a href='#' onclick='showActivityBox(this)'>查看</a></td>" + 
+                    "<td><a  href='#' >修改</td>" +
+                    "<td><a  href='#' onclick='deleteItem(this)' >删除</td>"+
+                    "</tr>";
+            }
+            $("#table").html(tr_str);
+            
+            
+            $(".M-box").pagination({
+                pageCount: data.pages,
+                current: data.page_num,
+                callback: 'pageselectCallback',
+                prevContent: "上一页",
+                nextContent: "下一页",
+                jump: true,
+                coping: true,
+                callback: function (api) {
+                    getData(api.getCurrent())
+                }
+            });
+        
+        }
+    
+ //删除
+        function deleteItem(item) {
+            if (confirm("确定要删除吗？")) {
+                var id = $(item).closest("tr").data("id");
+
+                var data = "";
+                data += "id=" + id;
+                $.ajax({
+                    url: "/api/user/delete",
+                    type: "post",
+                    dataType: "json",
+                    cache: false,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function () {},
+                    complete: function () {},
+                    data: data,
+                    success: function (result) {
+                        if (result.code == 200) {
+                            alert(result.msg);
+                            var tr = $(item).closest("tr");
+                            tr.remove();
+                        }
+
+                    }
+
+                });
+            }
+        }
+
+
+//查看
+        //查看
+        var activityXhr;
+        var updateTr;
+        function showActivityBox(item) {
+        $(".activity-box").show();
+
+         var tr=$(item).closest("tr");
+         update_tr=tr;
+
+        update_id = tr.data("id");
+          
+        if (activityXhr) activityXhr.abort();
+            activityXhr = $.ajax({
+            url: basePath+"/api/activity/show/" + update_id,
+            type: "get",
+            dataType: "json",
+            cache: false,
+            xhrFields: {
+               withCredentials: true
+          },
+            beforeSend: function() {
+            },
+            complete: function() {
+            },
+            success: function (result) {
+            
+                if (result.code == 200) {
+
+                    updateTr = tr;
+                    
+                    var data = result.data;
+
+                     var dialog = $("#pjax-container");  
+                    dialog.find("input[name=id]").val(data.id);
+                    dialog.find("input[name=theme]").val(data.theme);
+                    dialog.find("input[name=subject_id]").val(data.subject_id);
+                    dialog.find("input[name=author]").val(data.author);
+                    dialog.find("input[name=date]").val(data.date);
+                    dialog.find("textarea[name=content]").val(data.content);                   
+                  
+           }
+
+                   
+            },
+            error: function (result) {
+
+            }
+        });
+    } 
+
+
+    </script>
+</head>
+<body>
+
+    <!-- 查看 -->
+    <div style="height: 100%; width: 100%; padding-left: 200px; background: #f1f1fc;  position: fixed; z-index: 900; display: none;" class="activity-box" style="font-size: 24px;">
+        <div id="pjax-container" style="padding-top: 80px;">
+            <span>课题活动</span>
+            <p id="theme">主题：<input type="text" name="theme" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>
+            <p>课题：<input type="text" name="subject_id" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>
+            <p>作者(来源)：<input type="text" name="author" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>
+            <p>发布时间：<input type="text" name="date" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>
+            <p>内容：<input type="text" name="content" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>    
+        </div>
+    </div>
+<!-- 查看 -->
+
+	<div >
+
+        <table   cellspacing="0" cellpadding="0" align="center" id="table">
+            <div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px; ">查询全部用户</div>
+        </table>
+
+        <div align="center">
+            <div class="M-box"></div>
+        </div>
+    </div>
+
+</body>
+</html>

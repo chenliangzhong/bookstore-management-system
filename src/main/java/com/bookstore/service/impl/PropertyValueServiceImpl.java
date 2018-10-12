@@ -36,4 +36,9 @@ public class PropertyValueServiceImpl implements PropertyValueService {
 	public int insert(PropertyValue propertyvalue) {
 		return propertyValueDao.insert(propertyvalue);
 	}
+
+	@Override
+	public PropertyValue selectById(Long id) {
+		return propertyValueDao.selectById(id);
+	}
 }

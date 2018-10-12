@@ -10,7 +10,7 @@ import java.util.Date;
 public class Upload {
 
     private Long id;
-    private Double version;
+    private Integer versionCode;
     private String fileName;
     private String  fileUrl;
     private String developer;
@@ -26,12 +26,12 @@ public class Upload {
         this.id = id;
     }
 
-    public Double getVersion() {
-        return version;
+    public Integer getVersionCode() {
+        return versionCode;
     }
 
-    public void setVersion(Double version) {
-        this.version = version;
+    public void setVersionCode(Integer versionCode) {
+        this.versionCode = versionCode;
     }
 
     public String getFileName() {

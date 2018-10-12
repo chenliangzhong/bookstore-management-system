@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加商品</title>
+    <link rel="stylesheet" type="text/css" href="/css/shangpinfenlei.css">
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/shangpinfenlei.js"></script>
+
+</head>
+
+<body>
+    <div id="blte">
+        <div id="pjax-container">
+            <h3>添加商品</h3>
+            <form id="subject-personnel-post-form">
+                <input type="hidden" name="id" value="">
+                <td><input type="hidden" autocomplete="off" name="category_id" value="$!category_id "></td>
+                <table>
+                    <tr>
+                        <td>名字：</td>
+                        <td><input type="text" autocomplete="off" name="name" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>小标题：</td>
+                        <td><input type="text" autocomplete="off" name="subtitle" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>原价格：</td>
+                        <td><input type="text" autocomplete="off" name="original_price" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>优惠价格：</td>
+                        <td><input type="text" autocomplete="off" name="promote_price" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>库存：</td>
+                        <td><input type="text" autocomplete="off" name="stock" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>时间：</td>
+                        <td><input type="date" autocomplete="off" name="create_date" value=""></td>
+                    </tr>
+                </table>
+            </form>
+            <input type="button" value="提交" onclick="subjectPersonnalPost()">
+        </div>
+    </div>
+</body>
+
+</html>

@@ -4,6 +4,10 @@
     <resultMap id="findOrderResultMap" type="com.bookstore.bean.User">
         <id column="id" property="id"/>
         <result column="name" property="username"/>
+        <result column="mobile_phone" property="mobile_phone"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="role_type" property="roleTypeEnum"/>
         <collection property="orders" column="id" select="com.bookstore.dao.OrderDao.selectByOrderId"></collection>
     </resultMap>
 
@@ -12,15 +16,15 @@
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.bookstore.bean.User">
-        INSERT INTO tb_user(name, password, mobile_phone, email)
-        VALUES (#{username},#{password},#{mobile_phone},#{email})
+        INSERT INTO tb_user(name, password, mobile_phone, email,role_type)
+        VALUES (#{username},#{password},#{mobile_phone},#{email},#{roleTypeEnum})
     </insert>
 
-    <select id="list" resultType="com.bookstore.bean.User">
+    <select id="list" resultMap="findOrderResultMap">
         SELECT * FROM tb_user
     </select>
 
-    <select id="selectByUname" resultType="com.bookstore.bean.User" parameterType="java.lang.String">
+    <select id="selectByUname" resultMap="findOrderResultMap" parameterType="java.lang.String">
         SELECT * FROM tb_user WHERE mobile_phone=#{mobile_phone}
     </select>
 
@@ -31,7 +35,10 @@
     <update id="updateById" parameterType="com.bookstore.bean.User">
         UPDATE tb_user
         <set>
-            <if test="password != null">password=#{password}</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="username != null">name=#{username},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="mobile_phone != null">mobile_phone=#{mobile_phone}</if>
         </set>
         WHERE id=#{id}
     </update>

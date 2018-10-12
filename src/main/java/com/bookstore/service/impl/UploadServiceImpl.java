@@ -43,4 +43,9 @@ public class UploadServiceImpl implements UploadService {
     public List<Upload> select() {
         return uploadDao.select();
     }
+
+    @Override
+    public List<Upload> listDeveloper(String developer) {
+        return uploadDao.listDeveloper(developer);
+    }
 }

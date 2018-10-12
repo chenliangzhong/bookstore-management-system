@@ -20,4 +20,6 @@ public interface PropertyDao {
     int insert(Property property);
 
     List<Property> selectById(Long id);
+
+    List<Property> selectByCategoryId(Long category_id);
 }

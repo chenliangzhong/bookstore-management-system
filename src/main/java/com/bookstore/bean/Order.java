@@ -30,8 +30,10 @@ public class Order {
     private User user;//用户信息
 
     private List<OrderItem> orderItems;///订单详细
+
     public Order() {
     }
+
     public Order(Long id, Long user_id, String order_code, String address, String user_message, String receivre, String mobile, List<OrderItem> orderItems, Date create_date, Date pay_date, Date delivery_date, Date confirm_date, int status, User user, List<OrderItem> orderItems1) {
         this.id = id;
         this.user_id = user_id;

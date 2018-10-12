@@ -12,8 +12,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
     <!-- 配置component所在的包，自动加载需要管理的Bean -->
     <context:component-scan base-package="com.bookstore.service,com.bookstore.dao"/>
     <import resource="spring-mybatis.xml"/>
+    <import resource="spring-shiro.xml" />
 
-    <context:component-scan base-package="com.bookstore.util" />
+    <context:component-scan base-package="com.bookstore.common,com.bookstore.util" />
 
     <mvc:annotation-driven />
 

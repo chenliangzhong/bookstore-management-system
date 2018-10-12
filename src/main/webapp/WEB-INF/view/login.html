@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>说明</title>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/security.js"></script>
+	<title>登录</title>
+	<style>
+       
+        body{
+            background:#eeeeee;           
+        }
+        #form1{
+            text-align: center;
+        }
+        table{
+            width: 400px;
+            height: 270px;
+            border: 1px solid #ccc;
+            border-radius:15px;
+            background: white;
+            text-align: center;
+            border-collapse:separate; border-spacing:40px;
+           
+        }
+        table input{
+            line-height: 2em;
+        }
+        .text1{
+            color:#337a21;
+            border: none;
+            margin-left:50px;
+            text-decoration: none;
+        }
+         a:hover{
+            color:#5b6059;
+            text-decoration: underline; 
+        }
+	</style>
+	<script src="/js/jquery-1.9.1.min.js"></script>
+	<script>
+		function Logon(){
+
+            $.ajax({
+                url: "/api/user/pubkey",
+                type: "post",
+                dataType: "json",
+                cache: false,
+                beforeSend: function() {
+                },
+                complete: function() {
+                },
+                success: function (result) {
+                    if (result.code == 200) {
+                        var login_form = $("#form1");
+
+                        var pwd = login_form.find("input[name=password]").val();
+                        var modulus = result.data.modulus;
+                        var exponent = result.data.exponent;
+
+                        //加密
+                        var key = RSAUtils.getKeyPair(exponent, "", modulus);
+                        var apwd = RSAUtils.encryptedString(key, JSON.stringify({"password":pwd}));
+
+                        $.ajax({
+                            url: "/api/user/login",
+                            type: "post",
+                            data: "mobile_phone=" + login_form.find("input[name=mobile_phone]").val() + "&password=" + apwd,
+                            dataType: "json",
+                            cache: false,
+                            beforeSend: function() {
+                            },
+                            complete: function() {
+                            },
+                            success: function (result) {
+                                if (result.code == 200) {
+                                    window.location.href = "/home";
+                                } else {
+                                    alert(result.msg);
+                                }
+                            },error: function (result) {
+                                alert("网络连接失败！");
+                            }
+                        });
+                    } else {
+                        alert(result.msg);
+                    }
+                },error: function (result) {
+                    alert("网络连接失败！");
+                }
+            });
+       }
+	</script>
+</head>
+<body>
+	<form action="" id="form1" method="post" enctype="multipart/form-data">
+  
+    <table cellpadding="5" cellspacing="0" border="0" class="centenTable" align="center">
+    <caption style="font-family:'华文行楷'; font-size:25px; margin-top: 20px;">输入您登录的信息</caption>
+    	<tr>
+            <td>账号：
+                <input type="text" id="phone" name="mobile_phone" autocomplete="off" value="18475794899"/>
+            </td>
+        </tr>	
+    	<tr>
+            <td>密码：
+                <input type="text" id="pow" name="password" autocomplete="off" value="123456"/>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" id="btn" value="登录"  onclick="Logon()"/>
+            <a href="/register" class="text1">注册</a></td>
+        </tr>
+        </table>
+	</form>
+
+    <br/><br/><br/>
+    <div><a href="/index.jsp">接口文档</a></div>
+    <br/><br/><br/>
+    <div>
+        <span>
+            后台管理：
+            账号：18475794899
+            密码：123456
+        </span>
+        <br/>
+        <span>
+            普通用户：
+            账号：17876786701
+            密码：123456
+        </span>
+    </div>
+</body>
+</html>

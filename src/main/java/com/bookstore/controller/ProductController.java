@@ -82,23 +82,24 @@ public class ProductController extends BaseApiController{
         if (promote_price != null) product.setPromotePrice(promote_price);
         if (stock != null) product.setStock(stock);
         if (category_id != null) product.setCategoryId(category_id);
-        if (productService.updateById(product) > 0){onSuccessRep("修改成功");}
+        if (productService.updateById(product) > 0){return onSuccessRep("修改成功");}
         return onBadResp("修改失败");
     }
 
     // 查
-    @GetMapping("/selectByCategoryId/{id}")
-    public MyPageInfo<Product> selectByCategoryId(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, @PathVariable Long id)
+    @GetMapping("/selectByCategoryId/{category_id}")
+    public Map<String, Object> selectByCategoryId(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, @PathVariable Long category_id)
     {
         PageHelper.startPage(pageNo,pageSize);
-        return new MyPageInfo<Product>(productService.selectByCategoryId(id));
+        return onDataResp(new MyPageInfo<Product>(productService.selectByCategoryId(category_id)));
     }
 
 
     @GetMapping("/selectByProductId")
-    public MyPageInfo<Product> selectByProductId (@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize,@RequestParam Long id){
+    public Map<String, Object> selectByProductId (@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize,@RequestParam Long id){
         PageHelper.startPage(pageNo,pageSize);
-        return  new MyPageInfo<Product>((List<Product>) productService.selectByProductId(id));
+
+        return onDataResp(new MyPageInfo<Product>((List<Product>) productService.selectByProductId(id)));
 
     }
     @GetMapping("/selectById")

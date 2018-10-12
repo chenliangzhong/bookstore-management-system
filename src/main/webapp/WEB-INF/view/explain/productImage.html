@@ -63,6 +63,17 @@
         <p>POST：<a href="/api/productImage/delete">/api/productImage/delete</a></p>
         <p>描述: 根据传入批量id删除对应的商品图片</p>
         <p>参数: id</p>
+        <form action="/api/productImage/delete" method="post">
+            <table>
+                <tr>
+                    <td>主键：</td>
+                    <td><input type="text" name="id"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="提交"/></td>
+                </tr>
+            </table>
+        </form>
     </li>
 
     <li>
