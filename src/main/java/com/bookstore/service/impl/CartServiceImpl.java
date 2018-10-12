@@ -19,4 +19,21 @@ public class CartServiceImpl implements CartService {
     public List<Cart> seleByUser(Long user_id) {
         return cartDao.seleByUser(user_id);
     }
+
+    @Override
+    public int insert(Cart cart) {
+        return cartDao.insert(cart);
+    }
+
+    @Override
+    public int update(Cart cart) {
+        return cartDao.update(cart);
+    }
+
+    @Override
+    public int deleteBatch(Long... id) {
+        return cartDao.deleteBatch(id);
+    }
+
+
 }

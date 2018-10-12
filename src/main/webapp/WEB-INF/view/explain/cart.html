@@ -5,11 +5,35 @@
     <title>cart</title>
 </head>
 <body>
-<h3>订单管理</h3>
+<h3>购物车</h3>
 <ul>
     <li><p>GET：<a href="/api/cart/selectByUser">/api/orderitem/selectById</a> </p></li>
     <p>描述：根据用户user_id查询购物车</p>
     <p>参数：user_id </p>
 </ul>
+
+<ul>
+    <li><p>POST：<a href="/api/cart/insert">/api/cart/insert</a> </p></li>
+    <p>描述：添加购物车</p>
+    <p>参数：user_id itemId(产品id),num(数量)</p>
+</ul>
+
+
+<ul>
+    <li><p>POST：<a href="/api/cart/update">/api/cart/update</a> </p></li>
+    <p>描述：修改购物车</p>
+    <p>参数：id,num(数量)</p>
+</ul>
+
+<ul>
+    <li><p>POST：<a href="/api/cart/delete">/api/cart/delete</a> </p></li>
+    <p>描述：删除购物车购物车</p>
+    <p>参数：id,</p>
+</ul>
+
+
+
+
+
 </body>
 </html>
