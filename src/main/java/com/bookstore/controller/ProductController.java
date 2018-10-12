@@ -1,7 +1,6 @@
 package com.bookstore.controller;
 
 import com.bookstore.bean.MyPageInfo;
-import com.bookstore.bean.OrderItem;
 import com.bookstore.bean.Product;
 import com.bookstore.service.ProductService;
 import com.github.pagehelper.PageHelper;
@@ -107,4 +106,9 @@ public class ProductController extends BaseApiController{
         return onDataResp(productService.selectById(id));
     }
 
+    @GetMapping("/selectByName")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Product>(productService.selectByName( name)));
+    }
 }
