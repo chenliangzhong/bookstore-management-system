@@ -40,9 +40,10 @@ public class TestControllerTest {
     public void testString()throws Exception {
         String responseString = mockMvc.perform(
 //                    get("/api/user/login")
-            post("/api/user/update") // 请求的url，请求的方法是get
+            post("/api/product/delete") // 请求的url，请求的方法是get
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
-                .param("username","zhong")
+                    .param("id","2")
+//                    .param("name","传记")
         )
                 .andDo(print()) // 打印出请求和相应的内容
                 .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串

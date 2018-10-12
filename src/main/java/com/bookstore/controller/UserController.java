@@ -133,7 +133,7 @@ public class UserController extends  BaseApiController{
 
     //修改资料接口
     @PostMapping("/update")
-    public Map<String, Object> update(@RequestParam String username, @RequestParam(defaultValue = "") String email, HttpServletRequest request){
+    public Map<String, Object> update(String username, String email, HttpServletRequest request){
         if (username == null || username.trim().length() == 0) return onBadResp("用户名不能为空");
 
         User currentUser = UserManager.getUser(request);
