@@ -9,4 +9,12 @@ import java.util.List;
  */
 public interface CartService {
     List<Cart> seleByUser(Long user_id);
+
+    int insert(Cart cart);//加入购物车
+
+    int update(Cart cart);//修改购物车
+
+    int deleteBatch(Long... id);
+
+
 }
