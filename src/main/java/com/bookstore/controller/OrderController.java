@@ -41,7 +41,7 @@ public class OrderController  extends BaseApiController{
        return onDataResp(orderService.selectById(id));
     }
 
-    @PostMapping("/insert")
+    @GetMapping("/insert")
     public Map<String,Object> insert(@RequestParam Long user_id,@RequestParam String address,@RequestParam String receivre,
                                      @RequestParam String mobile, @RequestParam String order_code,
                                      @RequestParam String user_message, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date create_date ) {
