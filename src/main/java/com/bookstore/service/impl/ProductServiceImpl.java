@@ -54,4 +54,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> select() {
         return productDao.select();
     }
+
+    @Override
+    public List<Product> selectByName(String name) {
+        return productDao.selectByName( name );
+    }
 }

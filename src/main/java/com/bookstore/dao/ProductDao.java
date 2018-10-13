@@ -1,6 +1,7 @@
 package com.bookstore.dao;
 
 import com.bookstore.bean.Product;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface ProductDao {
     int updateById(Product product);
 
     int deleteBatch(Long... id);
+
+    List<Product> selectByName(@Param( "name" ) String name);
 }
