@@ -51,4 +51,13 @@
         </foreach>
     </delete>
 
+    <select id="selectByName" resultType="com.bookstore.bean.Product">
+        SELECT * FROM tb_product
+         <where>
+             <if test="name != null and name != ''">
+                 name LIKE "%"#{name}"%"
+             </if>
+         </where>
+        ORDER BY id DESC
+    </select>
 </mapper>
