@@ -18,8 +18,8 @@ public class Product {
     private BigDecimal originalPrice;
     private BigDecimal promotePrice;
     private Integer stock;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createDate;
     private Long categoryId;
     private Category category;

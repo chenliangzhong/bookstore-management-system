@@ -36,7 +36,8 @@ public class ProductImageController extends BaseApiController{
     // 增
     @PostMapping("/add")
     public Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam Long product_id) {
-        if (product_id == null) return onBadResp("subtitle 不能为空");
+//        if (product_id == null) return onBadResp("不能为空");
+        if (file == null) {onBadResp("图片不能为空");}
 
         String filePath = "";
 
@@ -70,6 +71,8 @@ public class ProductImageController extends BaseApiController{
     @PostMapping("/update")
     public Map<String, Object> update(@RequestParam Long id, @RequestParam(required = false)CommonsMultipartFile file, Long product_id )
     {
+        if (file == null) {onBadResp("图片不能为空");}
+
         String picture = productImageService.selectById(id).getPicture();
         File file1 = new File(fileUploadUtils.getBasePath() + picture);
 
@@ -92,6 +95,14 @@ public class ProductImageController extends BaseApiController{
     }
 
     // 查
+    @GetMapping("/show/{product_id}")
+    public Map<String, Object> show(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize, @PathVariable Long[] product_id)
+    {
+        PageHelper.startPage(pageNo,pageSize);
+        return onDataResp(new MyPageInfo<ProductImage>(productImageService.show(product_id)));
+    }
+
+
     @GetMapping("/list")
     public Map<String, Object> select(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize)
     {

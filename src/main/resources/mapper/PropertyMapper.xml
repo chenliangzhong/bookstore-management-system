@@ -18,8 +18,7 @@
     <update id="updateById" parameterType="com.bookstore.bean.Property">
         UPDATE tb_property
         <set>
-        <if test="name != null">name=#{name},</if>
-        <if test="categoryId != null">category_id=#{category_id},</if>
+        <if test="name != null">name=#{name}</if>
         </set>
         WHERE id=#{id}
     </update>
