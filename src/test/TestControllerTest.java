@@ -42,7 +42,7 @@ public class TestControllerTest {
 //                    get("/api/user/login")
             post("/api/product/delete") // 请求的url，请求的方法是get
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
-                    .param("id","2")
+                    .param("id","8")
 //                    .param("name","传记")
         )
                 .andDo(print()) // 打印出请求和相应的内容

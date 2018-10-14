@@ -6,10 +6,10 @@
 	<script src="/js/jquery-1.9.1.min.js"></script>
 </head>
 <body>
-<form id="uploadForm"> 
-   <p>上传文件：<input type="file" name="file" /></p> 
-   <p>上传文件：<input type="text" name="product_id" /></p> 
-   <input type="button" value="上传" onclick="upload()" /> 
+<form id="uploadForm">
+	<input type="hidden" name="product_id" value="$!foreign_key"/>
+   	<p>上传文件：<input type="file" name="file" /></p>
+   	<input type="button" value="上传" onclick="upload()" />
 </form>
 	<script>
 		function upload() { 

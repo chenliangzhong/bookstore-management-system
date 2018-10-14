@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>密码修改</title>
+  <style>
+    body{
+    margin: 0px ;
+    padding:0px;
+    text-align:center;
+  }
+    #update-pwd{
+      position: relative;
+      padding-top: 20px;
+      text-align: left;
+      margin: auto;
+      background: #f1f1fc;
+      width: 1100px;
+      height: 665px;
+      font-size: 14px;
+      font-family: "微软雅黑";
+    }
+  </style>
+</head>
+<body>
+<form id="update-pwd">
+
+            <table border="1" width="1100">
+            <tr>
+                <td align="right">id：</td>
+                <td><input id="id" type="id：" name="id："></td>
+            </tr>
+            <tr>
+                <td align="right">新密码：</td>
+                <td><input id="password" type="password" name="password"></td>
+            </tr>
+            <!-- <tr>
+                <td align="right">新密码：</td>
+                <td><input id="new_password" type="password" name="new_password"></td>
+            </tr> -->
+            <tr>
+                <td></td>
+        <td> <input type="button"  value="修改"  onclick="updateUserPwd()" /> &nbsp;<input type="reset" value="重置">&nbsp;<input type="button"  value="返回" /></td>
+            </tr>
+        </table>
+        </form>
+  
+</body> 
+<script  src="/js/jquery-1.9.1.min.js"></script>
+ <script>
+  var modifyPasd;
+    function updateUserPwd(item) {
+        var id=$("#id").val(); 
+        var password=$("#password").val(); 
+        // var new_password=$("#new_password").val();
+
+        if (modifyPasd) modifyPasd.abort();
+        modifyPasd = $.ajax({
+            url: "/api/user/alterPw",
+            type: "post",
+            data:{"id":id,"password":password},
+            dataType: "json",
+             cache: false,
+            xhrFields: {
+                withCredentials: true
+            },
+            beforeSend: function() {
+            },
+            complete: function() {
+            },
+            success: function (result) {
+                alert(result.msg);
+                if (result.code == 200) {
+
+                }
+            },error: function (result) {
+                alert("网络连接出错！");
+            }
+        });
+    }
+ </script>
+</html>

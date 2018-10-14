@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-    <title>分类商品详细列表</title>
+    <title>商品列表</title>
     <link rel="stylesheet" type="text/css" href="/css/fenleiliebiao.css">
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/jquery.pagination.js"></script>
-    <script src="/js/fenleiliebiao.js"></script>
+    <!--<script src="/js/fenleiliebiao.js"></script>-->
 </head>
 
 <body>
@@ -35,7 +35,7 @@
             if (productXhr) productXhr.abort();
             var _data = "page_num=" + page_num + "&page_size=10";
             productXhr=$.ajax({
-                url: "/api/product/selectByCategoryId/$!category_id",
+                url: "/api/product/selectByCategoryId/$!foreign_key",
                 type: "get",
                 dataType: "json",
                 cache: false,
@@ -63,6 +63,7 @@
                 "<th   >优惠价格</th>" +
                 "<th   >库存</th>" +
                 "<th   >时间</th>" +
+                "<th>图片管理</th>" +
                 "<th  >操作</th>" +
                 "</tr>";
             for (var i = 0; i < list.length; i++) {
@@ -73,6 +74,7 @@
                     '<td class="cc">' + list[i].promote_price + '</td>' +
                     '<td class="cc">' + list[i].stock + '</td>' +
                     '<td class="cc">' + list[i].create_date + '</td>' +
+                    '<td  class="cc">&nbsp&nbsp<a href="/admin/' + list[i].id + '/picture_list">详情</a></td>' +
                     "<td  class='cc'>&nbsp&nbsp<a  href='#' onclick='showActivityBoxx(this)'>修改</a>&nbsp&nbsp<a  href='#'  onclick='deleteItem(this)'>删除</a></td>" +
                     '</td>'
                 "</tr>";
@@ -93,6 +95,40 @@
                     getData(api.getCurrent())
                 }
             });
+        }
+
+        function deleteItem(item) {
+            if (confirm("确定要删除吗？")) {
+                var id = $(item).closest("tr").data("id");
+                var data = "";
+                data += "id=" + id;
+                $.ajax({
+                    url: "/api/product/delete",
+                    type: "post",
+                    dataType: "json",
+                    cache: false,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function () {},
+                    complete: function () {},
+                    data: data,
+                    success: function (result) {
+                        if (result.code == 200) {
+                            alert(result.msg);
+                            var tr = $(item).closest("tr");
+                            tr.remove();
+                        }
+
+                    }
+
+                });
+            }
+        }
+
+        function showActivityBoxx(item) {
+            window.location.href = "tianjiaRevise.html?id=" + $(item).closest("tr").data("id");
+            return;
         }
     </SCRIPT>
 </body>

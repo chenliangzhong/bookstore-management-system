@@ -18,10 +18,10 @@
             <h3>添加商品</h3>
             <form id="subject-personnel-post-form">
                 <input type="hidden" name="id" value="">
-                <td><input type="hidden" autocomplete="off" name="category_id" value="$!category_id "></td>
+                <td><input type="hidden" autocomplete="off" name="category_id" value="$!foreign_key"></td>
                 <table>
                     <tr>
-                        <td>名字：</td>
+                        <td>产品名称：</td>
                         <td><input type="text" autocomplete="off" name="name" value=""></td>
                     </tr>
                     <tr>
@@ -39,10 +39,6 @@
                     <tr>
                         <td>库存：</td>
                         <td><input type="text" autocomplete="off" name="stock" value=""></td>
-                    </tr>
-                    <tr>
-                        <td>时间：</td>
-                        <td><input type="date" autocomplete="off" name="create_date" value=""></td>
                     </tr>
                 </table>
             </form>

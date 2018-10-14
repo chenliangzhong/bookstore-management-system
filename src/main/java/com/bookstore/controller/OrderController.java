@@ -81,7 +81,7 @@ public class OrderController  extends BaseApiController{
         if (delivery_date == null) return onBadResp("创建时间不能为空");
         Order order=new Order();
         order.setId(id);
-        order.setDelivery_date(delivery_date);
+        order.setDelivery_date(new Date());
         order.setStatus(2);
         if (orderService.updateById(order)>0) return onSuccessRep("发货成功");
         return onBadResp("发货失败");
@@ -91,7 +91,7 @@ public class OrderController  extends BaseApiController{
         if (confirm_date == null) return onBadResp("创建时间不能为空");
         Order order=new Order();
         order.setId(id);
-        order.setConfirm_date(confirm_date);
+        order.setConfirm_date(new Date());
         order.setStatus(3);
         if (orderService.updateById(order)>0) return onSuccessRep("收货成功");
         return onBadResp("收货失败");

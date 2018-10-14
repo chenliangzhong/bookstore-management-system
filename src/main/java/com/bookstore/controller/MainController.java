@@ -47,10 +47,10 @@ public class MainController extends BaseController {
         return getPageURI(request, model);
     }
 
-    @GetMapping("/category/{category_id}/{property}")
-    public String categorySelectProperty(@PathVariable Long category_id, @PathVariable String property, Model model) {
-        model.addAttribute("category_id", category_id);
-        return "/admin/" + property;
+    @GetMapping("/admin/{foreign_key}/{page}")
+    public String categorySelectProperty(@PathVariable Long foreign_key, @PathVariable String page, Model model) {
+        model.addAttribute("foreign_key", foreign_key);
+        return "/admin/" + page;
     }
 
     private String getPageURI(String uri, HttpServletRequest request, Model model) {
