@@ -121,4 +121,10 @@ public class ProductImageController extends BaseApiController{
         return onDataResp(productImageService.listById(id));
     }
 
+
+    @GetMapping("/selectByProductId")
+    public Map<String, Object> selectByProductId(@RequestParam Long id) {
+        return onDataResp(productImageService.selectByProductId(id));
+    }
+
 }

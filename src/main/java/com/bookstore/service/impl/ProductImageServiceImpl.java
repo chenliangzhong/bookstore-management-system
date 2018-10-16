@@ -34,6 +34,11 @@ public class ProductImageServiceImpl implements ProductImageService{
     }
 
     @Override
+    public List<ProductImage> selectByProductId(Long id) {
+        return productImageDao.selectByProductId(id);
+    }
+
+    @Override
     public int updateById(ProductImage productImage) {
         if (productImage == null) return 0;
         return productImageDao.updateById(productImage);

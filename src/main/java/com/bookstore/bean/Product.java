@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by SX-503 on 2018/9/19.
@@ -23,6 +24,15 @@ public class Product {
     private Date createDate;
     private Long categoryId;
     private Category category;
+    private List<ProductImage> productImageList;
+
+    public List<ProductImage> getProductImageList() {
+        return productImageList;
+    }
+
+    public void setProductImageList(List<ProductImage> productImageList) {
+        this.productImageList = productImageList;
+    }
 
     public Long getId() {
         return id;
