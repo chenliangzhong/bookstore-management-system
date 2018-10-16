@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<title>查看订单</title>
+	<link rel="stylesheet" href="/css/query.css">
+	<script src="/js/jquery-1.9.1.min.js"></script>
+	<script src="/js/jquery.pagination.js"></script>
+</head>
+<body>
+	<!-- 分页查询 -->
+	<script>
+		$(function(){
+			getData(1);
+		});
+		function getData(page_num){
+			var _data = "page_num=" + page_num + "&page_size=10";
+			$.ajax({
+				url:"/api/order/select",
+				type:"get",
+				dataType:"json",
+				cache:false,//去掉缓存
+				xhrFields:{
+					withCredentials:true
+				},
+				data:_data,
+				success: function (result) {
+					if (result.code == 200) {
+						initData(result.data);
+					}
+				}
+			});
+		}
+		function initData(data){
+			var list = data.list;
+			var tr_str = "<tr >" + 
+				
+				"<th class='t'>id</th>"+
+				"<th class='t'>用户编号</th>"+
+				"<th class='t'>订单号</th>"+
+				"<th class='t'>地址</th>"+
+				"<th class='t'>用户信息</th>"+
+				"<th class='t'>收货人</th>"+
+				"<th class='t'>创建时间</th>"+
+				"<th class='t'>支付时间</th>"+
+				"<th class='t'>收货时间</th>"+
+				"<th class='t'>发货时间</th>"+
+				"<th class='t'>状态</th>"+
+				
+				"</tr>";
+				for (var i = 0; i < list.length; i++) {
+				tr_str += "<tr  data-id='"+list[i].id+"'>" +		
+					"<td >" + list[i].id + "</td>" +
+					"<td >" + list[i].user_id + "</td>" +
+					"<td >" + list[i].order_code + "</td>" +
+					"<td >" + list[i].address + "</td>" +
+					"<td >" + list[i].user_message + "</td>" +
+					"<td >" + list[i].receivre + "</td>" +
+					"<td >" + list[i].create_date + "</td>" +
+					"<td >" + list[i].pay_date + "</td>" +
+					"<td >" + list[i].delivery_date + "</td>" +
+					"<td >" + list[i].confirm_date + "</td>" +
+					"<td >" + list[i].status + "</td>" +
+					
+					"</tr>";
+			}
+			$("#table").html(tr_str);
+			
+    		
+			$(".M-box").pagination({
+				pageCount: data.pages,
+				current: data.page_num,
+				callback: 'pageselectCallback',
+				prevContent: "上一页",
+				nextContent: "下一页",
+				jump: true,
+				coping: true,
+				callback: function (api) {
+					getData(api.getCurrent())
+				}
+			});
+		
+		}
+	</script>
+	
+	<div >
+
+		<table   cellspacing="0" cellpadding="0" align="center" id="table">
+			<div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px;">订单列表</div><a href="deliver_goods.html">发货</a>
+		</table>
+
+		<div align="center">
+			<div class="M-box"></div>
+		</div>
+	</div>
+	
+</body>
+</html>
