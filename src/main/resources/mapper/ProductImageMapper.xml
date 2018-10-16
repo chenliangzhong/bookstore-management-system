@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bookstore.dao.ProductImageDao">
+    <resultMap id="findImgResultMap" type="com.bookstore.bean.ProductImage">
+        <id column="id" property="id"/>
+        <result column="productId" property="product_id"/>
+        <result column="picture" property="picture"/>
+    </resultMap>
+
+    <select id="selectByProductId"   resultMap="findImgResultMap"  parameterType="java.lang.Long" >
+        SELECT *FROM  tb_product_image WHERE product_id=#{id}
+
+    </select>
+
+
+
+
+    <select id="show" resultType="com.bookstore.bean.ProductImage">
+        SELECT * FROM tb_product_image WHERE product_id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
     <select id="show" resultType="com.bookstore.bean.ProductImage">
         SELECT * FROM tb_product_image WHERE product_id IN
