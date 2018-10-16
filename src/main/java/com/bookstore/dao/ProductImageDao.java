@@ -17,6 +17,8 @@ public interface ProductImageDao {
 
     ProductImage selectById(Long... id);
 
+    List<ProductImage> show(Long[] product_id);
+
     List<ProductImage> select();
 
     List<ProductImage> selectByProductId(Long id);

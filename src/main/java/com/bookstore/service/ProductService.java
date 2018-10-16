@@ -26,4 +26,6 @@ public interface ProductService {
     int deleteBatch(Long... id);
 
     List<Product> select();
+
+    List<Product> selectByName(String name);
 }

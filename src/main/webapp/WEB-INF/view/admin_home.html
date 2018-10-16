@@ -2,8 +2,38 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>卓越书店后台</title>
+	<title>Document</title>
 	<link rel="stylesheet" href="/css/index.css">
+	<script src="/js/jquery-1.9.1.min.js"></script>
+	<script>
+        function logout(){
+
+            $.ajax({
+                url : "/api/user/logout",
+                dataType : "json",
+                cache: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                beforeSend: function () {},
+                complete: function () {},
+                success : function(result) {
+                    if(result.status == 1){
+                        alert(result.msg);
+                        // window.location.href ="Login.html";
+
+                    }else{
+                        alert(result.msg);
+                    }
+                    if (result.code == 200) window.location.href = "Login.html";
+                },
+                error: function (result) {
+                    alert(result.msg);
+                }
+            });
+
+        }
+	</script>
 </head>
 <body>
 
@@ -14,22 +44,19 @@
 					<li><img src="/img/logo.jpg" class="img1" alt=""></li>
 					<li><a href="#">卓越书店后台</a></li>
 					<li><a href="/admin/tianjialiebiao" target="main">分类管理</a></li>
-					<li><a href="/admin/query" target="main">产品属性</a></li>
-					<li><a href="/admin/userList" target="main">用户文档</a></li>
-					<li><a href="/admin/PictureList" target="main">图片文档</a></li>
-					<li><a href="#">订单管理</a></li>
+					<li><a href="/admin/userList" target="main">用户管理</a></li>
+					<li><a href="/admin/selectlist" target="main">订单管理</a></li>
 				</ul>
 			</div>
 			<div id="right">
-				<a href="#"><img src="/img/tou.jpg" class="img2" alt=""></a>
+				<a href="#"><img src="/img/tou.jpg" class="img2"  alt=""></a>
+				<input type="button" value="注销登录" onclick="logout()" name="logout">
 			</div>
 		</div>
 	</div>
 
+	<iframe src="/admin/tianjialiebiao" name="main" frameborder="0" scrolling="no" style="width: 1300px; border: 1px solid pink; height: 550px;">
 
-		<iframe src="/admin/tianjialiebiao" name="main" frameborder="0" scrolling="no" style="width: 1300px; border: 1px solid pink; height: 550px;">
-
-		</iframe>
-	
+	</iframe>
 </body>
 </html>

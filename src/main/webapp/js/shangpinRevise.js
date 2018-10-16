@@ -28,7 +28,7 @@ function updateProductBox(id) {
                 var div = $("#subject-update");
                 div.find("input[name=id]").val(result.data.id);
                 div.find("input[name=name]").val(data.name);
-                div.find("input[name=subitle]").val(result.data.subitle);
+                div.find("input[name=subtitle]").val(result.data.subtitle);
                 div.find("input[name=original_price]").val(data.original_price);
                 div.find("input[name=promote_price]").val(result.data.promote_price);
                 div.find("input[name=stock]").val(result.data.stock);
@@ -39,9 +39,6 @@ function updateProductBox(id) {
         error: function (result) {
             alert("网络连接错误");
         }
-
-
-
 
     });
 

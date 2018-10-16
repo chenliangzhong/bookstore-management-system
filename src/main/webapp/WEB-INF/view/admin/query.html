@@ -20,7 +20,7 @@
 		    if (propertyXhr) propertyXhr.abort();
 			var _data = "page_num=" + page_num + "&page_size=10";
             propertyXhr=$.ajax({
-				url:"/api/property/selectByCategoryId/$!category_id",
+				url:"/api/property/selectByCategoryId/$!foreign_key",
 				type:"get",
 				dataType:"json",
 				cache:false,//去掉缓存
@@ -97,12 +97,10 @@ var activityXhr;
 							console.log("name: " + data[x].name);
 							console.log("category_id: " + data[x].category_id);
 						}
-
-
 						
 						for(x in data){
-						$("#container").append('<p>'+ "主键：" +"<input type='text' name='id'   value='"+data[x].id  +"'>"+ '</p>');
-						$("#container").append('<p>'+"商品名称："+"<input type='text' name='name' value='"+data[x].name +"'>" + '</p>');
+						$("#container").append('<p>'+"<input type='hidden' name='id' value='"+data[x].id  +"'>"+ '</p>');
+						$("#container").append('<p>'+"属性名称："+"<input type='text' name='name' value='"+data[x].name +"'>" + '</p>');
 							}
 					}
 					
@@ -129,9 +127,8 @@ var activityXhr;
                 if (result.code == 200) {
                 	alert(result.msg);
                     var dialog = $("#activity-update-dialog");
-                updateTr.children("#id").text(dialog.find("input[name=id]").val());
+                // updateTr.children("#id").text(dialog.find("input[name=id]").val());
                 updateTr.children("#name").text(dialog.find("input[name=name]").val());
-                updateTr.children("#category_id").text(dialog.find("input[name=category_id]").val());
                 } else {
                     
                 }
@@ -151,7 +148,7 @@ var activityXhr;
 				data += "id=" + id;
 				$.ajax({
 					url: '/api/property/delete',
-					type: "get",
+					type: "post",
 					dataType: "json",
 					cache: false,
 					xhrFields: {
@@ -179,7 +176,7 @@ var activityXhr;
 	<form action="" id="activity-update-form">
 		<div id="container">
 		</div>
-		<input type="button" value="提交"  onclick="activityUpdate()" /><input type="button" value="取消" id="btn2" onclick="$(this).closest('.activity-update-box').hide();" />
+		<input type="button" value="提交" onclick="activityUpdate()" /><input type="button" value="取消" id="btn2" onclick="$(this).closest('.activity-update-box').hide();" />
 	</form>
 	</div>
 </div>

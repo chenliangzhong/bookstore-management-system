@@ -20,16 +20,20 @@
     </delete>
 
     <update id="updateById" parameterType="com.bookstore.bean.Category">
-      UPDATE tb_category SET name=#{name} WHERE id=#{id}
+      UPDATE tb_category
+    <set>
+        <if test="name !=null">name=#{name}</if>
+    </set>
+     WHERE id=#{id}
     </update>
 
-    <select id="listByName" resultMap="categoryResultMap" parameterType="java.lang.String">
+    <select id="listByName" resultMap="categoryResultMap">
         SELECT * FROM tb_category
         <if test="name != null">WHERE tb_category.name LIKE #{name}"%"</if>
         ORDER BY id DESC
     </select>
 
-    <select id="selectById" resultMap="categoryResultMap" parameterType="java.lang.Long">
+    <select id="selectById" resultMap="categoryResultMap">
         SELECT * FROM tb_category WHERE id = #{id}
     </select>
 </mapper>

@@ -14,7 +14,7 @@ public interface ProductImageService {
 
     ProductImage selectById(Long... id);
 
-    List<ProductImage> select();
+    List<ProductImage> show(Long[] product_id);
 
     List<ProductImage> selectByProductId(Long id);
 
@@ -25,4 +25,6 @@ public interface ProductImageService {
     ProductImage listByProductId(Long product_id);
 
     ProductImage listById(Long id);
+
+    List<ProductImage> select();
 }

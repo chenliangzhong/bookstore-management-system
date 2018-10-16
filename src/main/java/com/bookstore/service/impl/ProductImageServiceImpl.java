@@ -29,8 +29,8 @@ public class ProductImageServiceImpl implements ProductImageService{
     }
 
     @Override
-    public List<ProductImage> select() {
-        return productImageDao.select();
+    public List<ProductImage> show(Long[] product_id) {
+        return productImageDao.show(product_id);
     }
 
     @Override
@@ -57,5 +57,10 @@ public class ProductImageServiceImpl implements ProductImageService{
     @Override
     public ProductImage listById(Long id) {
         return productImageDao.listById(id);
+    }
+
+    @Override
+    public List<ProductImage> select() {
+        return productImageDao.select();
     }
 }

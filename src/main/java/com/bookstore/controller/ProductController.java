@@ -1,15 +1,23 @@
 package com.bookstore.controller;
 
 import com.bookstore.bean.MyPageInfo;
+<<<<<<< HEAD
 import com.bookstore.bean.Order;
 import com.bookstore.bean.OrderItem;
+=======
+>>>>>>> d7e0e308298595c87cad34ec86512589e0a16bf0
 import com.bookstore.bean.Product;
+import com.bookstore.bean.ProductImage;
+import com.bookstore.service.ProductImageService;
 import com.bookstore.service.ProductService;
+import com.bookstore.util.FileUploadUtils;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +31,12 @@ public class ProductController extends BaseApiController{
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductImageService productImageService;
+
+    @Autowired
+    private FileUploadUtils fileUploadUtils;
 
     // 增
     @PostMapping("/add")
@@ -52,8 +66,16 @@ public class ProductController extends BaseApiController{
     // 批量删
     @PostMapping("/delete")
     public Map<String, Object> delete(@RequestParam Long[] id ){
-        productService.deleteBatch(id);
-        return onSuccessRep("删除成功");
+        List<ProductImage> imageURL = productImageService.show(id);
+        if (productService.deleteBatch(id) > 0) {
+            for (int i = 0; i < imageURL.size(); i++) {
+                String path = imageURL.get(i).getPicture();
+                File file = new File(fileUploadUtils.getBasePath() + path);
+                file.delete();
+            }
+            return onSuccessRep("删除成功");
+        }
+        return onBadResp("删除失败");
     }
 
     @GetMapping ("/list")
@@ -108,6 +130,7 @@ public class ProductController extends BaseApiController{
         return onDataResp(productService.selectById(id));
     }
 
+<<<<<<< HEAD
 
 
     @GetMapping("/selectFindProductImg")
@@ -117,4 +140,11 @@ public class ProductController extends BaseApiController{
     }
 
 
+=======
+    @GetMapping("/selectByName")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Product>(productService.selectByName( name)));
+    }
+>>>>>>> d7e0e308298595c87cad34ec86512589e0a16bf0
 }
