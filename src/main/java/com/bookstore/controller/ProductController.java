@@ -1,11 +1,7 @@
 package com.bookstore.controller;
 
 import com.bookstore.bean.MyPageInfo;
-<<<<<<< HEAD
-import com.bookstore.bean.Order;
-import com.bookstore.bean.OrderItem;
-=======
->>>>>>> d7e0e308298595c87cad34ec86512589e0a16bf0
+
 import com.bookstore.bean.Product;
 import com.bookstore.bean.ProductImage;
 import com.bookstore.service.ProductImageService;
@@ -130,7 +126,7 @@ public class ProductController extends BaseApiController{
         return onDataResp(productService.selectById(id));
     }
 
-<<<<<<< HEAD
+
 
 
     @GetMapping("/selectFindProductImg")
@@ -140,11 +136,11 @@ public class ProductController extends BaseApiController{
     }
 
 
-=======
+
     @GetMapping("/selectByName")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Product>(productService.selectByName( name)));
     }
->>>>>>> d7e0e308298595c87cad34ec86512589e0a16bf0
+
 }
