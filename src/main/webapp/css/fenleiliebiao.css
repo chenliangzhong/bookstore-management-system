@@ -1,3 +1,9 @@
+
+body{
+    margin: 0px;
+    margin-top: -50px;
+    padding: 0px;
+}
 #right-below {
     width: 1300px;
     height: 1040px;
@@ -33,7 +39,7 @@ a {
     min-width: 15px;
     color: black;
     text-align: center;
-    background: whitre;
+    background: white;
     border: 1px solid #eeeeee;
     border-radius: 5px;
     padding: 5px 10px;

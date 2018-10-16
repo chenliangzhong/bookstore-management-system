@@ -29,7 +29,7 @@
 			getData(1);
 		});
 		function getData(page_num){
-		
+            var _data = "page_num=" + page_num + "&page_size=5";
 			$.ajax({
 				url:"/api/productImage/show/$!foreign_key",
 				type:"get",
@@ -38,7 +38,7 @@
 				xhrFields:{
 					withCredentials:true
 				},
-				
+                data:_data,
 				success:function(result){
 					if (result.code == 200) {
 						initData(result.data);

@@ -18,7 +18,7 @@ public class PropertyController extends BaseApiController {
     @Autowired
     PropertyService propertyService;
     @GetMapping ("/list")
-    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size) {
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "5") Integer page_size) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Property>(propertyService.select()));
     }
@@ -56,7 +56,8 @@ public class PropertyController extends BaseApiController {
     }
 
     @GetMapping ("/selectByCategoryId/{category_id}")
-    public Map<String, Object> selectByCategoryId(@PathVariable Long category_id) {
+    public Map<String, Object> selectByCategoryId(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "5") Integer page_size, @PathVariable Long category_id) {
+        PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Property>(propertyService.selectByCategoryId(category_id)));
     }
 }

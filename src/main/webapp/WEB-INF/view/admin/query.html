@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>查看产品</title>
 	<link rel="stylesheet" href="/css/query.css">
 	<script src="/js/jquery-1.9.1.min.js"></script>
@@ -18,7 +19,7 @@
 		var propertyXhr;
 		function getData(page_num){
 		    if (propertyXhr) propertyXhr.abort();
-			var _data = "page_num=" + page_num + "&page_size=10";
+			var _data = "page_num=" + page_num + "&page_size=5";
             propertyXhr=$.ajax({
 				url:"/api/property/selectByCategoryId/$!foreign_key",
 				type:"get",
