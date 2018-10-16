@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/product")
-public class ProductController extends BaseApiController{
+public class ProductController extends BaseApiController {
 
     @Autowired
     private ProductService productService;
@@ -60,7 +60,7 @@ public class ProductController extends BaseApiController{
 
     // 批量删
     @PostMapping("/delete")
-    public Map<String, Object> delete(@RequestParam Long[] id ){
+    public Map<String, Object> delete(@RequestParam Long[] id) {
         List<ProductImage> imageURL = productImageService.show(id);
         if (productService.deleteBatch(id) > 0) {
             for (int i = 0; i < imageURL.size(); i++) {
@@ -73,22 +73,21 @@ public class ProductController extends BaseApiController{
         return onBadResp("删除失败");
     }
 
-    @GetMapping ("/list")
+    @GetMapping("/list")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Product>(productService.select()));
     }
 
     @GetMapping("/show/{id}")
-    public Map<String,Object> show(@PathVariable Long id) {
+    public Map<String, Object> show(@PathVariable Long id) {
         return onDataResp(productService.selectById(id));
     }
 
     // 改
     @PostMapping("/update")
     public Map<String, Object> update(@RequestParam Long id, String name, String subtitle, BigDecimal original_price,
-                                      BigDecimal promote_price, Integer stock, Long category_id)
-    {
+                                      BigDecimal promote_price, Integer stock, Long category_id) {
         if (name != null && name.trim().length() == 0) return onBadResp("");
         if (subtitle != null && subtitle.trim().length() == 0) return onBadResp("");
 
@@ -100,34 +99,42 @@ public class ProductController extends BaseApiController{
         if (promote_price != null) product.setPromotePrice(promote_price);
         if (stock != null) product.setStock(stock);
         if (category_id != null) product.setCategoryId(category_id);
-        if (productService.updateById(product) > 0){return onSuccessRep("修改成功");}
+        if (productService.updateById(product) > 0) {
+            return onSuccessRep("修改成功");
+        }
         return onBadResp("修改失败");
     }
 
     // 查
     @GetMapping("/selectByCategoryId/{category_id}")
-    public Map<String, Object> selectByCategoryId(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, @PathVariable Long category_id)
-    {
-        PageHelper.startPage(pageNo,pageSize);
+    public Map<String, Object> selectByCategoryId(@RequestParam(required = true, defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, @PathVariable Long category_id) {
+        PageHelper.startPage(pageNo, pageSize);
         return onDataResp(new MyPageInfo<Product>(productService.selectByCategoryId(category_id)));
     }
 
 
     @GetMapping("/selectByProductId")
-    public Map<String, Object> selectByProductId (@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize,@RequestParam Long id){
-        PageHelper.startPage(pageNo,pageSize);
+    public Map<String, Object> selectByProductId(@RequestParam(required = true, defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize, @RequestParam Long id) {
+        PageHelper.startPage(pageNo, pageSize);
 
         return onDataResp(new MyPageInfo<Product>((List<Product>) productService.selectByProductId(id)));
 
     }
+
     @GetMapping("/selectById")
-    public Map<String,Object> selectById(@RequestParam Long id){
+    public Map<String, Object> selectById(@RequestParam Long id) {
         return onDataResp(productService.selectById(id));
+    }
+
+    @GetMapping("/selectFindProductImg")
+    public Map<String, Object> selectFindProductImg(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam Long id) {
+        PageHelper.startPage(page_num, page_size);
+        return onDataResp(new MyPageInfo<Product>(productService.selectFindProductImg(id)));
     }
 
     @GetMapping("/selectByName")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
         PageHelper.startPage(page_num, page_size);
-        return onDataResp(new MyPageInfo<Product>(productService.selectByName( name)));
+        return onDataResp(new MyPageInfo<Product>(productService.selectByName(name)));
     }
 }

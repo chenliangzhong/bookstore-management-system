@@ -16,6 +16,8 @@ public interface ProductImageService {
 
     List<ProductImage> show(Long[] product_id);
 
+    List<ProductImage> selectByProductId(Long id);
+
     int updateById(ProductImage productImage);
 
     int deleteBatch(Long... id);
