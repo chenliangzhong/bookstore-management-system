@@ -12,16 +12,6 @@
 
     </select>
 
-
-
-
-    <select id="show" resultType="com.bookstore.bean.ProductImage">
-        SELECT * FROM tb_product_image WHERE product_id IN
-        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </select>
-
     <select id="show" resultType="com.bookstore.bean.ProductImage">
         SELECT * FROM tb_product_image WHERE product_id IN
         <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
