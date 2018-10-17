@@ -15,6 +15,17 @@
 
 
 <body>
+
+    <div class="activity-update-box" style="background: #f1f1fc;  position: fixed; width: 100%; height:100%; margin:0px; padding:0px; z-index: 900; display: none;" >
+        <div id="activity-update-dialog" >
+            <form action="" id="activity-update-form">
+                <div id="container">
+                </div>
+                <input type="button" value="提交"  onclick="activityUpdate()" /><input type="button" value="取消" id="btn2" onclick="$(this).closest('.activity-update-box').hide();" />
+            </form>
+        </div>
+    </div>
+
     <div id="right-below">
         <div id="mt">分类列表</div><a href="categoryAdd.html">添加</a>
         <table width="1100px" align="center" id="table" cellspacing="0px" cellpadding="0px">

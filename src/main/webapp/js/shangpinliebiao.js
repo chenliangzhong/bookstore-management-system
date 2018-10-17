@@ -1,11 +1,10 @@
 
-
 $(function () {
     getData(1);
 });
 
 function getData(page_num) {
-    var _data = "page_num=" + page_num + "&page_size=10";
+    var _data = "page_num=" + page_num + "&page_size=5";
     $.ajax({
         url: "/api/category/list",
         type: "get",

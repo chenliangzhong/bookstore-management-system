@@ -107,16 +107,16 @@ public class ProductController extends BaseApiController {
 
     // 查
     @GetMapping("/selectByCategoryId/{category_id}")
-    public Map<String, Object> selectByCategoryId(@RequestParam(required = true, defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, @PathVariable Long category_id) {
-        PageHelper.startPage(pageNo, pageSize);
+    public Map<String, Object> selectByCategoryId(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "5") Integer page_size, @PathVariable Long category_id)
+    {
+        PageHelper.startPage(page_num,page_size);
         return onDataResp(new MyPageInfo<Product>(productService.selectByCategoryId(category_id)));
     }
 
 
     @GetMapping("/selectByProductId")
-    public Map<String, Object> selectByProductId(@RequestParam(required = true, defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize, @RequestParam Long id) {
-        PageHelper.startPage(pageNo, pageSize);
-
+    public Map<String, Object> selectByProductId (@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "5") Integer page_size,@RequestParam Long id){
+        PageHelper.startPage(page_num,page_size);
         return onDataResp(new MyPageInfo<Product>((List<Product>) productService.selectByProductId(id)));
 
     }
