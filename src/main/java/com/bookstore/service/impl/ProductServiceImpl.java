@@ -38,6 +38,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> findImgByCategoryId(Long category_id) {
+        return productDao.findImgByCategoryId(category_id);
+    }
+
+    @Override
     public Product selectByProductId(Long id) {
         return productDao.selectByProductId(id);
     }

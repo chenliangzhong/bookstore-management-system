@@ -28,11 +28,33 @@
 
 
 
+    <resultMap id="findproductByCategoryIdMap" type="com.bookstore.bean.Product">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="subtitle" column="subtitle"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="promotePrice" column="promote_price"/>
+        <result property="stock" column="stock"/>
+        <result property="createDate" column="create_date"/>
+        <result property="categoryId" column="category_id"/>
+        <collection property="productImageList"  ofType="com.bookstore.bean.ProductImage">
+            <result property="id" column="id"/>
+            <result property="productId" column="product_id"/>
+            <result property="picture" column="picture"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="findImgByCategoryId" resultMap="findproductByCategoryIdMap" parameterType="java.lang.Long">
+        SELECT p.*,i.product_id,i.picture
+         FROM tb_product p LEFT JOIN tb_product_image i ON p.id = i.product_id WHERE  p.category_id=#{category_id}
+
+
+    </select>
 
     <select id="selectFindProductImg" resultMap="findproductImgMap" parameterType="java.lang.Long">
 
        SELECT * FROM  tb_product WHERE id=#{id}
-
 
     </select>
 
