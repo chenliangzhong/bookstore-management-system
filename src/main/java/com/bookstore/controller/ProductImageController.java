@@ -37,7 +37,7 @@ public class ProductImageController extends BaseApiController{
     @PostMapping("/add")
     public Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam Long product_id) {
 //        if (product_id == null) return onBadResp("不能为空");
-        if (file == null) {onBadResp("图片不能为空");}
+        if (file == null) {return onBadResp("图片不能为空");}
 
         String filePath = "";
 
