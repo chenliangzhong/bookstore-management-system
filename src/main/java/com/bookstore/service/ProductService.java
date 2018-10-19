@@ -16,8 +16,7 @@ public interface ProductService {
 
     List <Product> selectFindProductImg(Long id);
 
-
-
+    List<Product> findImgByCategoryId(Long category_id);
 
     Product selectByProductId(Long id);
 

@@ -22,6 +22,8 @@ public interface ProductDao {
 
     Product selectByProductId(Long id);
 
+    List<Product> findImgByCategoryId(Long category_id);
+
     List<Product> selectByCategoryId(Long category_id);
 
     int updateById(Product product);

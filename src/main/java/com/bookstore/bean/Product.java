@@ -26,14 +26,6 @@ public class Product {
     private Category category;
     private List<ProductImage> productImageList;
 
-    public List<ProductImage> getProductImageList() {
-        return productImageList;
-    }
-
-    public void setProductImageList(List<ProductImage> productImageList) {
-        this.productImageList = productImageList;
-    }
-
     public Long getId() {
         return id;
     }
@@ -104,5 +96,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<ProductImage> getProductImageList() {
+        return productImageList;
+    }
+
+    public void setProductImageList(List<ProductImage> productImageList) {
+        this.productImageList = productImageList;
     }
 }
