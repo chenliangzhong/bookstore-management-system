@@ -4,6 +4,7 @@ import com.bookstore.bean.MyPageInfo;
 import com.bookstore.bean.Password;
 import com.bookstore.bean.User;
 import com.bookstore.common.UserManager;
+import com.bookstore.enums.FreezeEnum;
 import com.bookstore.enums.RoleTypeEnum;
 import com.bookstore.util.Md5Utils;
 import org.apache.shiro.authc.*;
@@ -67,8 +68,11 @@ public class UserController extends  BaseApiController{
 
         try {
             // 登录，即身份验证
-            subject.login(token);
 
+            subject.login(token);
+            if (userService.selectByUname(mobile_phone).getFreezeEnum().getValue() == 2) {
+                throw new LockedAccountException();
+            }
             return onSuccessRep("登录成功");
         } catch (UnknownAccountException e) {
             return onBadResp("用户名或密码错误");
@@ -97,6 +101,8 @@ public class UserController extends  BaseApiController{
             user.setUsername(mobile_phone);
             user.setEmail(email);
             user.setRoleTypeEnum(RoleTypeEnum.USER);
+            user.setFreezeEnum(FreezeEnum.FROST);
+
             if (userService.selectByUname(user.getUsername()) != null ) return onBadResp(user.getUsername() + "已经存在，不能重复注册");
             userService.insert(user);
             return onRespWithId("注册成功", user.getId());
@@ -178,8 +184,33 @@ public class UserController extends  BaseApiController{
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<User>(userService.select(id)));
     }
+
     @GetMapping("/show/{id}")
     public Map<String, Object> selectById(@PathVariable Long id){
         return onDataResp(userService.selectById(id));
+    }
+
+//    冻结账户接口
+    @PostMapping("/freeze/{id}")
+    public Map<String, Object> freeze(@PathVariable Long id) {
+
+        User user = new User();
+        user.setId(id);
+        int freeze = userService.selectById(id).getFreezeEnum().getValue();
+
+        switch (freeze){
+            case 1:
+                user.setFreezeEnum(FreezeEnum.UNHITCH);
+                userService.updateById(user);
+                return onSuccessRep("冻结成功");
+
+            case 2:
+                user.setFreezeEnum(FreezeEnum.FROST);
+                userService.updateById(user);
+                return onSuccessRep("解冻成功");
+
+            default:
+                return onBadResp("操作出错");
+        }
     }
 }

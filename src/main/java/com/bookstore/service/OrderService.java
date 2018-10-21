@@ -26,4 +26,6 @@ public interface OrderService {
     int updateByStatus(int status);
 
     int deleteById(Long id);
+
+    List<Order> selectByUserId(Long user_id);
 }

@@ -17,4 +17,6 @@ public interface PropertyValueService {
 	int insert(PropertyValue propertyValue);
 
     PropertyValue selectById(Long id);
+
+    PropertyValue get(Long property_id, Long product_id);
 }

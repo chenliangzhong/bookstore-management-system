@@ -8,6 +8,7 @@
         <result column="password" property="password"/>
         <result column="email" property="email"/>
         <result column="role_type" property="roleTypeEnum"/>
+        <result column="freeze" property="freezeEnum"/>
         <collection property="orders" column="id" select="com.bookstore.dao.OrderDao.selectByOrderId"></collection>
     </resultMap>
 
@@ -16,8 +17,8 @@
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.bookstore.bean.User">
-        INSERT INTO tb_user(name, password, mobile_phone, email,role_type)
-        VALUES (#{username},#{password},#{mobile_phone},#{email},#{roleTypeEnum})
+        INSERT INTO tb_user(name, password, mobile_phone, email,role_type,freeze)
+        VALUES (#{username},#{password},#{mobile_phone},#{email},#{roleTypeEnum},#{freezeEnum})
     </insert>
 
     <select id="list" resultMap="findOrderResultMap">
@@ -38,7 +39,8 @@
             <if test="password != null">password=#{password},</if>
             <if test="username != null">name=#{username},</if>
             <if test="email != null">email=#{email},</if>
-            <if test="mobile_phone != null">mobile_phone=#{mobile_phone}</if>
+            <if test="mobile_phone != null">mobile_phone=#{mobile_phone},</if>
+            <if test="freezeEnum != null">freeze=#{freezeEnum}</if>
         </set>
         WHERE id=#{id}
     </update>

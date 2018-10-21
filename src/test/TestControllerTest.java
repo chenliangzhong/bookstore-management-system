@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -39,11 +40,11 @@ public class TestControllerTest {
     @Test
     public void testString()throws Exception {
         String responseString = mockMvc.perform(
-//                    get("/api/user/login")
-            post("/api/product/delete") // 请求的url，请求的方法是get
+//                    get("/api/user/freeze")
+            post("/api/user/freeze") // 请求的url，请求的方法是get
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED) // 数据的格式
-                    .param("id","8")
-//                    .param("name","传记")
+                    .param("id","70")
+//                    .param("password","123456")
         )
                 .andDo(print()) // 打印出请求和相应的内容
                 .andReturn().getResponse().getContentAsString(); // 将相应的数据转换为字符串

@@ -28,6 +28,9 @@ public class MainController extends BaseController {
     @GetMapping("/admin/{page}")
     public String admin(@PathVariable String page) {return "/admin/" + page;}
 
+    @GetMapping("/bookstoreHome/{page}")
+    public String bookstoreHome(@PathVariable String page) {return "/bookstoreHome/" + page;}
+
     @GetMapping("/register")
     @SystemControllerLog("注册页面")
     public String register() {
@@ -53,6 +56,12 @@ public class MainController extends BaseController {
         return "/admin/" + page;
     }
 
+    @GetMapping("/bookstoreHome/{foreign_key}/{page}")
+    public String SelectByForeignKey(@PathVariable Long foreign_key, @PathVariable String page, Model model) {
+        model.addAttribute("foreign_key", foreign_key);
+        return "/bookstoreHome/" + page;
+    }
+
     private String getPageURI(String uri, HttpServletRequest request, Model model) {
 //        uri = uri == null ? (request.getRequestURI() + "_include") : uri + "_include";
         model.addAttribute("currentUser", request.getSession().getAttribute(UserManager.CURRENT_USER));
@@ -64,7 +73,7 @@ public class MainController extends BaseController {
             return "/admin_home";
         }else if (subject.hasRole(RoleType.USER)) {
             System.out.println("user");
-            return "/home";
+            return "/index";
         }
         return "/error";
     }

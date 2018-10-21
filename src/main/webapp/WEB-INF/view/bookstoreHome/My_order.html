@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/js/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" href="/style/My_order.css">
+	<script>
+		$(function(){
+			getData(1);
+		});
+		function getData(page_num){
+			var _data = "page_num=" + page_num + "&pagesize=10";
+			$.ajax({
+				url:"/api/order/selectByUserId",
+				type:"get",
+				dataType:"json",
+				cache:false,
+				xhrFields:{
+				withCredentials:true
+				},
+				data:_data,
+				success:function(result){
+					if (result.code == 200) {
+						initData(result.data);
+					}
+				}
+			});
+		}
+		function initData(data){
+			var list = data.list;
+			var tr_str = "";
+
+			for (var i = 0; i < list.length; i++) {
+	       		tr_str += "<div id='le' data-id='" + list[i].id + "'>" +
+	            "<ul>"+
+	            "<li >" + "订单号：" + list[i].order_code + "</li>" +   
+	            "<li >" + "地址：" + list[i].address + "</li>" +   
+	            "<li >" + "用户信息：" + list[i].user_message + "</li>" +   
+	            "<li >" + "收货人：" + list[i].receivre + "</li>" +   
+	            "<li >" + "收货信息：" + list[i].delivery_date + "</li>" +   
+	            "<li ><a href='#' onclick='deleteItem(this)'>" + "删除" +"</a></li>" +   
+	            "<li ><a href='#' onclick='showActivityBox(this)'>" + "确认收货" +"</a></li>" +   
+				"</ul>"+
+	       	    "</div>";
+	    	}
+			$("#container").html(tr_str);
+		}
+		// 删除
+		function deleteItem(item) {
+			if (confirm("确定要删除吗？")) {
+				var id = $(item).closest("div").data("id");
+				var data = "";
+				data += "id=" + id;
+				$.ajax({
+					url: '/api/property/delete',
+					type: "post",
+					dataType: "json",
+					cache: false,
+					xhrFields: {
+						withCredentials: true
+					},
+					 beforeSend: function () {},
+					 complete: function () {},
+					data: data,
+					success: function (result) {
+						if (result.code == 200) {
+							alert(result.msg);
+							var tr = $(item).closest("div");
+							tr.remove();
+						}
+
+					}
+
+				});
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="head">
+        <div id="header">
+            <div class="l1">
+                <ul>
+                   <!--  <li><img src="img/logo.jpg" class="img" alt=""></li> -->
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                    <li><a href="/index/index">首页</a></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="l2">
+                <ul>
+                    <li></li>
+                    <li>购物车</li>
+                    <li><a href="/bookstoreHome/My_order">我的订单</a></li>
+                    <li>退出</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="container">
+		
+    </div>
+</body>
+</html>

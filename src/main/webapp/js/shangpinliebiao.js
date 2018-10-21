@@ -92,8 +92,8 @@ function showActivityUpdateBox(item) {
                     console.log("name: " + data[x].name);
                 }
                 for(x in data){
-                    $("#container").append('<p>'+"商品名称："+"<input type='text' name='id' value='"+data[x].id +"'>" + '</p>');
-                    $("#container").append('<p>'+"商品名称："+"<input type='text' name='name' value='" + data[x].name +"'>" + '</p>');
+                    $("#container").append('<p>'+"<input type=\"hidden\" name='id' value='"+data[x].id +"'>" + '</p>');
+                    $("#container").append('<p>'+"分类名称："+"<input type='text' name='name' value='" + data[x].name +"'>" + '</p>');
                 }
                 // alert("zhenshuai");
             }

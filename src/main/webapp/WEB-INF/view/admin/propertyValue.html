@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>查看产品</title>
+    <link rel="stylesheet" href="/css/query.css">
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+</head>
+<body>
+    <!-- 分页查询 -->
+    <script>
+        $(function(){
+            getData(1);
+        });
+        function getData(page_num){
+            var _data = "page_num=" + page_num + "&page_size=5";
+            $.ajax({
+                url:"/api/propertyValue/list",
+                type:"get",
+                dataType:"json",
+                cache:false,//去掉缓存
+                xhrFields:{
+                    withCredentials:true
+                },
+                data:_data,
+                success: function (result) {
+                    if (result.code == 200) {
+                        initData(result.data);
+                    }
+                }
+            });
+        }
+        function initData(data){
+            var list = data.list;
+            var tr_str = "<tr >" + 
+                
+                "<th class='t'>id</th>"+
+                "<th class='t'>属性值</th>"+
+                "<th class='t'>修改</th>"+
+                "<th class='t'>删除</th>"+
+
+                "</tr>";
+                for (var i = 0; i < list.length; i++) {
+                tr_str += "<tr  data-id='"+list[i].id+"'>" +        
+                    "<td >" + list[i].id + "</td>" +
+                    "<td >" + list[i].value + "</td>" +
+                    "<td><a  href='#' onclick='showActivityUpdateBox(this)'>修改</a></td>" +
+                    "<td><a  href='#' onclick='deleteItem(this)' >删除</a></td>"+
+                    "</tr>";
+            }
+            $("#table").html(tr_str);
+            
+            
+            $(".M-box").pagination({
+                pageCount: data.pages,
+                current: data.page_num,
+                callback: 'pageselectCallback',
+                prevContent: "上一页",
+                nextContent: "下一页",
+                jump: true,
+                coping: true,
+                callback: function (api) {
+                    getData(api.getCurrent())
+                }
+            });
+        
+        }
+
+
+//删除
+    function deleteItem(item){
+        if (confirm("确定要删除吗？")){
+            var id = $(item).closest("tr").data("id");
+            var data = "";
+            data += "id=" + id;
+            $.ajax({
+                url: '/api/propertyValue/delete',
+                type: "post",
+                dataType: "json",
+                cache: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                 beforeSend: function () {},
+                 complete: function () {},
+                data: data,
+                success: function (result) {
+                    if (result.code == 200) {
+                        alert(result.msg);
+                        var tr = $(item).closest("tr");
+                        tr.remove();
+                    }
+
+                },error: function (result) {
+                    alert(result.msg);
+                }
+
+            });
+        }
+
+    } 
+//修改
+    var activityXhr;
+    var updateTr;
+    function showActivityUpdateBox(item) {
+        $(".activity-update-box").show();
+         var tr=$(item).closest("tr");
+         update_tr=tr;
+        update_id = tr.data("id");
+        if (activityXhr) activityXhr.abort();
+            activityXhr = $.ajax({
+            url: "/api/propertyValue/selectById/" + update_id,
+            type: "get",
+            dataType: "json",
+            cache: false,
+            xhrFields: {
+               withCredentials: true
+          },
+            success: function (result) {
+                if (result.code == 200) {
+                    updateTr = tr;
+                    var data = result.data;
+                    var dialog = $("#activity-update-form");  
+                    dialog.find("input[name=id]").val(data.id);
+                    dialog.find("input[name=value]").val(data.value);
+                    dialog.find("input[name=product_id]").val(data.product_id);
+                    dialog.find("input[name=property_id]").val(data.property_id);
+
+          		 }    
+            },
+            error: function (result) {
+                alert(result.msg);
+            }
+        });
+    }
+    
+    function activityUpdate() {
+
+       if (activityXhr) activityXhr.abort();
+        activityXhr = $.ajax({
+            url: "/api/propertyValue/update",
+            type: "post",
+            data: new FormData($("#activity-update-form")[0]),
+            dataType: "json",
+            cache: false, // 上传文件无需缓存
+            processData: false, // 用于对data参数进行序列化处理 这里必须false
+            contentType: false, // 必须
+            async : true,
+            cache: false,//清除缓存
+            xhrFields: {//跨域
+               withCredentials: true
+          },
+            beforeSend: function() {
+            },
+            complete: function() {
+            },
+            success: function (result) {
+                if (result.code == 200) {
+                    alert("修改成功！");
+                    var dialog = $("#activity-update-dialog");
+                     updateTr.children("#id").text(dialog.find("input[name=id]").val());
+                    updateTr.children("#value").text(dialog.find("input[name=value]").val());
+                    updateTr.children("#product_id").text(dialog.find("input[name=product_id]").val());
+                    updateTr.children("#property_id").text(dialog.find("input[name=property_id]").val());
+                    
+                                                 
+                } else {
+                    alert(result.msg);
+                }
+            },error: function (result) {
+
+            }
+        });
+    }
+
+    </script>
+
+    <!-- 修改 -->
+
+    <div class="activity-update-box" style="background: #f1f1fc;  position: fixed; width: 100%; height:100%; margin:0px; padding:0px; z-index: 1000; display: none;" >
+    <div id="activity-update-dialog" style=" max-width: 100%;max-height: 100%; background: #fff; padding:60px; position: fixed;margin:0 auto; top: 50%; left: 50%; transform: translate(-50%,-50%);  border-radius: 5px;">
+  <div>
+       <h3>修改</h3><br>
+        <form id="activity-update-form" method="post" enctype="">
+        <!-- <input type="hidden" name="id" > -->
+            <table border="1" cellpadding="5" cellspacing="1" style="width: 800px; margin:0 auto;" id="activity_alter_table">
+            <tr>
+                    <td>id：</td>
+                    <td>
+                        <input type="text" name="id" id="id" autocomplete="off" />
+                    </td>
+                </tr>
+            <tr>
+                    <td>属性值</td>
+                    <td>
+                        <input type="text" name="value" id="value" autocomplete="off" />
+                    </td>
+                </tr>
+              <tr>
+                    <td>外键产品表</td>
+                    <td><input type="text" name="product_id" id="product_id" autocomplete="off" /></td>
+                </tr>
+                <tr>
+                    <td>外键属性表</td>
+                    <td><input type="text" name="property_id" id="property_id" autocomplete="off" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="提交" id="btn1" onclick="activityUpdate()" />&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" value="取消" id="btn2" onclick="$(this).closest('.activity-update-box').hide();" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+   </div>
+  </div>
+
+
+    <div >
+
+        <table   cellspacing="0" cellpadding="0" align="center" id="table">
+            <div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px;">产品属性值</div><a href="propertyadd.html">添加</a>
+        </table>
+
+        <div align="center">
+            <div class="M-box"></div>
+        </div>
+    </div>
+
+    
+</body>
+</html>

@@ -19,4 +19,6 @@ public interface PropertyValueDao {
 	int insert(PropertyValue propertyvalue);
 
 	PropertyValue selectById(Long id);
+
+	PropertyValue get(Long property_id, Long product_id);
 }
