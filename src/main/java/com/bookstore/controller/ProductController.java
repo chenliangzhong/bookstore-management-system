@@ -126,8 +126,8 @@ public class ProductController extends BaseApiController {
         return onDataResp(productService.selectById(id));
     }
 
-    @GetMapping("/selectFindProductImg")
-    public Map<String, Object> selectFindProductImg(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam Long id) {
+    @GetMapping("/selectFindProductImg/{id}")
+    public Map<String, Object> selectFindProductImg(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @PathVariable Long id) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Product>(productService.selectFindProductImg(id)));
     }
@@ -139,8 +139,8 @@ public class ProductController extends BaseApiController {
     }
 
     // 通过分类id查询产品信息和图片
-    @GetMapping("/findImgByCategoryId")
-    public Map<String, Object> findImgByCategoryId(@RequestParam(required = true, defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestParam Long category_id) {
+    @GetMapping("/findImgByCategoryId/{category_id}")
+    public Map<String, Object> findImgByCategoryId(@RequestParam(required = true, defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, @PathVariable Long category_id) {
         PageHelper.startPage(pageNo, pageSize);
         return onDataResp(new MyPageInfo<Product>(productService.findImgByCategoryId(category_id)));
     }

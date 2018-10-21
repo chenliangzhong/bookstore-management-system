@@ -37,7 +37,7 @@ public class ProductImageController extends BaseApiController{
     @PostMapping("/add")
     public Map<String, Object> add(@RequestParam(required = false)CommonsMultipartFile file, @RequestParam Long product_id) {
 //        if (product_id == null) return onBadResp("不能为空");
-        if (file == null) {onBadResp("图片不能为空");}
+        if (file == null) {return onBadResp("图片不能为空");}
 
         String filePath = "";
 
@@ -133,8 +133,8 @@ public class ProductImageController extends BaseApiController{
     }
 
 
-    @GetMapping("/selectByProductId")
-    public Map<String, Object> selectByProductId(@RequestParam Long id) {
+    @GetMapping("/selectByProductId/{id}")
+    public Map<String, Object> selectByProductId(@PathVariable Long id) {
         return onDataResp(productImageService.selectByProductId(id));
     }
 

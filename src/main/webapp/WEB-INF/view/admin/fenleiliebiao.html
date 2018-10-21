@@ -53,6 +53,7 @@
             "<th   >库存</th>" +
             "<th   >时间</th>" +
             "<th>图片管理</th>" +
+            "<th>属性值管理</th>" +
             "<th  >操作</th>" +
             "</tr>";
         for (var i = 0; i < list.length; i++) {
@@ -64,6 +65,7 @@
                 '<td class="cc">' + list[i].stock + '</td>' +
                 '<td class="cc">' + list[i].create_date + '</td>' +
                 '<td  class="cc">&nbsp&nbsp<a href="/admin/' + list[i].id + '/picture_list">详情</a></td>' +
+                '<td  class="cc">&nbsp&nbsp<a href="/admin/' + list[i].id + '/propertyValue">详情</a></td>' +
                 "<td  class='cc'>&nbsp&nbsp<a  href='#' onclick='showActivityBoxx(this)'>修改</a>&nbsp&nbsp<a  href='#'  onclick='deleteItem(this)'>删除</a></td>" +
                 '</td>'
             "</tr>";

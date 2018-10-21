@@ -64,4 +64,9 @@ public class OrderServiceImpl implements OrderService {
     public int deleteById(Long id) {
         return orderDao.deleteById(id);
     }
+
+    @Override
+    public List<Order> selectByUserId(Long user_id) {
+        return orderDao.selectByUserId(user_id);
+    }
 }

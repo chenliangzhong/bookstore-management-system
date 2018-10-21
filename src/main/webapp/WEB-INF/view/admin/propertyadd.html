@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	 <script src="/js/jquery-1.9.1.min.js"></script>
+	<script>
+	   function activityAdd() {
+	        $.ajax({
+	            url: "/api/propertyValue/add",
+	            type: "post",
+	            data: $("#update-form").serialize(),
+	            dataType: "json",
+	            cahce: false,
+	            xhrFields:{
+	                 withCredentials:true
+	            },
+	    
+	            success: function (result) {
+	               
+	                if (result.code == 200) {
+	                    alert(result.msg);
+	                    window.location.href ="propertyValue.html";
+	                }
+	            },error: function (result) {
+	                alert("网络连接错误！");
+	            }
+	        });
+	    
+	    }
+	</script>
+</head>
+<body>
+	  <div>
+   
+        <form id="update-form" method="post" enctype="">
+            <input type="hidden" value="$!foreign_key" name="product_id" id="product_id"  />
+            <table align="center" id="alter_table"> <tr>
+                    <td>属性值</td>
+                    <td>
+                        <input type="text" name="value" id="value" autocomplete="off" />
+                    </td>
+
+                    <td>
+                        <input type="button" value="添加" id="btn1" onclick="activityAdd(this)" />&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" value="取消" id="btn2" onclick="javascript:history.back(1);" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

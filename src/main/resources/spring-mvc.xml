@@ -68,7 +68,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd http://www.springfr
 	<mvc:resources location="/css/" mapping="/css/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
 	<mvc:resources location="/img/" mapping="/img/**" />
-	<!--<mvc:resources location="/styles/" mapping="/styles/**" />-->
+	<mvc:resources location="/style/" mapping="/style/**" />
 	<!--<mvc:resources location=" /Views/" mapping="/Views/**" />-->
 	<mvc:default-servlet-handler />
 

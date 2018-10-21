@@ -41,4 +41,9 @@ public class PropertyValueServiceImpl implements PropertyValueService {
 	public PropertyValue selectById(Long id) {
 		return propertyValueDao.selectById(id);
 	}
+
+	@Override
+	public PropertyValue get(Long property_id, Long product_id) {
+		return propertyValueDao.get(property_id,product_id);
+	}
 }

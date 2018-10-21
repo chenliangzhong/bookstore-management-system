@@ -45,6 +45,10 @@
         SELECT * FROM  tb_order o WHERE o.user_id=#{id}
     </select>
 
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="orderResultMap">
+        SELECT * FROM  tb_order o WHERE o.user_id=#{id}
+    </select>
+
     <select id="selectById" parameterType="java.lang.Long" resultMap="orderResultMap">
         SELECT o.*,u.name
         FROM  tb_order o LEFT JOIN tb_user u  ON o.user_id=u.id

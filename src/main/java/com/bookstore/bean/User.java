@@ -1,5 +1,6 @@
 package com.bookstore.bean;
 
+import com.bookstore.enums.FreezeEnum;
 import com.bookstore.enums.RoleTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,6 +16,7 @@ public class User {
     private String email;
     private List<Order> orders;//用户创建订单列表
     private RoleTypeEnum roleTypeEnum;
+    private FreezeEnum freezeEnum;
 
     public User() {
     }
@@ -82,6 +84,14 @@ public class User {
 
     public void setRoleTypeEnum(RoleTypeEnum roleTypeEnum) {
         this.roleTypeEnum = roleTypeEnum;
+    }
+
+    public FreezeEnum getFreezeEnum() {
+        return freezeEnum;
+    }
+
+    public void setFreezeEnum(FreezeEnum freezeEnum) {
+        this.freezeEnum = freezeEnum;
     }
 }
 

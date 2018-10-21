@@ -34,9 +34,8 @@
             var tr_str = "<tr >" +
                 "<th class='t'>用户名</th>"+
                 "<th class='t'>手机号</th>"+
-                "<th class='t'>email</th>"+
+                "<th class='t'>邮箱</th>"+
                 "<th class='t'>冻结账户</th>"+
-                // "<th class='t'>修改</th>"+
                 "<th class='t'>删除</th>"+
 
                 "</tr>";
@@ -45,10 +44,8 @@
                     "<td >" + list[i].username + "</td>" +
                     "<td >" + list[i].mobile_phone + "</td>" +
                     "<td >" + list[i].email + "</td>" +
-                    // "<td ><a href='#' onclick='showActivityBox(this)'>查看</a></td>" +
-                    "<td ><a href='#' >冻结</a></td>" +
-                    // "<td><a  href='#' >修改</td>" +
-                    "<td><a  href='#' onclick='deleteItem(this)' >删除</td>"+
+                    "<td ><a href='#' onclick='showFreezeBox(this)'>"+ list[i].freeze_enum.desc +"</a></td>" +
+                    "<td><a href='#' onclick='deleteItem(this)'>删除</a></td>"+
                     "</tr>";
             }
             $("#table").html(tr_str);
@@ -100,75 +97,38 @@
             }
         }
 
+    var activityXhr;
+    function showFreezeBox(item) {
+        if (confirm("确定要冻结或解冻？")) {
+            var tr = $(item).closest("tr");
+            update_id = tr.data("id");
 
-//查看
-        //查看
-        var activityXhr;
-        var updateTr;
-        function showActivityBox(item) {
-        $(".activity-box").show();
-
-         var tr=$(item).closest("tr");
-         update_tr=tr;
-
-        update_id = tr.data("id");
-          
-        if (activityXhr) activityXhr.abort();
+            if (activityXhr) activityXhr.abort();
             activityXhr = $.ajax({
-            url: basePath+"/api/activity/show/" + update_id,
-            type: "get",
-            dataType: "json",
-            cache: false,
-            xhrFields: {
-               withCredentials: true
-          },
-            beforeSend: function() {
-            },
-            complete: function() {
-            },
-            success: function (result) {
-            
-                if (result.code == 200) {
+                url: "/api/user/freeze/" + update_id,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                xhrFields: {
+                    withCredentials: true
+                },
 
-                    updateTr = tr;
-                    
-                    var data = result.data;
+                success: function (result) {
 
-                     var dialog = $("#pjax-container");  
-                    dialog.find("input[name=id]").val(data.id);
-                    dialog.find("input[name=theme]").val(data.theme);
-                    dialog.find("input[name=subject_id]").val(data.subject_id);
-                    dialog.find("input[name=author]").val(data.author);
-                    dialog.find("input[name=date]").val(data.date);
-                    dialog.find("textarea[name=content]").val(data.content);                   
-                  
-           }
+                    if (result.code == 200) {
+                        alert(result.msg);
+                        window.location.href = "userList.html";
+                    }
+                },
+                error: function (result) {
 
-                   
-            },
-            error: function (result) {
-
-            }
-        });
-    } 
-
-
+                }
+            });
+        }
+    }
     </script>
 </head>
 <body>
-
-    <!-- 查看 -->
-    <!--<div style="height: 100%; width: 100%; padding-left: 200px; background: #f1f1fc;  position: fixed; z-index: 900; display: none;" class="activity-box" style="font-size: 24px;">-->
-        <!--<div id="pjax-container" style="padding-top: 80px;">-->
-            <!--<span>课题活动</span>-->
-            <!--<p id="theme">主题：<input type="text" name="theme" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>-->
-            <!--<p>课题：<input type="text" name="subject_id" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>-->
-            <!--<p>作者(来源)：<input type="text" name="author" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>-->
-            <!--<p>发布时间：<input type="text" name="date" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>-->
-            <!--<p>内容：<input type="text" name="content" style="border:0px; outline:none; background: #f1f1fc; pointer-events: none;"></p>    -->
-        <!--</div>-->
-    <!--</div>-->
-<!-- 查看 -->
 
 	<div >
 

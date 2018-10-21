@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/js/jquery-1.9.1.min.js"></script>
+    <!-- <script src="jq/jquery.pagination.js"></script> -->
+    <link rel="stylesheet" href="/style/categoryById.css">
+    <script>
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) return pair[1];
+    }
+}
+$(function () {
+    showActivityBo(getQueryVariable("id"));
+});
+
+function showActivityBo(id) {
+   
+    // var _data = "page_num =" + page_num + "&page_size=5";
+    $.ajax({
+        url: "/api/product/selectFindProductImg/" +id,
+        type: "get",
+        dataType: "json",
+        cache: false,
+        xhrFields: {
+            withCredentials: true
+        },
+        beforeSend: function () {},
+        complete: function () {},
+        // data: _data,
+        success: function (result) {
+            if (result.code == 200) {
+                initData(result.data);
+            }
+        }
+    });
+}
+
+function initData(data) {
+    var list = data.list;
+
+    var tr_str="";
+    var tr_str1="";
+
+    for (var i = 0; i < list.length; i++) {
+            // tr_str1= "<div>" + tr_str + "</div>";
+           tr_str += "<div data-id='" + list[i].id + "' id='container1'>" +
+            // '<li >' + list[i].id + '</li>' +
+             "<li>"+ "书名：" + list[i].name + "</li>"+
+             "<li>"+ "原价格：" + list[i].original_price + "</li>"+
+             "<li>"+ "优惠价格：" + list[i].promote_price + "</li>"+
+             "<li>"+ "库存：" + list[i].stock + "</li>"+
+             "<li><a href='insertOrder.html' >" +"立即购买"+ "</a></li>"+
+             "<li><a href='#' >" +"加入购物车"+ "</a></li>"+
+             // "<li> <input type='button' value='购买' onclick='javascript:window.location.href='insertOrder.html''></li>" +
+             // "<li><input type='button' value='加入购物车' onclick='showActivityBox(this)'></li>"+
+             "</div>";
+        var product_image_list = list[i].product_image_list;
+        for (var y = 0; y < product_image_list.length; y++) {
+            tr_str +="<div data-id='" + list[i].id + "' id='container2'>" +
+            // "<li >" + product_image_list[y].id + "</li>" +
+            "<li ><img src='" + product_image_list[y].picture +"' class='im'></li>" +
+            "</div>";  
+            } 
+        }
+    $("#container").html(tr_str);
+}
+function showActivity(item){
+	alert("你好");
+}
+
+</script>
+</head>
+<body>
+<div id="head">
+        <div id="header">
+            <div class="l1">
+                <ul>
+                   <!--  <li><img src="img/logo.jpg" class="img" alt=""></li> -->
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                    <li><a href="/index/index">首页</a></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="l2">
+                <ul>
+                    <li></li>
+                    <li>购物车</li>
+                    <li><a href="/bookstoreHome/My_order">我的订单</a></li>
+                    <li>退出</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+	<div id="container"></div>
+</body>
+</html>
