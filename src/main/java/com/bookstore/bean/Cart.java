@@ -21,6 +21,16 @@ public class Cart {
     private Date updated;
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date createdate;
+    private ProductImage productImage;
+
+
+    public ProductImage getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(ProductImage productImage) {
+        this.productImage = productImage;
+    }
 
     public Long getId() {
         return id;

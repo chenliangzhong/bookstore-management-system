@@ -60,13 +60,16 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.updateByStatus(status);
     }
 
-    @Override
-    public int deleteById(Long id) {
-        return orderDao.deleteById(id);
-    }
 
     @Override
     public List<Order> selectByUserId(Long user_id) {
         return orderDao.selectByUserId(user_id);
     }
+
+    @Override
+    public int deleteBatch(Long... id) {
+        return orderDao.deleteBatch(id);
+    }
+
+
 }

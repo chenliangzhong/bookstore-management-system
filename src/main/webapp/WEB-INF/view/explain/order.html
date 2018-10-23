@@ -17,11 +17,16 @@
         <p>参数：id </p>
         <li><p>POST：<a href="/api/order/confirm">/api/order/confirm</a> </p></li>
         <p>描述：收货</p>
-        <p>参数：id  confirm_date </p>
+        <p>参数：id   </p>
+
+        <p>参数：id </p>
+        <li><p>POST：<a href="/api/order/payment">/api/order/payment</a> </p></li>
+        <p>描述：支付成功</p>
+        <p>参数：id   </p>
 
         <li><p>POST：<a href="/api/order/insert">/api/order/insert</a> </p></li>
         <p>描述：插入订单</p>
-        <p>参数：user_id  address(收货人) receivre(地址) mobile(电话)  user_message(用户描述)  order_code(订单号)  create_date(创建时间)  </p>
+        <p>参数：user_id  address(收货人) receivre(地址) mobile(电话)  user_message(用户描述)  order_code(订单号)    </p>
 
         <li><p>GET：<a href="/api/order/selectByOrderId">/api/order/selectByOrderId</a> </p></li>
         <p>描述：根据用户id查询订单</p>
@@ -33,9 +38,10 @@
         <li><p>GET：<a href="/api/order/select">//api/order/select</a> </p></li>
         <p>描述：根据id查询订单和订单项</p>
         <p>参数：id </p>
+
         <li><p>POST：<a href="/api/order/delivery">/api/order/delivery</a> </p></li>
         <p>描述：发货</p>
-        <p>参数：id    delivery_date </p>
+        <p>参数：id     </p>
 
         <li><p>GET：<a href="/api/order/selectByUserId">/api/order/selectByUserId</a> </p></li>
         <p>描述：用户查询订单</p>
