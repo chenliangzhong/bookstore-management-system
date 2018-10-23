@@ -17,7 +17,7 @@
         function getData(page_num){
             var _data = "page_num=" + page_num + "&page_size=5";
             $.ajax({
-                url:"/api/propertyValue/list",
+                url:"/api/propertyValue/selectByProductId/$!foreign_key",
                 type:"get",
                 dataType:"json",
                 cache:false,//去掉缓存
@@ -37,14 +37,15 @@
             var tr_str = "<tr >" + 
                 
                 "<th class='t'>id</th>"+
+                "<th class='t'>属性</th>"+
                 "<th class='t'>属性值</th>"+
                 "<th class='t'>修改</th>"+
                 "<th class='t'>删除</th>"+
-
                 "</tr>";
                 for (var i = 0; i < list.length; i++) {
                 tr_str += "<tr  data-id='"+list[i].id+"'>" +        
                     "<td >" + list[i].id + "</td>" +
+                    "<td >" + list[i].property.name + "</td>" +
                     "<td >" + list[i].value + "</td>" +
                     "<td><a  href='#' onclick='showActivityUpdateBox(this)'>修改</a></td>" +
                     "<td><a  href='#' onclick='deleteItem(this)' >删除</a></td>"+

@@ -132,8 +132,8 @@ public class ProductController extends BaseApiController {
         return onDataResp(new MyPageInfo<Product>(productService.selectFindProductImg(id)));
     }
 
-    @GetMapping("/selectByName")
-    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
+    @GetMapping("/selectByName/{name}")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @PathVariable String name) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Product>(productService.selectByName(name)));
     }

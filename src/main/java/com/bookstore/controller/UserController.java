@@ -58,6 +58,7 @@ public class UserController extends  BaseApiController{
             Map<String, Object> keypair = (Map<String, Object>) session.getAttribute(RSAUtils.KEYPAIR);
             session.removeAttribute(RSAUtils.KEYPAIR);
 
+
             if (keypair != null) pwd = new Gson().fromJson(RSAUtils.decrypt((RSAPrivateKey) keypair.get(RSAUtils.PRIVATE_KEY), password), Password.class);
         }catch (Exception e) {
         }

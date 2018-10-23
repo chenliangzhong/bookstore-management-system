@@ -96,17 +96,17 @@ public class ProductImageController extends BaseApiController{
 
     // 查
     @GetMapping("/show/{product_id}")
-    public Map<String, Object> show(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize, @PathVariable Long[] product_id)
+    public Map<String, Object> show(@RequestParam(required = true,defaultValue = "1") Integer page_num, @RequestParam(required = false, defaultValue = "10") Integer page_size, @PathVariable Long[] product_id)
     {
-        PageHelper.startPage(pageNo,pageSize);
+        PageHelper.startPage(page_num,page_size);
         return onDataResp(new MyPageInfo<ProductImage>(productImageService.show(product_id)));
     }
 
 
     @GetMapping("/list")
-    public Map<String, Object> select(@RequestParam(required = true,defaultValue = "1") Integer pageNo, @RequestParam(required = false, defaultValue = "10") Integer pageSize)
+    public Map<String, Object> select(@RequestParam(required = true,defaultValue = "1") Integer page_num, @RequestParam(required = false, defaultValue = "10") Integer page_size)
     {
-        PageHelper.startPage(pageNo,pageSize);
+        PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<ProductImage>(productImageService.select()));
     }
 

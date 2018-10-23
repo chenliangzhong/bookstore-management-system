@@ -6,6 +6,11 @@
         <result property="value" column="value"/>
         <result property="productId" column="product_id"/>
         <result property="propertyId" column="property_id"/>
+        <association property="property" column="property_id" select="com.bookstore.dao.PropertyDao.selectById"/>
+    </resultMap>
+
+    <resultMap id="ProductMap" type="com.bookstore.bean.PropertyValue" extends="PropertyMap">
+        <association property="property" column="property_id" select="com.bookstore.dao.PropertyDao.selectById"/>
     </resultMap>
 
     <select id="list" resultType="com.bookstore.bean.PropertyValue">
@@ -17,7 +22,11 @@
     </select>
 
     <select id="get" resultMap="PropertyMap">
-        SELECT * FROM tb_propertyvalue
+        SELECT * FROM tb_propertyvalue WHERE property_id = #{propertyId} AND product_id = #{productId}
+    </select>
+
+    <select id="selectByProductId" resultMap="ProductMap">
+        SELECT * FROM tb_propertyvalue WHERE product_id = #{productId}
     </select>
 
     <insert id="insert" parameterType="com.bookstore.bean.PropertyValue" useGeneratedKeys="true" keyProperty="id">

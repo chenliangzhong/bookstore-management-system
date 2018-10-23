@@ -19,4 +19,6 @@ public interface PropertyValueService {
     PropertyValue selectById(Long id);
 
     PropertyValue get(Long property_id, Long product_id);
+
+	List<PropertyValue> selectByProductId(Long product_id);
 }

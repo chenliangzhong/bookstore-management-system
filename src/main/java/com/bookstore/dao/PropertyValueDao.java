@@ -1,6 +1,7 @@
 package com.bookstore.dao;
 
 import com.bookstore.bean.PropertyValue;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface PropertyValueDao {
 
 	PropertyValue selectById(Long id);
 
-	PropertyValue get(Long property_id, Long product_id);
+	PropertyValue get(@Param("propertyId") Long property_id, @Param("productId") Long product_id);
+
+	List<PropertyValue> selectByProductId(@Param("productId") Long product_id);
 }

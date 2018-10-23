@@ -1,13 +1,18 @@
 package com.bookstore.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by Administrator on 2018/9/21.
  */
+
+@JsonIgnoreProperties(value = {"handler"})
 public class PropertyValue {
 	private Long id;
 	private String value;
 	private Long productId;
 	private Long propertyId;
+	private Property property;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -40,5 +45,13 @@ public class PropertyValue {
 
 	public Long getPropertyId() {
 		return propertyId;
+	}
+
+	public Property getProperty() {
+		return property;
+	}
+
+	public void setProperty(Property property) {
+		this.property = property;
 	}
 }

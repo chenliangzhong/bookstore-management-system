@@ -57,7 +57,7 @@ function logout(){
 	               if(result.code == 200){
 	               	// if (result.code == 200) {
 	               		  alert(result.msg);
-	                   window.location.href ="Login.html";
+	                   window.location.href ="login.html";
 	               	// }
 	                 
 
