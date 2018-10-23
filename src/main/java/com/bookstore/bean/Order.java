@@ -1,5 +1,6 @@
 package com.bookstore.bean;
 
+import com.bookstore.enums.OrderEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,30 +27,23 @@ public class Order {
     private Date delivery_date;
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date confirm_date;
-    private int status;
+
+    private OrderEnum orderEnum;
     private User user;//用户信息
 
     private List<OrderItem> orderItems;///订单详细
 
     public Order() {
+
     }
 
-    public Order(Long id, Long user_id, String order_code, String address, String user_message, String receivre, String mobile, List<OrderItem> orderItems, Date create_date, Date pay_date, Date delivery_date, Date confirm_date, int status, User user, List<OrderItem> orderItems1) {
-        this.id = id;
-        this.user_id = user_id;
-        this.order_code = order_code;
-        this.address = address;
-        this.user_message = user_message;
-        this.receivre = receivre;
-        this.mobile = mobile;
-        this.orderItems = orderItems;
-        this.create_date = create_date;
-        this.pay_date = pay_date;
-        this.delivery_date = delivery_date;
-        this.confirm_date = confirm_date;
-        this.status = status;
-        this.user = user;
-        this.orderItems = orderItems1;
+
+    public OrderEnum getOrderEnum() {
+        return orderEnum;
+    }
+
+    public void setOrderEnum(OrderEnum orderEnum) {
+        this.orderEnum = orderEnum;
     }
 
     public List<OrderItem> getOrderItems() {
@@ -156,11 +150,4 @@ public class Order {
         this.confirm_date = confirm_date;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }
