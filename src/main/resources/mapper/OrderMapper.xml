@@ -11,7 +11,7 @@
         <result column="pay_date" property="pay_date"/>
         <result column="delivery_date" property="delivery_date"/>
         <result column="confirm_date" property="confirm_date"/>
-        <result column="status" property="status"/>
+        <result column="status" property="orderEnum"/>
         <result column="user_id" property="user_id"/>
         <association property="user" javaType="com.bookstore.bean.User">
             <id column="uid" property="id"/>
@@ -29,7 +29,7 @@
         <result column="pay_date" property="pay_date"/>
         <result column="delivery_date" property="delivery_date"/>
         <result column="confirm_date" property="confirm_date"/>
-        <result column="status" property="status"/>
+        <result column="status" property="orderEnum"/>
         <result column="user_id" property="user_id"/>
         <collection property="orderItems" column="id" select="com.bookstore.dao.OrderItemDao.selectByOrderItemId">
          </collection>
@@ -62,12 +62,10 @@
   <insert id="insert" parameterType="com.bookstore.bean.Order" useGeneratedKeys="true" keyProperty="id">
 
       INSERT INTO  tb_order(user_id,address,receivre,mobile,order_code,user_message,create_date,status)
-      VALUES(#{user_id},#{address},#{receivre},#{mobile},#{order_code},#{user_message},#{create_date},#{status})
+      VALUES(#{user_id},#{address},#{receivre},#{mobile},#{order_code},#{user_message},#{create_date},#{orderEnum})
   </insert>
 
-    <select id="selectByStatus" resultType="com.bookstore.bean.Order">
-        SELECT * FROM tb_order WHERE status=#{status}
-    </select>
+
 
     <update id="updateById" parameterType="com.bookstore.bean.Order">
         UPDATE tb_order
@@ -75,11 +73,19 @@
             <if test="pay_date !=null">pay_date=#{pay_date},</if>
             <if test="confirm_date !=null">confirm_date=#{confirm_date},</if>
             <if test="delivery_date !=null">delivery_date=#{delivery_date},</if>
-            <if test="status !=null">status=#{status}</if>
+            <if test="orderEnum !=null">status=#{orderEnum}</if>
         </set>
         WHERE id=#{id}
 
     </update>
+
+
+    <delete id="deleteBatch">
+        DELETE FROM tb_order WHERE id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
     
 </mapper>

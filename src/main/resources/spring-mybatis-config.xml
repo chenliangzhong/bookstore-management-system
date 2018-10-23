@@ -34,6 +34,8 @@
 					 javaType="com.bookstore.enums.RoleTypeEnum"/>
 		<typeHandler handler="com.bookstore.handler.FreezeEnumTypeHandler"
 					 javaType="com.bookstore.enums.FreezeEnum"/>
+		<typeHandler handler="com.bookstore.handler.OrderEnumTypeHandler"
+					 javaType="com.bookstore.enums.OrderEnum"/>
 	</typeHandlers>
 
 	<plugins>
