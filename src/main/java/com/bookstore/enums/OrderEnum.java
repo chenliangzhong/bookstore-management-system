@@ -10,10 +10,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(value = {"declaring_class"})
 public enum OrderEnum {
 
-    PAYMENT(2, "待支付"),
-    DELIVER(3,"待发货"),
-    RECEVICE(4,"待收货"),
-    EVALUATE(5,"待评价");
+    PAYMENT(1, "待支付"),
+    DELIVER(2,"待发货"),
+    RECEVICE(3,"待收货"),
+    EVALUATE(4,"待评价"),
+    FINISH(5,"完成");
 
     private int value;
     private String desc;

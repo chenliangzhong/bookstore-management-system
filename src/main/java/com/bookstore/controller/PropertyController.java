@@ -39,8 +39,7 @@ public class PropertyController extends BaseApiController {
     @PostMapping("/add")
     public Map<String, Object> add(@RequestParam String name, @RequestParam Long category_id) {
 
-        if (name == null || name.trim().length() == 0) return onBadResp("name 不能为空");
-        if (category_id == null) return onBadResp("category_id 不能为空");
+        if (name == null || name.trim().length() == 0) return onBadResp("属性不能为空");
 
         Property property = new Property();
         property.setName(name.trim());

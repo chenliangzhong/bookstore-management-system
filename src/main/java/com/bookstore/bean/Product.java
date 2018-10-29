@@ -19,6 +19,8 @@ public class Product {
     private BigDecimal originalPrice;
     private BigDecimal promotePrice;
     private Integer stock;
+    private Integer saleCount;
+    private Integer reviewCount;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 //    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createDate;
@@ -74,6 +76,14 @@ public class Product {
         this.stock = stock;
     }
 
+    public Integer getSaleCount() {
+        return saleCount;
+    }
+
+    public void setSaleCount(Integer saleCount) {
+        this.saleCount = saleCount;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }
@@ -104,5 +114,13 @@ public class Product {
 
     public void setProductImageList(List<ProductImage> productImageList) {
         this.productImageList = productImageList;
+    }
+
+    public Integer getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(Integer reviewCount) {
+        this.reviewCount = reviewCount;
     }
 }

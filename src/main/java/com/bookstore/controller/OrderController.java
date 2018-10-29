@@ -3,14 +3,19 @@ package com.bookstore.controller;
 import com.bookstore.bean.*;
 import com.bookstore.common.UserManager;
 import com.bookstore.enums.OrderEnum;
+import com.bookstore.service.OrderItemService;
 import com.bookstore.service.OrderService;
+import com.bookstore.service.ProductService;
+import com.bookstore.util.OrderNoGenerator;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,12 +27,19 @@ public class OrderController  extends BaseApiController{
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    OrderItemService orderItemService;
+
+    @Autowired
+    ProductService productService;
+
 
     @GetMapping("/select")
     public Map<String, Object> select(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size){
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Order>(orderService.select()));
     }
+
     @GetMapping ("/selectlist")
     public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size) {
         PageHelper.startPage(page_num, page_size);
@@ -41,9 +53,9 @@ public class OrderController  extends BaseApiController{
     }
 
     @GetMapping("/selectByUserId")
-    public Map<String,Object> selectByUserId (@RequestParam(defaultValue = "1") Integer pageNo, @RequestParam(defaultValue = "5") Integer pageSize, HttpServletRequest request){
+    public Map<String,Object> selectByUserId (@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "20") Integer page_size, HttpServletRequest request){
         User currentUser = UserManager.getUser(request);
-        PageHelper.startPage(pageNo,pageSize);
+        PageHelper.startPage(page_num,page_size);
         return onDataResp(new MyPageInfo<Order>(orderService.selectByUserId(currentUser.getId())));
     }
 
@@ -53,26 +65,69 @@ public class OrderController  extends BaseApiController{
     }
 
     @PostMapping("/insert")
-    public Map<String,Object> insert(@RequestParam Long user_id,@RequestParam String address,@RequestParam String receivre,
-                                     @RequestParam String mobile, @RequestParam String order_code,
-                                     @RequestParam String user_message ) {
-        if (user_message != null && user_message.trim().length() == 0) return onBadResp("联系人不能为空");
+    public Map<String,Object> insert(@RequestParam String address,@RequestParam String receivre, @RequestParam Long product_id,
+                                     @RequestParam String mobile, @RequestParam(defaultValue = "") String user_message, @RequestParam Integer num, HttpServletRequest request) {
+        if (user_message != null && user_message.trim().length() == 0) return onBadResp("用户信息不能为空");
         if (address != null && address.trim().length() == 0) return onBadResp("收货地址不能为空");
         if (receivre != null && receivre.trim().length() == 0) return onBadResp("收货人不能为空");
         if (mobile != null && mobile.trim().length() == 0) return onBadResp("联系电话不能为空");
-        if (order_code != null && order_code.trim().length() == 0) return onBadResp("订单编号不能为空");
+
+        OrderNoGenerator orderNoGenerator = new OrderNoGenerator(10,4);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        User currentUser = UserManager.getUser(request);
 
         Order order = new Order();
-        OrderItem orderItem= new OrderItem();
-        order.setUser_id(user_id);
-        order.setOrder_code(order_code);
+        order.setUser_id(currentUser.getId());
+        order.setOrder_code(dateFormat.format(date).replaceAll("[\" \" |:|-]*", "") + orderNoGenerator.generatorOrderNo());
         order.setAddress(address);
         order.setReceivre(receivre);
-        order.setMobile(mobile);
         order.setUser_message(user_message);
         order.setCreate_date(new Date());
         order.setOrderEnum(OrderEnum.PAYMENT);
-        if (orderService.insert(order) > 0) return onSuccessRep("添加成功");
+
+        String regex = "1[3578][0-9]{9}";
+        boolean b = mobile.matches(regex);
+        if (b) {
+            order.setMobile(mobile);
+        }else {
+            return onBadResp("请输入正确的手机号格式");
+        }
+
+        if (orderService.insert(order) > 0) {
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setNumber(num);
+            orderItem.setUser_id(currentUser.getId());
+            orderItem.setProduct_id(product_id);
+            orderItem.setOrder_id(order.getId());
+            orderItemService.insert(orderItem);
+            Integer number=0;
+            List<OrderItem> orderItems = orderItemService.selectByProductId(product_id);
+            for (OrderItem orderItem1 : orderItems) {
+                if (orderItem1.getOrder_id() != null) {
+                    number+=orderItem1.getNumber();
+                }
+
+            }
+
+            Product product = productService.selectById(product_id);
+            Integer stock = product.getStock();
+            if (stock == 0) {
+                return onBadResp("该商品已销售完");
+            }
+            stock = product.getStock() - num;
+            if (stock < 0) {
+                return onBadResp("您购买数量过多，库存不够");
+            }
+            product.setId(product_id);
+            product.setSaleCount(number);
+            product.setStock(stock);
+            productService.updateById(product);
+            return onSuccessRep("添加成功");
+
+        }
         return onBadResp("添加失败");
     }
 
@@ -115,7 +170,5 @@ public class OrderController  extends BaseApiController{
     public Map<String,Object> cancel (@RequestParam Long[] id){
         orderService.deleteBatch(id);
         return onSuccessRep("删除成功");
-
-
     }
 }

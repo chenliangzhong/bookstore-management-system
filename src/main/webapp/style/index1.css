@@ -1,0 +1,359 @@
+body {
+    background: #F6F6F6;
+   margin: 0 ;
+   padding: 0px;
+   /*text-align: left;*/
+    color: #464646;
+    padding-top: 10px;
+    position: relative;
+    font-size: 14px;
+}
+
+#head{
+    height: 50px;
+    width: 100%;
+    background-color: #EEEEEE;
+}
+#header{
+    color: #666;
+    height: 50px;
+    margin: 0 auto;
+    /*text-align: right;*/
+    width: 1200px;
+    /*background-color: pink;*/
+}
+ .l1 {
+    height: 50px;
+    width: 600px;
+    /*background-color: pink;*/
+    text-align: left;
+    float: left;
+}
+ .l2{
+    height: 50px;
+    width: 570px;
+    text-align: right;
+    padding-right: 30px;
+    /*background-color: yellow;*/
+    float: left;
+}
+.head1{
+    float: left;
+    padding-left:10px;    
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    text-align: right;
+}
+.head2{
+    float: left;
+    padding-left:10px;
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    
+}
+.head3{
+    float: left;
+    padding-left:10px;   
+    /*border: 1px solid red;*/
+   
+    line-height: 48px;
+}
+.header1{
+    float: left;
+    padding-left:10px;    
+    /*border: 1px solid red;*/
+    line-height: 48px;
+   
+}
+.header2{
+    float: left;
+    padding-left:10px;
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    
+}
+.header3{
+    float: left;
+    padding-left:10px;   
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    
+}
+#hea{
+    position: relative;
+    right: -420px;
+    text-align: right;
+    /*background-color: red;*/
+    width: 300px;
+    height: 50px;
+}
+/*.l1 ul li{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: left;
+    border: 1px solid #fff;
+    margin-left: -30px;
+    padding-left: 30px;
+
+    text-align: center;
+    width: 40px;
+    line-height: 10px;
+}*/
+.l2 ul li{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    border: 1px solid #fff;
+    /*text-align: center;*/
+    width: 70px;
+    line-height: 10px;
+}
+#log{
+    /*background-color: #fff;*/
+    width: 100%;
+    height: 70px;
+}
+#logo{
+    /*border: 1px solid pink;*/
+    height: 50px;
+    margin: 0 auto;
+    text-align: left;
+    width: 1178px;
+    overflow: hidden;
+    padding: 10px;
+    clear: both;
+}
+.logo{
+    width: 80px;
+    height: 50px;
+}
+#logo1{
+ 
+    width: 80px;
+    height: 80px;
+    float: left;
+}
+#logo2{
+    line-height: 50px;
+    text-align: center;
+    /*border: 1px solid pink;*/
+    width: 1060px;
+    height: 50px;
+    float: left;
+}
+.logo3{
+
+    width: 400px;
+    font-size: 16px;
+    height: 30px;
+}
+.logo4{
+    width: 80px;
+    height: 37px;
+    font-size: 16px;
+}
+#banner{
+    /*background-color: red;*/
+    width: 1200px;
+    height: 400px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+#fenlie{
+    clear: both;
+    width: 1198px;
+    margin: 0 auto;
+    height:20px;
+    /*border: 1px solid pink;*/
+    margin-bottom: 30px;
+}
+
+#foot{
+
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    height:100px;
+     background-color: #eee;
+}
+#footer{
+    width: 1198px;
+    /*border: 1px solid pink;*/
+    margin: 0 auto;
+    height:100px;
+   
+}
+#footzheng{
+    margin-left: 15px;
+    padding-left:100px;
+    padding-top:25px;
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+
+#footqian{
+    padding-left:100px;
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+    padding-top:25px;
+}
+#footche{
+    padding-left:100px;
+   /*border: 1px solid red;*/
+    width: 190px;
+    padding-top:25px;
+    float: left;
+}
+#footshoujian{
+    padding-left:100px;
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+    padding-top:25px;
+}
+
+.zhengtu{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+#button{
+    padding-top: 30px;
+    position: relative;
+    top: 30px;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    height:150px;
+     /*background-color: #eee;*/
+     border: 2px solid #eee;
+}
+#butt{
+    width: 1198px;
+    /*border: 1px solid pink;*/
+    margin: 0 auto;
+    height:150px;
+   
+}
+
+#buttongouwu{
+    margin-left: 25px;
+/*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+
+#buttonzhifu{
+  /*  padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttondingdan{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttonpeisong{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttontuihuo{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttonshangjia{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+
+#footzhengtu{
+  /*  width: 150px;
+    height: 100px;*/
+    float: left;
+}
+#footzhengwen{
+    padding-top: 5px;
+    float: left;
+}
+
+.lef1{
+    text-align: left;
+    display: inline;
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+
+    line-height: 40px;
+}
+
+/*.ll{
+    text-align: left;
+
+    border: 1px solid red;
+}*/
+#le{
+    margin: 0px;
+    padding: 0px;
+   width: 248px;
+}
+#le ul li {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: left;
+  
+    /*border: 1px solid red;*/
+   
+    
+}
+#le ul li a {
+  color:#fff; 
+  text-decoration: none;
+  
+}
+#jiao{
+    position: relative;
+    top: 60px;
+    margin: 0 auto;
+    text-align: center;
+    width: 1198px;
+    /*border: 1px solid red;*/
+    margin: 0 auto;
+}
+#jiao ul li{
+    /*position: relative;
+    left: 280px;*/
+    /*border: 1px solid red;*/
+    display: inline-block;
+}
+#jiaoban1{
+    /*border: 1px solid red;*/
+    padding-bottom: 5px;
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+#jiaoban2{
+    /*border: 1px solid red;*/
+    width: 1200px;
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+

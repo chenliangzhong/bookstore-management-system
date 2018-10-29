@@ -1,0 +1,42 @@
+
+#container{
+	margin: 0 auto;
+	text-align: left;
+	width: 1200px;
+}
+#container3{
+    position: relative;
+    right: -500px;
+    width: 400px;
+    text-align: button;
+    height: 300px;
+    padding-top: 100px;
+    /*border: 1px solid red;*/
+}
+#container4{
+    position:relative;
+    top: -400px;
+    left: 90px;
+    width: 400px;
+    height: 400px;
+    /*border: 1px solid pink;*/
+}
+ul li{
+    list-style: none;
+}
+ul li a{
+    text-decoration: none;
+    color: #666;
+}
+.tu{
+    width: 350px;
+    height: 350px;
+}
+.a1{text-align: center;
+    background-color: red;
+    width: 80px;
+    height: 20px;
+}
+.a1 a{
+    color: #fff;
+}

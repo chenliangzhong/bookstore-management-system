@@ -31,4 +31,5 @@ public interface ProductDao {
     int deleteBatch(Long... id);
 
     List<Product> selectByName(@Param( "name" ) String name);
+
 }

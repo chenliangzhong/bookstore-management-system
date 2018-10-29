@@ -29,7 +29,7 @@
 			getData(1);
 		});
 		function getData(page_num){
-            var _data = "page_num=" + page_num + "&page_size=5";
+            var _data = "page_num=" + page_num + "&page_size=2";
 			$.ajax({
 				url:"/api/productImage/show/$!foreign_key",
 				type:"get",
@@ -64,6 +64,18 @@
                     "</tr>";
             }
 		$("#table").html(tr_str);
+			$(".M-box").pagination({
+                pageCount: data.pages,
+                current: data.page_num,
+                callback: 'pageselectCallback',
+                prevContent: "上一页",
+                nextContent: "下一页",
+                jump: true,
+                coping: true,
+                callback: function (api) {
+                    getData(api.getCurrent())
+                }
+            });
 	}
 	</script>
 
@@ -218,6 +230,9 @@
         <table   cellspacing="0" cellpadding="0" align="center" id="table">
             <div style="width: 120px; height: 45px; background-color:#6ec3c9; text-align: center; line-height: 40px;border:1px solid #000; border-radius:25px;">商品图片</div><a href="shangpintupian.html">添加</a>
         </table>
+		<div align="center">
+			<div class="M-box"></div>
+		</div>
     </div>
 </body>
 </html>

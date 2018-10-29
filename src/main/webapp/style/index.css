@@ -1,11 +1,14 @@
 body {
     background: #F6F6F6;
-   margin: 0 auto;
+   margin: 0 ;
    padding: 0px;
-   text-align: center;
+   /*text-align: left;*/
     color: #464646;
     padding-top: 10px;
+    position: relative;
+    font-size: 14px;
 }
+
 #head{
     height: 50px;
     width: 100%;
@@ -15,17 +18,18 @@ body {
     color: #666;
     height: 50px;
     margin: 0 auto;
+    /*text-align: right;*/
     width: 1200px;
     /*background-color: pink;*/
 }
-div .l1 {
+ .l1 {
     height: 50px;
     width: 600px;
     /*background-color: pink;*/
     text-align: left;
     float: left;
 }
-div .l2{
+ .l2{
     height: 50px;
     width: 570px;
     text-align: right;
@@ -33,23 +37,86 @@ div .l2{
     /*background-color: yellow;*/
     float: left;
 }
-#head ul li{
+.head1{
+    float: left;
+    padding-left:10px;    
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    text-align: right;
+}
+.head2{
+    float: left;
+    padding-left:10px;
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    
+}
+.head3{
+    float: left;
+    padding-left:10px;   
+    /*border: 1px solid red;*/
+   
+    line-height: 48px;
+}
+.header1{
+    float: left;
+    padding-left:10px;    
+    /*border: 1px solid red;*/
+    line-height: 48px;
+   
+}
+.header2{
+    float: left;
+    padding-left:10px;
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    
+}
+.header3{
+    float: left;
+    padding-left:10px;   
+    /*border: 1px solid red;*/
+    line-height: 48px;
+    
+}
+#hea{
+    position: relative;
+    right: -420px;
+    text-align: right;
+    /*background-color: red;*/
+    width: 300px;
+    height: 50px;
+}
+/*.l1 ul li{
     display: inline-block;
     *display: inline;
     *zoom: 1;
-    /*border: 1px solid #fff;*/
+    text-align: left;
+    border: 1px solid #fff;
+    margin-left: -30px;
+    padding-left: 30px;
+
+    text-align: center;
+    width: 40px;
+    line-height: 10px;
+}*/
+.l2 ul li{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    border: 1px solid #fff;
     /*text-align: center;*/
-    width: 100px;
+    width: 70px;
     line-height: 10px;
 }
 #log{
-/*    background-color: #fff;*/
+    /*background-color: #fff;*/
     width: 100%;
     height: 70px;
 }
 #logo{
     /*border: 1px solid pink;*/
-    height: 50px;
+    height: 80px;
     margin: 0 auto;
     text-align: left;
     width: 1178px;
@@ -64,81 +131,276 @@ div .l2{
 #logo1{
  
     width: 80px;
-    height: 50px;
+    line-height: 50px;
+    height: 80px;
     float: left;
 }
 #logo2{
     line-height: 50px;
     text-align: center;
     /*border: 1px solid pink;*/
-    width: 1090px;
+    width: 1060px;
     height: 50px;
     float: left;
 }
 .logo3{
 
     width: 400px;
+    line-height: 50px;
     font-size: 16px;
     height: 30px;
 }
 .logo4{
+    margin-top: 10px;
+    line-height: 10px;
     width: 80px;
-    height: 37px;
+    height: 32px;
     font-size: 16px;
 }
 #banner{
     /*background-color: red;*/
     width: 1200px;
-    height: 450px;
+    height: 370px;
     margin: 0 auto;
     text-align: center;
 
 }
+#demo{
+    text-align: center;
+    width: 950px;
+        height: 370px;
+  }
+     #demo img{
+        width: 950px;
+        height: 370px;
+        /*height: 100vh; 高度按照屏幕来改变*/
+        overflow:hidden;
+        background-repeat: no-repeat;  
+        background-position: center;  
+        -webkit-background-size:cover;
+        -moz-background-size:cover;
+        /*background-size:100% 100%;*/
+    }
+    .carousel-control-prev-icon{
+        width: 20px;
+        height: 90px;
+    }
+    .carousel-control-next-icon{
+        width: 20px;
+        height: 90px;
+    }
+
+    .white_content::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+    .white_content::-webkit-scrollbar-track {
+            -webkit-box-shadow: white;
+            border-radius: 0;
+        }
+    .white_content::-webkit-scrollbar-thumb {
+            border-radius: 0;
+            background: white;
+            -webkit-box-shadow: white;
+        }
+    .white_content::-webkit-scrollbar-thumb:window-inactive {
+            background: white;
+        }
+    
+    
+    .white_content {
+        display: none;
+        position: absolute;
+        top: 20%;
+        left: 35%;
+        width: 300px;
+        height: 300px;
+        background-color: white;
+        z-index:1002;
+        overflow: auto;
+    }
 #left{
-    width: 248px;
-    height:368px;
-    border: 1px solid pink;
+    width: 244px;
+    height:370px;
+  
+    /*border: 1px solid pink;*/
     float: left;
     text-align: left;
 }
  #left1{
     text-align: left;
+    
     margin: 0px;
-    width: 248px;
-    height: 368px;
+    width: 234px;
+    height: 370px;
     
     padding-top: 5px;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     background-color: #666666;
 }
 #left nav{
     padding-left: 30px;
     text-align: left;
-    width: 220px;
+    width: 210px;
     height: 35px;
     /*background-color: pink;*/
     padding-top: 15px;
 }
+#jianxi{
+    float: left;
+    /*background-color: #000;*/
+    width: 10px;height: 360px;
+}
 #right {
-    width: 948px;
-    height: 370px;
-    border:1px solid pink;
+    border-radius: 5px;
+    width: 930px;
+    height: 360px;
+    /*border:1px solid pink;*/
     float: left;
 }
 #right nav{
-    width: 950px;
+    width: 940px;
     height: 35px;
     /*background-color: pink;*/
     padding-top: 15px;
 }
+#fenlie1{
+    position: relative;
+    top: 20px;
+    clear: both;
+    width: 1300px;
+    margin: 0 auto;
+    /*height:600px;*/
+    /*border: 1px solid pink;*/
+    margin-bottom: 30px;
+}
+
 #foot{
     clear: both;
-   
-    width: 1198px;
+    text-align: center;
+    width: 100%;
     margin: 0 auto;
-    height:300px;
-    border: 1px solid pink;
+    height:100px;
+     background-color: #eee;
 }
+#footer{
+    width: 1198px;
+    /*padding-left: 200px;*/
+    /*border: 1px solid pink;*/
+    margin: 0 auto;
+    /*text-align: center;*/
+    height:100px;
+   
+}
+#footzheng{
+    margin-left: 15px;
+    padding-left:100px;
+    padding-top:25px;
+   /*border: 1px solid red;*/
+    width: 290px;
+    float: left;
+}
+
+#footqian{
+    padding-left:100px;
+   /*border: 1px solid red;*/
+    width: 290px;
+    float: left;
+    padding-top:25px;
+}
+#footche{
+    padding-left:100px;
+   /*border: 1px solid red;*/
+    width: 290px;
+    padding-top:25px;
+    float: left;
+}
+#footshoujian{
+    padding-left:100px;
+   /*border: 1px solid red;*/
+    width: 290px;
+    float: left;
+    padding-top:25px;
+}
+#footzhengtu{
+  /*  width: 150px;
+    height: 100px;*/
+    /*border: 1px solid red;*/
+    float: left;
+}
+#footzhengwen{
+    padding-top: 5px;
+    /*border: 1px solid red;*/
+    float: left;
+}
+.zhengtu{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+#button{
+    padding-top: 30px;
+    position: relative;
+    top: 30px;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    height:180px;
+     /*background-color: #eee;*/
+     border: 2px solid #eee;
+}
+#butt{
+    width: 1198px;
+    /*border: 1px solid pink;*/
+    margin: 0 auto;
+    height:150px;
+   
+}
+
+#buttongouwu{
+    margin-left: 25px;
+/*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+
+#buttonzhifu{
+  /*  padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttondingdan{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttonpeisong{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttontuihuo{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+#buttonshangjia{
+    /*padding-left:100px;*/
+   /*border: 1px solid red;*/
+    width: 190px;
+    float: left;
+}
+
+
+
 .lef1{
     text-align: left;
     display: inline;
@@ -174,3 +436,33 @@ div .l2{
   text-decoration: none;
   
 }
+#jiao{
+    position: relative;
+    top: 60px;
+    margin: 0 auto;
+    text-align: center;
+    width: 1198px;
+    /*border: 1px solid red;*/
+    margin: 0 auto;
+}
+#jiao ul li{
+    /*position: relative;
+    left: 280px;*/
+    /*border: 1px solid red;*/
+    display: inline-block;
+}
+#jiaoban1{
+    /*border: 1px solid red;*/
+    padding-bottom: 5px;
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+#jiaoban2{
+    /*border: 1px solid red;*/
+    width: 1200px;
+    height: 150px;
+    margin: 0 auto;
+    text-align: center;
+}
+

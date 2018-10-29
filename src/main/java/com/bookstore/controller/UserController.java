@@ -58,6 +58,7 @@ public class UserController extends  BaseApiController{
             Map<String, Object> keypair = (Map<String, Object>) session.getAttribute(RSAUtils.KEYPAIR);
             session.removeAttribute(RSAUtils.KEYPAIR);
 
+
             if (keypair != null) pwd = new Gson().fromJson(RSAUtils.decrypt((RSAPrivateKey) keypair.get(RSAUtils.PRIVATE_KEY), password), Password.class);
         }catch (Exception e) {
         }
@@ -208,6 +209,28 @@ public class UserController extends  BaseApiController{
                 user.setFreezeEnum(FreezeEnum.FROST);
                 userService.updateById(user);
                 return onSuccessRep("解冻成功");
+
+            default:
+                return onBadResp("操作出错");
+        }
+    }
+
+//    升为管理员接口
+    @PostMapping("admin/{id}")
+    public Map<String, Object> ADMIN(@PathVariable Long id) {
+
+        User user = new User();
+        user.setId(id);
+        int admin = userService.selectById(id).getRoleTypeEnum().getValue();
+
+        switch (admin){
+            case 2:
+                user.setRoleTypeEnum(RoleTypeEnum.ADMIN);
+                userService.updateById(user);
+                return onSuccessRep("审核成功");
+
+            case 1:
+                return onSuccessRep("已是管理员");
 
             default:
                 return onBadResp("操作出错");

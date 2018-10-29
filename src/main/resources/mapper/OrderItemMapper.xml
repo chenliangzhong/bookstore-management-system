@@ -4,10 +4,13 @@
     <resultMap id="findorderItemResultMap" type="com.bookstore.bean.OrderItem">
         <id column="id" property="id"/>
         <result column="number" property="number"/>
-        <result column="aorder_id" property="order_id"/>
+        <result column="order_id" property="order_id"/>
         <result column="product_id" property="product_id"/>
-        <result column="total" property="total"/>
-        <association property="product" column="id" select="com.bookstore.dao.ProductDao.selectById"></association>
+        <result column="user_id" property="user_id"/>
+    </resultMap>
+
+    <resultMap id="OrderOfCartMap" type="com.bookstore.bean.OrderItem" extends="findorderItemResultMap">
+        <association property="product" column="product_id" select="com.bookstore.dao.ProductDao.selectById"></association>
     </resultMap>
 
     <resultMap id="findProductResultMap" type="com.bookstore.bean.OrderItem">
@@ -31,16 +34,27 @@
     <select id="selectById" parameterType="java.lang.Long" resultMap="findProductResultMap">
         SELECT o.*,p.name,p.subtitle,p.promote_price
         FROM  tb_orderitem o LEFT JOIN tb_product p ON o.product_id=p.id
-        WHERE o.id=#{id}
+        WHERE o.id=#{id} order by id DESC
     </select>
 
     <select id="selectByOrderItemId" parameterType="java.lang.Long" resultMap="findorderItemResultMap">
     SELECT * FROM  tb_orderitem o WHERE o.order_id=#{id}
     </select>
 
-    <select id="selectByProductId" parameterType="java.lang.Long" resultMap="findProductResultMap">
-        SELECT * FROM  tb_orderitem o WHERE  o.product_id=#{id}
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="findorderItemResultMap">
+        SELECT * FROM  tb_orderitem WHERE user_id=#{user_id}
+    </select>
 
+    <select id="selectByUserIdOfOrder" parameterType="java.lang.Long" resultMap="OrderOfCartMap">
+        SELECT * FROM  tb_orderitem WHERE user_id=#{user_id} AND order_id IS NOT NULL
+    </select>
+
+    <select id="selectByProductId" parameterType="java.lang.Long" resultMap="findorderItemResultMap">
+        SELECT * FROM  tb_orderitem o WHERE  o.product_id=#{id}
+    </select>
+
+    <select id="selectByUserIdAndProductId" parameterType="java.lang.Long" resultMap="OrderOfCartMap">
+        SELECT * FROM  tb_orderitem WHERE  user_id = #{user_id} AND order_id IS NULL
     </select>
 
   <insert id="insert" parameterType="com.bookstore.bean.OrderItem" useGeneratedKeys="true" keyProperty="id">
@@ -52,12 +66,13 @@
     <update id="updateById" parameterType="com.bookstore.bean.Order">
         UPDATE tb_orderitem
         <set>
-            <if test="number !=null">pay_date=#{pay_date}</if>
+            <if test="number != null">number=#{number}</if>
         </set>
         WHERE id=#{id}
 
     </update>
 
-
-    
+    <delete id="deleteById">
+        DELETE FROM tb_orderitem WHERE id = #{id}
+    </delete>
 </mapper>

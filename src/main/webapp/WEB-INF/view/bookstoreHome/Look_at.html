@@ -5,7 +5,8 @@
 	<title>Document</title>
 	<script src="/js/jquery-1.9.1.min.js"></script>
     <!-- <script src="jq/jquery.pagination.js"></script> -->
-    <link rel="stylesheet" href="/style/categoryById.css">
+    <link rel="stylesheet" href="/style/Look_at.css">
+    <link rel="stylesheet" href="/style/index1.css">
     <script>
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
@@ -16,14 +17,14 @@ function getQueryVariable(variable) {
     }
 }
 $(function () {
-    showActivityBo(getQueryVariable("id"));
+    showActivityBo();
 });
 
-function showActivityBo(id) {
+function showActivityBo() {
    
     // var _data = "page_num =" + page_num + "&page_size=5";
     $.ajax({
-        url: "/api/product/selectFindProductImg/" +id,
+        url: "/api/product/selectFindProductImg/$!foreign_key",
         type: "get",
         dataType: "json",
         cache: false,
@@ -49,55 +50,267 @@ function initData(data) {
 
     for (var i = 0; i < list.length; i++) {
             // tr_str1= "<div>" + tr_str + "</div>";
-           tr_str += "<div data-id='" + list[i].id + "' id='container1'>" +
+           tr_str += "<div data-id='" + list[i].id + "' id='container3'>" +
             // '<li >' + list[i].id + '</li>' +
+            "<ul>" +
              "<li>"+ "书名：" + list[i].name + "</li>"+
+               "<li>"+ "小标题：" + list[i].subtitle + "</li>"+
              "<li>"+ "原价格：" + list[i].original_price + "</li>"+
              "<li>"+ "优惠价格：" + list[i].promote_price + "</li>"+
              "<li>"+ "库存：" + list[i].stock + "</li>"+
-             "<li><a href='insertOrder.html' >" +"立即购买"+ "</a></li>"+
-             "<li><a href='#' >" +"加入购物车"+ "</a></li>"+
+             "<li>"+ "销量(" + list[i].sale_count + ")</li>"+
+             "<li>"+ "评价(" + list[i].review_count + ")</li>"+
+             "<li class='a1'><a onclick='showAddOrder(this)'>" +"立即购买"+ "</a></li>"+
+             "<br>"+
+             "<li class='a1'><a href='#' onclick='showAddCart()'>" +"加入购物车"+ "</a></li>"+
+             "</ul>"+
              // "<li> <input type='button' value='购买' onclick='javascript:window.location.href='insertOrder.html''></li>" +
              // "<li><input type='button' value='加入购物车' onclick='showActivityBox(this)'></li>"+
              "</div>";
         var product_image_list = list[i].product_image_list;
         for (var y = 0; y < product_image_list.length; y++) {
-            tr_str +="<div data-id='" + list[i].id + "' id='container2'>" +
+            tr_str +="<div data-id='" + list[i].id + "' id='container4'>" +
             // "<li >" + product_image_list[y].id + "</li>" +
-            "<li ><img src='" + product_image_list[y].picture +"' class='im'></li>" +
+            "<ul>"+
+            "<li ><img src='" + product_image_list[y].picture +"' class='tu'></li>" +
+            "</ul>"+
             "</div>";  
             } 
         }
     $("#container").html(tr_str);
 }
-function showActivity(item){
-	alert("你好");
+function showAddCart(){
+    if (confirm("确定要添加吗？")) {
+            $.ajax({
+                url:"/api/cart/insert",
+                data:$("#dingdan").serialize(),
+                type:'post',
+                dataType:"json",
+                cache:false,
+                xhrFields:{
+                    withCredentials:true
+                },
+                success:function(result){
+                    if (result.code == 200) {
+                        alert(result.msg);
+                        window.location.href = "Look_at.html";
+                    }else{
+                        alert(result.msg);
+                    }
+                },
+                error: function() {
+                    alert("网络连接出错");
+                }
+            });
+    }
+}
+
+function showAddOrder(item) {
+    window.location.href = "/bookstoreHome/" + $(item).closest("div").data("id") + "/insertOrder";
 }
 
 </script>
+<script>
+        function logout(){
+            
+            $.ajax({
+                url : "/api/user/logout",
+                dataType : "json",
+                cache: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+                beforeSend: function () {},
+                complete: function () {},
+               success : function(result) {
+                   if(result.code == 200){
+                    // if (result.code == 200) {
+                          alert(result.msg);
+                       window.location.href ="Login.html";
+                    // }
+                     
+
+                   }else{
+                       alert(result.msg);
+                   }
+                   // if (result.code == 200) window.location.href = "Login.html";
+               },
+                 error: function (result) {
+                    alert(result.msg);
+                }
+            });
+     
+        }
+    </script>
 </head>
 <body>
-<div id="head">
+     <div id="head">
         <div id="header">
             <div class="l1">
-                <ul>
+                <div class="head1"><a href="/login">登录</a></div>
+                <div class="head2"><a href="/register">注册</a></div>
+                <div class="head3"><a href="/index/index">首页</a></div>
+                <!-- <ul> -->
                    <!--  <li><img src="img/logo.jpg" class="img" alt=""></li> -->
-                    <li><a href="/login">登录</a></li>
-                    <li><a href="/register">注册</a></li>
-                    <li><a href="/index/index">首页</a></li>
-                    <li></li>
-                </ul>
+                    <!-- <li>登录</li>
+                    <li>注册</li>
+                    <li><a href="index.html">首页</a></li>
+                    <li></li> -->
+                <!-- </ul> -->
             </div>
             <div class="l2">
-                <ul>
+                <div id="hea">                
+                    <div class="header1"><a href="Shopping_Cart.html">购物车</a></div>
+                    <div class="header2"><a href="My_order.html">我的订单</a></div>
+                    <div class="header3"><a href="#" onclick="logout()">退出</a></div>
+                </div>
+
+               <!--  <ul>
                     <li></li>
                     <li>购物车</li>
-                    <li><a href="/bookstoreHome/My_order">我的订单</a></li>
+                    <li><a href="My order.html">我的订单</a></li>
                     <li>退出</li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>
-	<div id="container"></div>
+
+    <div id="log">
+        <div id="logo">
+            <div id="logo1"><img src="/img/logo.png" class="logo" alt=""></div>
+            <div id="logo2">
+                <input type="text" placeholder="请输入书名" class="logo3"><input class="logo4" type="button" value="搜索">
+            </div>
+        </div>
+       
+    </div>
+    
+    
+    <div id="banner">
+  <!--   <iframe src="index1.html" name="main" frameborder="0" scrolling="no" style="width: 1200px;  height: 385px;">
+    
+        </iframe> -->
+        <div id="container"></div>
+        <!-- <div id="left">
+            <nav>
+                商品分类
+            </nav>
+            <div id="left1">
+                
+            </div>
+        </div>
+
+        <div id="right">
+            <nav></nav>
+        </div> -->
+        <div id="container">
+            <div id="container1">
+                <form  id="dingdan" enctype="multipart/form-data">
+                    <input type="hidden" name="product_id" value="$!foreign_key">
+                </form>
+            </div>
+        </div>
+    </div>
+
+ 
+    
+    <div id="foot">
+         <div id="footer">
+            <div id="footzheng">
+                <div id="footzhengtu"><img src="/img/zheng.png" alt="" class="zhengtu"></div>
+            <div id="footzhengwen">正规渠道<br>正品保障</div>
+               
+            </div>
+            <div id="footqian">
+                <div id="footzhengtu"><img src="/img/qian.png" alt="" class="zhengtu"></div>
+                <div id="footzhengwen">放心购物<br>货到付款</div>
+             </div>
+            <div id="footche">
+                <div id="footzhengtu"><img src="/img/che.png" alt="" class="zhengtu"></div>
+                <div id="footzhengwen">625城市<br>次日到达</div>
+            </div>
+            <div id="footshoujian">
+                <div id="footzhengtu"><img src="/img/shoujian.png" alt="" class="zhengtu"></div>
+                <div id="footzhengwen">上门退换<br>物件无忧</div>
+            </div>
+         </div>
+    </div>
+    <div id="button">
+        <div id="butt">
+            <div id="buttongouwu">
+                <h3>购物指南</h3>
+                购物流程<br>
+                发票制度<br>
+                账户管理<br>
+                会员优惠
+               
+            </div>
+            <div id="buttonzhifu">
+                <h3>支付方式</h3>
+                货到付款<br>
+                网上支付<br>
+                礼品卡支付<br>
+                银行转账
+            </div>
+            <div id="buttondingdan">
+                <h3>订单服务</h3>
+                配送服务查询<br>
+                订单状态说明<br>
+                自动取消订单<br>
+                自动修改订单
+            </div>
+            <div id="buttonpeisong">
+                <h3>配送方式</h3>
+                当日递<br>
+                次日达<br>
+                订单自提<br>
+                验货与签收
+            </div>
+            <div id="buttontuihuo">
+                <h3>退换货</h3>
+                退换货服务查询<br>
+                自助申请退换货<br>
+                退换货进度查询<br>
+                退款方式和时间
+            </div>
+            <div id="buttonshangjia">
+                <h3>商家服务</h3>
+                商家中心<br>
+                运营服务<br>
+                加入尾品汇
+            </div>
+        </div>
+    </div>
+    <div id="jiao">
+        <div id="jiaoban">
+            <ul>
+                <li>公司简介</li>
+                <li>|</li>
+                <li>诚聘英才</li>
+                <li>|</li>
+                <li>网站联盟</li>
+                <li>|</li>
+                <li>当当招聘</li>
+                <li>|</li>
+                <li>机构销售</li>
+                <li>|</li>
+                <li>手机当当</li>
+                <li>|</li>
+                <li>官方Blog</li>
+                <li>|</li>
+                <li>热词搜索</li>
+            </ul>
+        </div>
+        <div id="jiaoban1">
+            卓越书店 2018-09-15/2018-12-12
+        </div>
+        <div id="jiaoban2">
+            xxxx号|出版物经营许可证新出发京批字第直|食品许可证xxxx <br>   
+            互联网药品信息服务资格证编号：(京)-非经营性-2012-0016|京公网安备110101000001号 <br>
+            互联网违法和不良信息举报电话：4001066666-5 邮箱：service@cs.dangdang.com<br>
+            网络出版服务许可证（总）网出证（京）字第049号北京当当网信息技术有限公司，公司地址：北京市朝阳区北三环东路8号静安中心21层
+        </div>
+    </div>
+	
 </body>
 </html>

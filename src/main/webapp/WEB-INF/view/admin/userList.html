@@ -35,6 +35,7 @@
                 "<th class='t'>用户名</th>"+
                 "<th class='t'>手机号</th>"+
                 "<th class='t'>邮箱</th>"+
+                "<th class='t'>角色</th>"+
                 "<th class='t'>冻结账户</th>"+
                 "<th class='t'>删除</th>"+
 
@@ -44,6 +45,7 @@
                     "<td >" + list[i].username + "</td>" +
                     "<td >" + list[i].mobile_phone + "</td>" +
                     "<td >" + list[i].email + "</td>" +
+                    "<td ><a href='#' onclick='showAdminBox(this)'>"+ list[i].role_type_enum.desc +"</a></td>" +
                     "<td ><a href='#' onclick='showFreezeBox(this)'>"+ list[i].freeze_enum.desc +"</a></td>" +
                     "<td><a href='#' onclick='deleteItem(this)'>删除</a></td>"+
                     "</tr>";
@@ -96,6 +98,36 @@
                 });
             }
         }
+
+    var activityXhr;
+    function showAdminBox(item) {
+        if (confirm("确定要升为管理员？")) {
+            var tr = $(item).closest("tr");
+            update_id = tr.data("id");
+
+            if (activityXhr) activityXhr.abort();
+            activityXhr = $.ajax({
+                url: "/api/user/admin/" + update_id,
+                type: "post",
+                dataType: "json",
+                cache: false,
+                xhrFields: {
+                    withCredentials: true
+                },
+
+                success: function (result) {
+
+                    if (result.code == 200) {
+                        alert(result.msg);
+                        window.location.href = "userList.html";
+                    }
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+    }
 
     var activityXhr;
     function showFreezeBox(item) {

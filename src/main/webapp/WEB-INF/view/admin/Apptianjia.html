@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>App添加</title>
+    <link rel="stylesheet" type="text/css" href="/css/Apptianjia.css">
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/Apptianjia.js"></script>
+</head>
+
+<body>
+    <div id="blte">
+        <div id="pjax-container">
+            <h3>更新App接口</h3>
+            <form id="subject-personnel-post-form" enctype="multipart/form-data">
+                <!--<input type="hidden" name="id" value="">-->
+                <table cellspacing="0px" cellpadding="0px">
+                    <tr id="he">
+                        <td>版本号：</td>
+                        <td><input type="text" autocomplete="off" value="" id="name" onblur="checktxt()" name="versionCode"/>
+                        </td>
+                        <td>
+                            <span id="nameDiv">版本号不能为空</span>
+                        </td>
+
+                    </tr>
+                    <tr id="he">
+                        <td>开发者(LM或XC)：</td>
+                        <td><input type="text" autocomplete="off" id="namev" value="" name="developer" onblur="checktxtc()"/></td>
+                        <td>
+                            <span id="nameDivv">不能为空且只能是LM或XC不分大小写</span>
+                        </td>
+                    </tr>
+                    <tr id="he">
+                        <td>APP附件：</td>
+                        <td><input type="file" name="file" id="f_zswb" class="djinput" onblur="zswbjy()"/>
+                        </td>
+                        <td>
+                            <div id="zswbdiv"></div>
+                        </td>
+                    </tr>
+                </table>
+                <input type="button" value="提交" onclick="subjectPersonnalPost()"/>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

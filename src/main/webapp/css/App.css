@@ -1,0 +1,80 @@
+#right-below {
+    width: 1300px;
+    height: 1040px;
+    padding-top: 80px;
+}
+
+#mt {
+    width: 120px;
+    height: 45px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 25px;
+    background: #6ec3c9;
+    line-height: 40px;
+    margin-left: 100px;
+}
+
+
+
+table tr {
+    background: #f0f0f0;
+}
+
+table {
+    margin-top: 20px;
+}
+
+table th {
+    background: #d1e9ec;
+    height: 45px;
+}
+
+#page-num {
+    width: 30px;
+    background-color: #f1f1fc;
+    border: #000 1px solid;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.M-box a {
+    min-width: 15px;
+    color: black;
+    text-align: center;
+    background: whitre;
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 20px 2px;
+    display: inline-block;
+}
+
+.M-box span {
+    min-width: 15px;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    margin: 0 2px;
+    display: inline-block;
+
+}
+
+.M-box .active {
+    color: white;
+    background: #96d5ff;
+    border-radius: 5px;
+}
+
+.jump-ipt {
+    width: 30px;
+
+}
+
+.cc {
+    text-align: center;
+    height: 50px;
+}

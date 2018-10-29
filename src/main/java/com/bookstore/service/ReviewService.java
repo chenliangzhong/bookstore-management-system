@@ -17,4 +17,8 @@ public interface ReviewService {
     int updateById(Review review);
 
     int insert(Review review);
+
+    Review selectByUserIdAndReviewId(Long id, Long User_id);
+
+    Review selectById(Long id);
 }

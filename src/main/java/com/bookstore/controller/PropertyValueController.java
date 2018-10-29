@@ -45,27 +45,32 @@ public class PropertyValueController extends BaseApiController{
 
 	@GetMapping ("/selectById/{id}")
 	public Map<String, Object> selectById(@PathVariable Long id) {
-		return onDataResp(propertyValueService.selectById( id ));
+		return onDataResp(propertyValueService.selectById(id));
+	}
+
+	@GetMapping ("/selectByProductId/{product_id}")
+	public Map<String, Object> selectByProductId(@PathVariable Long product_id) {
+		return onDataResp(new MyPageInfo<PropertyValue>(propertyValueService.selectByProductId(product_id)));
 	}
 
 	@PostMapping("/add")
 	public Map<String, Object> add(@RequestParam String value, @RequestParam Long product_id) {
 
 		if (value == null || value.trim().length() == 0) return onBadResp("属性值不能为空");
-		if (product_id == null) return onBadResp("product_id 不能为空");
 
 		Product p = productService.selectById(product_id);
 		List<Property> properties = propertyService.selectByCategoryId(p.getCategoryId());
 		for (Property pt : properties) {
 			PropertyValue propertyvalue = propertyValueService.get(pt.getId(),p.getId());
 			if(null==propertyvalue) {
+				propertyvalue = new PropertyValue();
 				propertyvalue.setValue(value.trim());
 				propertyvalue.setProductId(product_id);
 				propertyvalue.setPropertyId(pt.getId());
-				if (propertyValueService.insert(propertyvalue) > 0) return onSuccessRep("添加成功");
+				propertyValueService.insert(propertyvalue);
 			}
 		}
-		return onBadResp("添加失败");
+		return onSuccessRep("添加成功");
 	}
 
 	// 改(不成功)

@@ -34,4 +34,14 @@ public class ReviewServiceImpl implements ReviewService {
     public int insert(Review review) {
         return reviewDao.insert( review );
     }
+
+    @Override
+    public Review selectByUserIdAndReviewId(Long id, Long user_id) {
+        return reviewDao.selectByUserIdAndReviewId(id,user_id);
+    }
+
+    @Override
+    public Review selectById(Long id) {
+        return reviewDao.selectById(id);
+    }
 }

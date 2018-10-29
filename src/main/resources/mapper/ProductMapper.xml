@@ -8,6 +8,7 @@
         <result property="originalPrice" column="original_price"/>
         <result property="promotePrice" column="promote_price"/>
         <result property="stock" column="stock"/>
+        <result property="saleCount" column="sale_Count"/>
         <result property="createDate" column="create_date"/>
         <result property="categoryId" column="category_id"/>
         <!--<association property="category" column="category_id" select="com.bookstore.dao.CategoryDao.selectById"/>-->
@@ -20,6 +21,7 @@
         <result property="originalPrice" column="original_price"/>
         <result property="promotePrice" column="promote_price"/>
         <result property="stock" column="stock"/>
+        <result property="saleCount" column="sale_Count"/>
         <result property="createDate" column="create_date"/>
         <result property="categoryId" column="category_id"/>
         <collection property="productImageList" column="id" select="com.bookstore.dao.ProductImageDao.selectByProductId">
@@ -35,6 +37,7 @@
         <result property="originalPrice" column="original_price"/>
         <result property="promotePrice" column="promote_price"/>
         <result property="stock" column="stock"/>
+        <result property="saleCount" column="sale_Count"/>
         <result property="createDate" column="create_date"/>
         <result property="categoryId" column="category_id"/>
         <collection property="productImageList"  ofType="com.bookstore.bean.ProductImage">
@@ -48,8 +51,6 @@
     <select id="findImgByCategoryId" resultMap="findproductByCategoryIdMap" parameterType="java.lang.Long">
         SELECT p.*,i.product_id,i.picture
          FROM tb_product p LEFT JOIN tb_product_image i ON p.id = i.product_id WHERE  p.category_id=#{category_id}
-
-
     </select>
 
     <select id="selectFindProductImg" resultMap="findproductImgMap" parameterType="java.lang.Long">
@@ -58,23 +59,21 @@
 
     </select>
 
-
-
     <select id="selectByCategoryId" resultMap="productMap" parameterType="java.lang.Long">
         SELECT * FROM tb_product p WHERE p.category_id = #{category_id}
     </select>
 
-    <select id="select" resultMap="productMap" parameterType="java.lang.Long">
-        SELECT * FROM tb_product
+    <select id="select" resultMap="findproductImgMap" parameterType="java.lang.Long">
+        SELECT * FROM tb_product ORDER BY id DESC
     </select>
 
-    <select id="selectById" resultType="com.bookstore.bean.Product" parameterType="java.lang.Long">
+    <select id="selectById" resultMap="findproductImgMap" parameterType="java.lang.Long">
         SELECT * FROM  tb_product WHERE id=#{id}
     </select>
 
     <insert id="insert" parameterType="com.bookstore.bean.Product" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tb_product(name, subtitle, original_price, promote_price, stock, create_date, category_id)
-        VALUES (#{name},#{subtitle},#{originalPrice},#{promotePrice},#{stock},#{createDate},#{categoryId})
+        INSERT INTO tb_product(name,subtitle,original_price,promote_price,stock,sale_Count,review_Count,create_date,category_id)
+        VALUES (#{name},#{subtitle},#{originalPrice},#{promotePrice},#{stock},#{saleCount},#{reviewCount},#{createDate},#{categoryId})
     </insert>
 
     <update id="updateById" parameterType="com.bookstore.bean.Product">
@@ -85,6 +84,8 @@
             <if test="originalPrice != null">original_price=#{originalPrice},</if>
             <if test="promotePrice != null">promote_price=#{promotePrice},</if>
             <if test="stock != null">stock=#{stock},</if>
+            <if test="saleCount != null">sale_Count=#{saleCount},</if>
+            <if test="reviewCount != null">review_Count=#{reviewCount},</if>
             <if test="createDate != null">create_date=#{createDate},</if>
             <if test="categoryId != null">category_id=#{categoryId}</if>
         </set>
