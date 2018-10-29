@@ -214,4 +214,26 @@ public class UserController extends  BaseApiController{
                 return onBadResp("操作出错");
         }
     }
+
+//    升为管理员接口
+    @PostMapping("admin/{id}")
+    public Map<String, Object> ADMIN(@PathVariable Long id) {
+
+        User user = new User();
+        user.setId(id);
+        int admin = userService.selectById(id).getRoleTypeEnum().getValue();
+
+        switch (admin){
+            case 2:
+                user.setRoleTypeEnum(RoleTypeEnum.ADMIN);
+                userService.updateById(user);
+                return onSuccessRep("审核成功");
+
+            case 1:
+                return onSuccessRep("已是管理员");
+
+            default:
+                return onBadResp("操作出错");
+        }
+    }
 }

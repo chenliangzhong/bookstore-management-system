@@ -1,3 +1,4 @@
+import com.bookstore.util.OrderNoGenerator;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -65,4 +66,10 @@ public class TestControllerTest {
         System.out.println("-----返回的json = " + responseString);
     }
 
+    @Test
+    public void testString2()throws Exception {
+        OrderNoGenerator orderNoGenerator = new OrderNoGenerator(10,3);
+        String s = orderNoGenerator.generatorOrderNo();
+        System.out.println("------------------------"+s);
+    }
 }

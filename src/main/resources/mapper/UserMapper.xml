@@ -22,7 +22,7 @@
     </insert>
 
     <select id="list" resultMap="findOrderResultMap">
-        SELECT * FROM tb_user
+        SELECT * FROM tb_user order by role_type asc
     </select>
 
     <select id="selectByUname" resultMap="findOrderResultMap" parameterType="java.lang.String">
@@ -40,6 +40,7 @@
             <if test="username != null">name=#{username},</if>
             <if test="email != null">email=#{email},</if>
             <if test="mobile_phone != null">mobile_phone=#{mobile_phone},</if>
+            <if test="roleTypeEnum != null">role_type=#{roleTypeEnum},</if>
             <if test="freezeEnum != null">freeze=#{freezeEnum}</if>
         </set>
         WHERE id=#{id}

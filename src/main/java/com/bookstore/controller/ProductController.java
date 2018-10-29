@@ -51,6 +51,8 @@ public class ProductController extends BaseApiController {
         product.setOriginalPrice(original_price);
         product.setPromotePrice(promote_price);
         product.setStock(stock);
+        product.setSaleCount(0);
+        product.setReviewCount(0);
         product.setCreateDate(new Date());
         product.setCategoryId(category_id);
 
@@ -87,7 +89,7 @@ public class ProductController extends BaseApiController {
     // 改
     @PostMapping("/update")
     public Map<String, Object> update(@RequestParam Long id, String name, String subtitle, BigDecimal original_price,
-                                      BigDecimal promote_price, Integer stock, Long category_id) {
+                                      BigDecimal promote_price, Integer stock, Long category_id, Integer sale_Count) {
         if (name != null && name.trim().length() == 0) return onBadResp("");
         if (subtitle != null && subtitle.trim().length() == 0) return onBadResp("");
 
@@ -99,6 +101,7 @@ public class ProductController extends BaseApiController {
         if (promote_price != null) product.setPromotePrice(promote_price);
         if (stock != null) product.setStock(stock);
         if (category_id != null) product.setCategoryId(category_id);
+        if (sale_Count != null) product.setSaleCount(sale_Count);
         if (productService.updateById(product) > 0) {
             return onSuccessRep("修改成功");
         }
@@ -132,8 +135,8 @@ public class ProductController extends BaseApiController {
         return onDataResp(new MyPageInfo<Product>(productService.selectFindProductImg(id)));
     }
 
-    @GetMapping("/selectByName/{name}")
-    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @PathVariable String name) {
+    @GetMapping("/selectByName")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "10") Integer page_size, @RequestParam String name) {
         PageHelper.startPage(page_num, page_size);
         return onDataResp(new MyPageInfo<Product>(productService.selectByName(name)));
     }

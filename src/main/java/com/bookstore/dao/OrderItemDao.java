@@ -1,6 +1,7 @@
 package com.bookstore.dao;
 
 import com.bookstore.bean.OrderItem;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,9 +18,15 @@ public interface OrderItemDao {
 
     OrderItem selectById (Long id);
 
-    OrderItem selectByProductId(Long id);
+    List<OrderItem> selectByProductId(Long id);
+
+    List<OrderItem> selectByUserId(Long user_id);
 
     int updateById(OrderItem orderitem);
 
     int deleteById(Long id);
+
+    List<OrderItem> selectByUserIdAndProductId(@Param("user_id") Long user_id);
+
+    OrderItem selectByUserIdOfOrder(@Param("user_id") Long user_id);
 }

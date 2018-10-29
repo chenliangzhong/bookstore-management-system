@@ -14,20 +14,9 @@ public class OrderItem {
     private Long product_id;
     private Long user_id;
     private int number;
-    private Long total;
-    private Product product;//明细对应的产品信息
+    private Product product;
 
     public OrderItem() {
-    }
-
-    public OrderItem(Long id, Long order_id, Long product_id, Long user_id, int number, Long total, Product product) {
-        this.id = id;
-        this.order_id = order_id;
-        this.product_id = product_id;
-        this.user_id = user_id;
-        this.number = number;
-        this.total = total;
-        this.product = product;
     }
 
     public Long getId() {
@@ -68,14 +57,6 @@ public class OrderItem {
 
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    public Long getTotal() {
-        return total;
-    }
-
-    public void setTotal(Long total) {
-        this.total = total;
     }
 
     public Product getProduct() {

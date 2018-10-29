@@ -1,13 +1,16 @@
 package com.bookstore.controller;
 
-import com.bookstore.bean.Cart;
-import com.bookstore.bean.Product;
-import com.bookstore.service.CartService;
+import com.bookstore.bean.*;
+import com.bookstore.common.UserManager;
+import com.bookstore.service.OrderItemService;
+import com.bookstore.service.ProductImageService;
 import com.bookstore.service.ProductService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,62 +20,70 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/cart")
 public class CartController extends BaseApiController {
-    @Autowired
-    CartService cartService;
 
     @Autowired
     ProductService productService;
 
+    @Autowired
+    OrderItemService orderItemService;
 
-    @GetMapping("/selectByUser")
-    public Map<String,Object>selectByUser(@RequestParam Long user_id){
-        return onDataResp(cartService.seleByUser(user_id));
+    @Autowired
+    ProductImageService productImageService;
+
+    @GetMapping("/list")
+    public Map<String, Object> list(@RequestParam(defaultValue = "1") Integer page_num, @RequestParam(defaultValue = "5") Integer page_size, HttpServletRequest request){
+
+        PageHelper.startPage(page_num, page_size);
+
+        User currentUser = UserManager.getUser(request);
+
+//        List<Product> products = new LinkedList<>();
+//
+//        List<OrderItem> orderItems = orderItemService.selectByUserId(currentUser.getId());
+//        for (OrderItem orderItem : orderItems) {
+//            if (orderItem.getOrder_id() == null) {
+//                products.add(productService.selectById(orderItem.getProduct_id()));
+//            }
+//        }
+
+        return onDataResp(new MyPageInfo<OrderItem>(orderItemService.selectByUserIdAndProductId(currentUser.getId())));
     }
-
 
     @PostMapping("/insert")
-    public Map<String,Object> insert(@RequestParam Long user_id,@RequestParam Long itemId,@RequestParam int num){
-        List<Cart> cartList=cartService.seleByUser(user_id);
-        Cart cart=null;
-        for (Cart c: cartList){
-            if (c.getProduct_id().longValue()==itemId.longValue()){
-                cart=c;
-                break;
+    public Map<String, Object> insert(@RequestParam Long product_id, HttpServletRequest request) {
+
+        User currentUser = UserManager.getUser(request);
+
+        List<OrderItem> orderItems = orderItemService.selectByUserId(currentUser.getId());
+        for (OrderItem orderItem : orderItems) {
+            if (orderItem.getProduct_id().intValue() == product_id && orderItem.getOrder_id() == null) {
+                orderItem.setNumber(orderItem.getNumber() + 1);
+                orderItemService.updateById(orderItem);
+                return onSuccessRep("添加成功");
             }
         }
-        if (cart !=null){
-            cart.setNumber(cart.getNumber()+num);
-            cart.setUpdated(new Date());
-            if (cartService.update(cart)>0) return onSuccessRep("修改成功");
-            return onBadResp("修改失败");
-        }else {
-            Product product=productService.selectById(itemId);
-            cart = new Cart();
-            cart.setUser_id(user_id);
-            cart.setProduct_id(itemId);
-            cart.setItemTitle(product.getName());
-            cart.setItemPrice(product.getPromotePrice());
-            cart.setCreatedate(new Date());
-            cart.setUpdated(cart.getUpdated());
-            cartList.add(cart);
-            if (cartService.insert(cart)>0)  return onSuccessRep("添加购物车成功");
-            return onBadResp("添加购物车失败");
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setNumber(1);
+        orderItem.setProduct_id(product_id);
+        orderItem.setUser_id(currentUser.getId());
+        if (orderItemService.insert(orderItem) > 0) return onSuccessRep("添加成功");
+        return onBadResp("添加失败");
+    }
+
+    @PostMapping("delete")
+    public Map<String, Object> delete(Long product_id, HttpServletRequest request) {
+
+        User currentUser = UserManager.getUser(request);
+
+        List<OrderItem> orderItems = orderItemService.selectByUserId(currentUser.getId());
+        for (OrderItem orderItem : orderItems) {
+            if (orderItem.getProduct_id().intValue() == product_id && orderItem.getOrder_id() == null) {
+                orderItemService.deleteById(orderItem.getId());
+                return onSuccessRep("删除成功");
+            }
         }
-
-    }
-    @PostMapping("/update")
-    public Map<String,Object> update(@RequestParam Long id,@RequestParam int num){
-        Cart cart=new Cart();
-        cart.setId(id);cart.setNumber(num);
-        cart.setUpdated(new Date());
-        if (cartService.update(cart)>0) return onSuccessRep("修改购物车成功");
-        return onBadResp("修改购物车失败");
-
-    }
-    @PostMapping("/delete")
-    public Map<String, Object> delete(@RequestParam Long[] id ){
-        productService.deleteBatch(id);
-        return onSuccessRep("删除成功");
+        return onBadResp("删除失败");
     }
 
 }

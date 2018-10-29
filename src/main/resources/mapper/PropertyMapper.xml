@@ -8,7 +8,7 @@
     </resultMap>
 
     <select id="select" resultType="com.bookstore.bean.Property" >
-        SELECT * FROM tb_property
+        SELECT * FROM tb_property order by id DESC
     </select>
 
     <delete id="deleteById" parameterType="java.lang.Long" >

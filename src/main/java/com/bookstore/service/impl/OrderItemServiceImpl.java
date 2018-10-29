@@ -28,7 +28,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
-    public OrderItem selectByProductId(Long id) {
+    public List<OrderItem> selectByProductId(Long id) {
         return orderItemDao.selectByProductId(id);
     }
 
@@ -36,6 +36,11 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public OrderItem selectById(Long id) {
         return orderItemDao.selectById(id);
+    }
+
+    @Override
+    public List<OrderItem> selectByUserId(Long user_id) {
+        return orderItemDao.selectByUserId(user_id);
     }
 
 
@@ -47,5 +52,15 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Override
     public int deleteById(Long id) {
         return orderItemDao.deleteById(id);
+    }
+
+    @Override
+    public List<OrderItem> selectByUserIdAndProductId(Long user_id) {
+        return orderItemDao.selectByUserIdAndProductId(user_id);
+    }
+
+    @Override
+    public OrderItem selectByUserIdOfOrder(Long user_id) {
+        return orderItemDao.selectByUserIdOfOrder(user_id);
     }
 }

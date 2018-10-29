@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bookstore.dao.OrderDao">
-    <resultMap id="orderResultMap" type="com.bookstore.bean.Order">
+
+    <resultMap id="orderMap" type="com.bookstore.bean.Order">
         <id column="id" property="id"/>
         <result column="order_code" property="order_code"/>
         <result column="address" property="address"/>
@@ -13,40 +14,36 @@
         <result column="confirm_date" property="confirm_date"/>
         <result column="status" property="orderEnum"/>
         <result column="user_id" property="user_id"/>
+    </resultMap>
+
+    <resultMap id="orderResultMap" type="com.bookstore.bean.Order" extends="orderMap">
         <association property="user" javaType="com.bookstore.bean.User">
             <id column="uid" property="id"/>
             <result column="name" property="username"/>
         </association>
     </resultMap>
 
-    <resultMap id="orderItemResultMap" type="com.bookstore.bean.Order">
-        <id column="id" property="id"/>
-        <result column="order_code" property="order_code"/>
-        <result column="address" property="address"/>
-        <result column="user_message" property="user_message"/>
-        <result column="receivre" property="receivre"/>
-        <result column="create_date" property="create_date"/>
-        <result column="pay_date" property="pay_date"/>
-        <result column="delivery_date" property="delivery_date"/>
-        <result column="confirm_date" property="confirm_date"/>
-        <result column="status" property="orderEnum"/>
-        <result column="user_id" property="user_id"/>
-        <collection property="orderItems" column="id" select="com.bookstore.dao.OrderItemDao.selectByOrderItemId">
-         </collection>
+    <resultMap id="orderItemResultMap" type="com.bookstore.bean.Order" extends="orderMap">
+        <association property="orderItems" column="id" select="com.bookstore.dao.OrderItemDao.selectByOrderItemId">
+         </association>
+    </resultMap>
+
+    <resultMap id="selectByOrderItem" type="com.bookstore.bean.Order" extends="orderMap">
+        <association property="orderItems" column="user_id" select="com.bookstore.dao.OrderItemDao.selectByUserIdOfOrder"/>
     </resultMap>
 
     <select id="select" resultMap="orderItemResultMap" parameterType="java.lang.Long">
-        SELECT * FROM  tb_order
+        SELECT * FROM  tb_order order by id DESC
     </select>
 
 
 
     <select id="selectByOrderId" parameterType="java.lang.Long" resultMap="orderResultMap">
-        SELECT * FROM  tb_order o WHERE o.user_id=#{id}
+        SELECT * FROM  tb_order o WHERE o.user_id=#{id} order by id DESC
     </select>
 
-    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="orderResultMap">
-        SELECT * FROM  tb_order o WHERE o.user_id=#{id}
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="selectByOrderItem">
+        SELECT * FROM tb_order WHERE user_id=#{user_id} order by id DESC
     </select>
 
     <select id="selectById" parameterType="java.lang.Long" resultMap="orderResultMap">

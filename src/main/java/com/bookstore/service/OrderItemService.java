@@ -14,11 +14,17 @@ public interface OrderItemService {
 
     List<OrderItem> selectByOrderItemId(Long id);
 
-    OrderItem selectByProductId(Long id);
+    List<OrderItem> selectByProductId(Long id);
 
     OrderItem selectById (Long id);
+
+    List<OrderItem> selectByUserId(Long user_id);
 
     int updateById(OrderItem orderitem);
 
     int deleteById(Long id);
+
+    List<OrderItem> selectByUserIdAndProductId(Long user_id);
+
+    OrderItem selectByUserIdOfOrder(Long user_id);
 }

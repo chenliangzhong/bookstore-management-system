@@ -1,0 +1,42 @@
+#container1{
+    position: relative;
+    top: 255px;
+    left: 70px;
+    float: left;
+    width: 160px;
+
+    height: 150px;
+    /*border: 1px solid yellow;*/
+}
+#container1 ul li{
+    font-size: 12px;
+    /*line-height: 10px;*/
+    text-align: left;
+    text-align: left;
+    list-style: none;
+    
+}
+#container1 ul li a{
+    list-style: none;
+    text-decoration: none;
+    color: #666;
+}
+#container2{
+    
+    float: left;
+    position:relative;
+    left: -70px;
+    width: 160px;
+    height: 410px;
+    /*border: 1px solid pink;*/
+}
+#container2  li{
+    
+    list-style: none;
+   
+}
+.im{
+
+    width: 160px;
+    height: 250px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>App</title>
+    <link rel="stylesheet" type="text/css" href="/css/App.css">
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <script src="/js/jquery.qrcode.js"></script>
+    <script src="/js/qrcode.js"></script>
+    <script src="/js/App.js"></script>
+
+</head>
+
+<body>
+    <div class="activity-update-box" style="background: #f1f1fc;  position: fixed; width: 100%; height:100%; margin:0px; padding:0px; z-index: 900; display: none;" >
+    <div id="activity-update-dialog" >
+        <form action="" id="activity-update-form">
+            <div id="container">
+            </div>
+            <input type="button" value="提交"  onclick="activityUpdate()" /><input type="button" value="取消" id="btn2" onclick="$(this).closest('.activity-update-box').hide();" />
+        </form>
+        </div>
+    </div>
+
+        <div id="right-below">
+
+           <!--  <form id="form-submit">
+
+                <h2 align="center">查询：
+                    <input type="text" name="txtSearch" value="" id="txtSearch" />
+
+                    <input type="button" name="cmdSerach" value="提交" onclick="submit3(this)" id="cmdSerach" /> </h2>
+                <div id="suggest" style="width:200px"></div>
+            </form> -->
+            <div id="mt">App列表</div>
+            <table width="1100px" align="center" id="table" cellspacing="0px" cellpadding="0px">
+
+            </table>
+
+            <div align="center">
+                <div class="M-box"></div>
+            </div>
+            <div id="qrcodeTable">
+
+            </div>
+
+            <div>
+                <a href="/admin/Apptianjia">更新</a>
+            </div>
+    </div>
+
+</body>
+
+</html>

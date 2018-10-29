@@ -53,10 +53,14 @@ div .l2{
 }
 #le ul li{
     /*border: 1px solid red;*/
+    
     padding-left: 20px;
     padding-right: 10px;
     text-align: center;
     display: inline-block;
     *display: inline;
     *zoom: 1;
+}
+#le ul li a{
+    color: #000;
 }

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bookstore.dao.ReviewDao">
+
     <select id="select" resultType="com.bookstore.bean.Review" >
-        SELECT * FROM tb_review
+        SELECT * FROM tb_review order by id DESC
     </select>
+
+    <select id="selectById" resultType="com.bookstore.bean.Review" >
+        SELECT * FROM tb_review WHERE id = #{id}
+    </select>
+
+    <select id="selectByUserIdAndReviewId" resultType="com.bookstore.bean.Review" >
+        SELECT * FROM tb_review WHERE id = #{id} AND user_id = #{user_id}
+    </select>
+
     <delete id="deleteById" parameterType="java.lang.Long" >
         DELETE FROM tb_review WHERE id=#{id}
     </delete>
+
     <update id="updateById" parameterType="com.bookstore.bean.Review">
         UPDATE tb_review
         <set>

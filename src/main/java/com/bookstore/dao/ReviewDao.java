@@ -1,6 +1,7 @@
 package com.bookstore.dao;
 
 import com.bookstore.bean.Review;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface ReviewDao {
     int updateById(Review review);
 
     int insert(Review review);
+
+    Review selectByUserIdAndReviewId(@Param("id") Long id, @Param("user_id") Long user_id);
+
+    Review selectById(Long id);
 }
