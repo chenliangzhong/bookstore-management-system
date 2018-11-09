@@ -86,4 +86,11 @@ public class CartController extends BaseApiController {
         return onBadResp("删除失败");
     }
 
+
+
+    @GetMapping("/selectById")
+    public Map<String,Object> selectById(@RequestParam Long id){
+        return onDataResp(orderItemService.selectById(id));
+    }
+
 }

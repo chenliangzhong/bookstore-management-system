@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>卓越书店</title>
+    <link rel="icon" href="/img/logo.ico" type="img/x-ico" />
 	<script src="/js/jquery-1.9.1.min.js"></script>
-	
 	<link rel="stylesheet" href="/style/index1.css">
 	<link rel="stylesheet" href="/style/Shopping_Cart.css">
 	<script>
@@ -29,45 +29,51 @@
 				}
 			});
 		}
-		function initData(data){
-			var list = data.list;
-			var tr_str = "<div id='le'>" +
-	            "<ul>"+
-	            "<li >" + "   " +"</li>" +
-	            "<li >" + "书名：" + "</li>" +
-                "<li >" + "标题：" + "</li>" +
-	            "<li >" + "原价格：" +"</li>" +
+        function initData(data){
+            var list = data.list;
+            var tr_str = "<div id='le'>" +
+                "<ul>"+
+                "<li >" + "" +"</li>" +
+                "<li >" + "id：" +"</li>" +
                 "<li >" + "数量：" + "</li>" +
+                "<li >" + "名称：" + "</li>" +
+                "<li >" + "原价格：" +"</li>" +
                 "<li >" + "优惠价格：" +"</li>" +
-	            "<li >" + "创建时间："  + "</li>" +   
-	             
-	            // "<li >" + "：" + list[i].item_title + "</li>" +   
-	            // "<li >" + "收货信息：" + list[i].delivery_date + "</li>" +   
-	            "<li >" + "删除" +"</li>" +   
-	            // "<li ><a href='#' onclick='showActivityBox(this)' >" + "修改" +"</a></li>" +   
-				"</ul>"+
-	       	    "</div>";
-			for (var i = 0; i < list.length; i++) {
-	       		tr_str += "<div id='le1' data-id='" + list[i].product_id + "'>" +
-	            "<ul>"+
+                "<li >" + "库存："+ "</li>" +
+                "<li >" + "销量：" + "</li>" +
+                "<li >" + "评价人数：" + "</li>" +
+                "<li >" + "创建时间："  + "</li>" +
 
-	            "<li >" + list[i].product.name + "</li>" +
-                    "<li >" + list[i].product.subtitle + "</li>" +
-	            "<li >" +  list[i].product.original_price + "</li>" +
+                // "<li >" + "：" + list[i].item_title + "</li>" +
+                // "<li >" + "收货信息：" + list[i].delivery_date + "</li>" +
+                "<li >" + "删除" +"</li>" +
+                // "<li ><a href='#' onclick='showActivityBox(this)' >" + "修改" +"</a></li>" +
+                "</ul>"+
+                "</div>";
+            for (var i = 0; i < list.length; i++) {
+                tr_str += "<div id='le1' data-product_id='" + list[i].product_id + "'>" +
+                    "<ul >"+
+                    "<li >"  + list[i].id + "</li>" +
                     "<li >"  + list[i].number+ "</li>" +
-                    "<li >"  + list[i].product.promote_price + "</li>" +
-	            "<li >" + list[i].product.create_date + "</li>" +
-	             
-	            // "<li >" + "：" + list[i].item_title + "</li>" +   
-	            // "<li >" + "收货信息：" + list[i].delivery_date + "</li>" +   
-	            "<li ><a href='#' onclick='deleteItem(this)' >" + "删除" +"</a></li>" +   
-	            // "<li ><a href='#' onclick='showActivityBox(this)' >" + "修改" +"</a></li>" +   
-				"</ul>"+
-	       	    "</div>";
+                    "<li >" + list[i].product.name + "</li>" +
+                    "<li >"+ "￥" +  list[i].product.original_price + "</li>" +
+                    "<li >" + "￥" + list[i].product.promote_price + "</li>" +
+                    "<li >"  + list[i].product.stock + "</li>" +
+                    "<li >"  + list[i].product.sale_count + "</li>" +
+                    "<li >" + list[i].product.review_count + "</li>" +
+                    "<li >" + list[i].product.create_date + "</li>" +
+
+                    // "<li >" + "：" + list[i].item_title + "</li>" +
+                    // "<li >" + "收货信息：" + list[i].delivery_date + "</li>" +
+                    "<li ><a href='#' onclick='deleteItem(this)' >" + "删除" +"</a></li>" +
+                    // "<li ><a href='#' onclick='showActivityBox(this)' >" + "修改" +"</a></li>" +
+                    "</ul>"+
+                    "</div>";
 	       	    var product_image_list = list[i].product.product_image_list;
         for (var y = 0; y < 1; y++) {
-            tr_str +=
-            "<li ><img src='" + product_image_list[y].picture +"' class='im' onclick='showActivityBo(this)'></li>" ;
+            tr_str +="<ul id='u'>"+
+            "<li ><img src='" + product_image_list[y].picture +"' class='im' onclick='showActivityBo(this)'></li>" +
+			"</ul>";
        
                 
             }
@@ -213,15 +219,15 @@
         </div>
        
     </div>
-    
-    
-    <div id="banner">
+
+	 <div id="container">
+
+	 </div>
+    <!--<div id="banner">-->
   <!--   <iframe src="index1.html" name="main" frameborder="0" scrolling="no" style="width: 1200px;  height: 385px;">
 	
 		</iframe> -->
-		<div id="container">
-		
-   		 </div>
+
       <!--   <div id="left">
             <nav>
                 商品分类
@@ -235,7 +241,7 @@
             <nav></nav>
         </div> -->
 
-    </div>
+    <!--</div>-->
 
    
 	

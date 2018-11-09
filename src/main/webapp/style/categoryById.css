@@ -1,67 +1,77 @@
-body{
-	margin: 0px;
-	padding: 0px;
-	text-align: center;
-	padding-top: 10px;
-	background: #F6F6F6;
-}
-#head{
-    height: 50px;
-    width: 100%;
-    background-color: #EEEEEE;
-}
-#header{
-    color: #666;
-    height: 50px;
-    margin: 0 auto;
-    width: 1200px;
-    /*background-color: pink;*/
-}
-div .l1 {
-    height: 50px;
-    width: 600px;
-    /*background-color: pink;*/
-    text-align: left;
-    float: left;
-}
-div .l2{
-    height: 50px;
-    width: 570px;
-    text-align: right;
-    padding-right: 30px;
-    /*background-color: yellow;*/
-    float: left;
-}
-#head ul li{
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    /*border: 1px solid #fff;*/
-    /*text-align: center;*/
-    width: 100px;
-    line-height: 10px;
-}
+
 #container{
 
 	position: relative;
 	margin:10px auto;
 	text-align: left;
-	width: 1200px;
+	width: 1300px;
 }
 #container1{
+	position: relative;
+	top: 190px;
+	left: 55px;
 	float: left;
-	width: 152px;
-	height: 50px;
-	text-align: right;
+	width: 160px;
+
+	height: 100px;
 	/*border: 1px solid yellow;*/
 }
+#container1 ul li{
+	/*border: 1px solid yellow;*/
+	white-space: nowrap;
+	/*（不换行，一行显示）*/
+	text-overflow: ellipsis;
+	/*(溢出用省略号）*/
+	overflow: hidden;
+	/*（多出的文字，隐藏）*/
+	width: 150px;
+	height: 20px;
+	/*border:1px solid red;*/
+	font-size: 12px;
+	/*line-height: 10px;*/
+	text-align: left;
+
+	list-style: none;
+
+}
+#container1 ul li a{
+	list-style: none;
+	text-decoration: none;
+
+}
 #container2{
-float: left;
-	width: 202px;
-	height: 350px;
+
+	float: left;
+	position:relative;
+	left: -70px;
+	width: 160px;
+	height: 320px;
 	/*border: 1px solid pink;*/
 }
+#container2  li{
+	list-style: none;
+
+}
+.yuan{
+	text-decoration: line-through;
+}
+.yuan a{
+	color:#666;
+}
+.ming a{
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #666;
+}
+.jia a{
+	color: red;
+	/*border: 1px solid red;*/
+}
+.ku a{
+	color: #666;
+}
 .im{
-	width: 200px;
-	height: 300px;
+
+	width: 160px;
+	height: 180px;
 }

@@ -1,9 +1,9 @@
 body{
-	margin: 0px;
-	padding: 0px;
-	text-align: center;
-	padding-top: 10px;
-	background: #F6F6F6;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    padding-top: 10px;
+    background: #F6F6F6;
 }
 #head{
     height: 50px;
@@ -48,19 +48,112 @@ div .l2{
     text-align: left;
     /*background-color: pink;*/
 }
-#le{
-    width: 1200px;
+#div1{
+    margin:0px;
+    width: 1140px;
+    position: relative;
+    top: 10px;
+    height: 150px;
+    border: 1px solid #666;
 }
-#le ul li{
+#to{
+    width: 1200px;
     /*border: 1px solid red;*/
-    
-    padding-left: 20px;
-    padding-right: 10px;
+}
+#to ul li{
+    position: relative;
+    left: -40px;
+    background: #eee;
+    border: 1px solid #eee;
+    line-height: 30px;
+
+    /*padding-right: 10px;*/
     text-align: center;
     display: inline-block;
     *display: inline;
     *zoom: 1;
 }
-#le ul li a{
-    color: #000;
+#u{
+    height: 0px;
+    /*border: 1px solid red;*/
+}
+#uu{
+    height: 0px;
+    /*border: 1px solid red;  */
+}
+.t1{
+    height: 30px;
+    width: 700px;
+}
+.t2{
+    height: 30px;
+    width: 108px;
+}
+#u1 {
+    /*border: 1px solid #eee;*/
+    position: relative;
+    top: -14px;
+    line-height: 50px;
+    width: 1100px;
+    height: 50px;
+    background: #eee;
+}
+#u1 li{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+li{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.s1{
+    position: relative;
+    right: -420px;
+    width: 100px;
+}
+.q1{
+    position: relative;
+    right: -310px;
+    top:60px;
+    width: 100px;
+}
+.u2{
+    width: 500px;
+}
+.im{
+
+    width: 80px;
+    height: 80px;
+}
+.im1{
+    position: relative;
+    top: -110px;
+    right: -40px;
+}
+.n1{
+    position: relative;
+    top: -80px;
+    right: -820px;
+    width: 100px;
+}
+.n2{
+    position: relative;
+    top: -80px;
+    text-decoration: line-through;
+    right: -600px;
+    width: 100px;
+}
+.n3{
+    color: red;
+    position: relative;
+    top: -80px;
+    right: -710px;
+    width: 100px;
+}
+.p1{
+    /*position: relative;
+    top: 20px;*/
 }

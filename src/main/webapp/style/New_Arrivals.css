@@ -1,42 +1,66 @@
+
 #container1{
     position: relative;
-    top: 255px;
-    left: 70px;
+    top: 190px;
+    left: 55px;
     float: left;
     width: 160px;
 
-    height: 150px;
+    height: 100px;
     /*border: 1px solid yellow;*/
 }
 #container1 ul li{
+    white-space: nowrap;
+    /*（不换行，一行显示）*/
+    text-overflow: ellipsis;
+    /*(溢出用省略号）*/
+    overflow: hidden;
+    /*（多出的文字，隐藏）*/
+    width: 150px;
+    height: 30px;
+    /*border:1px solid red;*/
     font-size: 12px;
     /*line-height: 10px;*/
     text-align: left;
     text-align: left;
     list-style: none;
-    
+
 }
 #container1 ul li a{
     list-style: none;
     text-decoration: none;
-    color: #666;
+
 }
 #container2{
-    
+
     float: left;
     position:relative;
     left: -70px;
     width: 160px;
-    height: 410px;
+    height: 330px;
     /*border: 1px solid pink;*/
 }
 #container2  li{
-    
     list-style: none;
-   
+
+}
+.yuan{
+    text-decoration: line-through;
+}
+.yuan a{
+    color:#666;
+}
+.ming a{
+    font-family: "微软雅黑";
+    font-weight: bold;
+    color: #666;
+}
+.jia a{
+    color: red;
+    /*border: 1px solid red;*/
 }
 .im{
 
     width: 160px;
-    height: 250px;
+    height: 180px;
 }
