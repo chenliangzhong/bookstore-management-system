@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>卓越书店</title>
+    <link rel="icon" href="/img/logo.ico" type="img/x-ico" />
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/jquery.pagination.js"></script>
     <link rel="stylesheet" href="/style/insertOrder.css">
@@ -112,25 +113,44 @@
 
     <div id="container">
         <div id="container1">
+            <h2>请输入收货地址</h2>
             <form  id="dingdan" enctype="multipart/form-data">
                 <input type="hidden" name="product_id" value="$!foreign_key">
-                收&nbsp;&nbsp;货&nbsp;&nbsp;人：<input type="text" name="address" autocomplete="off"><br>
-                地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<input type="text" name="receivre" autocomplete="off"><br>
-                电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input type="text" name="mobile" autocomplete="off"><br>
-                数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：<input type="text" name="num" autocomplete="off"><br>
-                用户描述：<input type="text" name="user_message" autocomplete="off"><br>
-                <!-- 订&nbsp;&nbsp;单&nbsp;&nbsp;号：<input type="text" name="order_code" autocomplete="off"><br> -->
-                <!-- 收货信息：<input type="text" name="delivery_date" autocomplete="off"><br> -->
+                <p><span class="span1 span2"> 详细地址：</span><textarea  id="" cols="30" name="receivre" autocomplete="off" rows="1"></textarea> </p>
+                <p><span>收货人姓名：</span> <input type="text" name="address" autocomplete="off"></p>
+
+                <p><span class="span2">手机号码：</span><input type="text" name="mobile" autocomplete="off"></p>
+                <p><span class="span2">用户描述：</span><input type="text" name="user_message" autocomplete="off"></p>
+                <p class="bookNum">
+                    <span class="span2">购买数量：</span>
+                    <a style="padding:6px; border: 1px solid #666; " id="sub" href="javascript:void(0);">-</a>
+                    <input style="width: 20px; text-align: center; height: 24px; margin-left: -4px;  background: #0098DD;" type="text" value="1" id="bookNum"" name="num" autocomplete="off">
+                    <a style="padding:6px; border: 1px solid #666;margin-left: -4px; "  id="add" href="javascript:void(0);">+</a>
+                </p>
 
                 <input type="button" value="提交订单" onclick="tijiao()">
-                <input type="button" value="取消订单" onclick="javascript:history.back(1);">
+
+
             </form>
         </div>
     </div>
 
 </div>
 
-
+<script>
+    //增加
+    $("#add").click(function() {
+        var num = parseInt($("#bookNum").val()) || 0;
+        $("#bookNum").val(num + 1);
+    });
+    //减去
+    $("#sub").click(function() {
+        var num = parseInt($("#bookNum").val()) || 0;
+        num = num - 1;
+        num = num < 1 ? 1 : num;
+        $("#bookNum").val(num);
+    });
+</script>
 
 <div id="foot">
     <div id="footer">

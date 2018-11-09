@@ -1,9 +1,9 @@
-ody{
-	margin: 0px;
-	padding: 0px;
-	text-align: center;
-	padding-top: 10px;
-	background: #F6F6F6;
+body{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    padding-top: 10px;
+    background: #F6F6F6;
 }
 #head{
     height: 50px;
@@ -44,6 +44,7 @@ div .l2{
 #container{
     width: 1200px;
     /*height:200px;*/
+    /*border: 1px solid red;*/
     margin: 0 auto;
     text-align: left;
     /*background-color: pink;*/
@@ -70,7 +71,20 @@ div .l2{
     /*border: 1px solid red;*/
 
 }
-#le1 ul li{
+#le1 ul li hover{
+    text-overflow:inherit;
+    overflow: visible;
+
+    white-space: pre-line;
+}
+#le1 ul li {
+
+    white-space: nowrap;
+    /*（不换行，一行显示）*/
+    text-overflow: ellipsis;
+    /*(溢出用省略号）*/
+    overflow: hidden;
+    /*（多出的文字，隐藏）*/
     position: relative;
     right: -102px;
     /*border: 1px solid red;*/
@@ -87,9 +101,9 @@ div .l2{
     color: #000;
 }
 
- li{
-  /*  position: relative;
-    top: -85px;*/
+li{
+    /*  position: relative;
+      top: -85px;*/
     /*border: 1px solid red;*/
     width: 70px;
     height: 50px;
@@ -100,8 +114,12 @@ div .l2{
     *display: inline;
     *zoom: 1;
 }
- li a{
+li a{
     color: #000;
+}
+#u{
+    height: 0px;
+    /*border: 1px solid red;*/
 }
 .l1{
     /*position: relative;

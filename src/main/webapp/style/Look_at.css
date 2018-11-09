@@ -1,10 +1,12 @@
 
 #container{
-	margin: 0 auto;
-	text-align: left;
-	width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+    width: 1200px;
+    clear: both;
 }
 #container3{
+    font-size: 12px;
     position: relative;
     right: -500px;
     width: 400px;
@@ -15,13 +17,21 @@
 }
 #container4{
     position:relative;
-    top: -400px;
-    left: 90px;
-    width: 400px;
-    height: 400px;
+    top: -350px;
+    left: 230px;
+    width: 200px;
+    height: 250px;
     /*border: 1px solid pink;*/
 }
+/*#container4 ul li{
+    border: 1px solid red;
+    padding-left: 10px;
+    float: left;
+    width: 60px;
+}*/
 ul li{
+    font-size: 12px;
+    height: 30px;
     list-style: none;
 }
 ul li a{
@@ -29,14 +39,34 @@ ul li a{
     color: #666;
 }
 .tu{
-    width: 350px;
-    height: 350px;
+    padding: 5px;
+    width: 200px;
+    height: 250px;
+    border: 1px solid red;
 }
-.a1{text-align: center;
+.a1{
+    float: left;
+    padding-left: 10px;
+    text-align: center;
     background-color: red;
     width: 80px;
     height: 20px;
 }
+.a2{
+    margin-right: 10px;
+}
 .a1 a{
     color: #fff;
+}
+.ming {
+    font-family: "微软雅黑";
+    font-weight: bold;
+    color: #666;
+}
+.yuan{
+    text-decoration: line-through;
+}
+.jia {
+    color: red;
+    /*border: 1px solid red;*/
 }

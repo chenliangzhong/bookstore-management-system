@@ -1,8 +1,8 @@
 body {
     background: #F6F6F6;
-   margin: 0 ;
-   padding: 0px;
-   /*text-align: left;*/
+    margin: 0 ;
+    padding: 0px;
+    /*text-align: left;*/
     color: #464646;
     padding-top: 10px;
     position: relative;
@@ -22,14 +22,14 @@ body {
     width: 1200px;
     /*background-color: pink;*/
 }
- .l1 {
+.l1 {
     height: 50px;
     width: 600px;
     /*background-color: pink;*/
     text-align: left;
     float: left;
 }
- .l2{
+.l2{
     height: 50px;
     width: 570px;
     text-align: right;
@@ -39,7 +39,7 @@ body {
 }
 .head1{
     float: left;
-    padding-left:10px;    
+    padding-left:10px;
     /*border: 1px solid red;*/
     line-height: 48px;
     text-align: right;
@@ -49,35 +49,35 @@ body {
     padding-left:10px;
     /*border: 1px solid red;*/
     line-height: 48px;
-    
+
 }
 .head3{
     float: left;
-    padding-left:10px;   
+    padding-left:10px;
     /*border: 1px solid red;*/
-   
+
     line-height: 48px;
 }
 .header1{
     float: left;
-    padding-left:10px;    
+    padding-left:10px;
     /*border: 1px solid red;*/
     line-height: 48px;
-   
+
 }
 .header2{
     float: left;
     padding-left:10px;
     /*border: 1px solid red;*/
     line-height: 48px;
-    
+
 }
 .header3{
     float: left;
-    padding-left:10px;   
+    padding-left:10px;
     /*border: 1px solid red;*/
     line-height: 48px;
-    
+
 }
 #hea{
     position: relative;
@@ -129,7 +129,7 @@ body {
     height: 50px;
 }
 #logo1{
- 
+
     width: 80px;
     height: 80px;
     float: left;
@@ -172,46 +172,46 @@ body {
 }
 
 #foot{
-
+    clear: both;
     text-align: center;
     width: 100%;
     margin: 0 auto;
     height:100px;
-     background-color: #eee;
+    background-color: #eee;
 }
 #footer{
     width: 1198px;
     /*border: 1px solid pink;*/
     margin: 0 auto;
     height:100px;
-   
+
 }
 #footzheng{
     margin-left: 15px;
     padding-left:100px;
     padding-top:25px;
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
 }
 
 #footqian{
     padding-left:100px;
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
     padding-top:25px;
 }
 #footche{
     padding-left:100px;
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     padding-top:25px;
     float: left;
 }
 #footshoujian{
     padding-left:100px;
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
     padding-top:25px;
@@ -232,59 +232,59 @@ body {
     width: 100%;
     margin: 0 auto;
     height:150px;
-     /*background-color: #eee;*/
-     border: 2px solid #eee;
+    /*background-color: #eee;*/
+    border: 2px solid #eee;
 }
 #butt{
     width: 1198px;
     /*border: 1px solid pink;*/
     margin: 0 auto;
     height:150px;
-   
+
 }
 
 #buttongouwu{
     margin-left: 25px;
-/*padding-left:100px;*/
-   /*border: 1px solid red;*/
+    /*padding-left:100px;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
 }
 
 #buttonzhifu{
-  /*  padding-left:100px;*/
-   /*border: 1px solid red;*/
+    /*  padding-left:100px;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
 }
 #buttondingdan{
     /*padding-left:100px;*/
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
 }
 #buttonpeisong{
     /*padding-left:100px;*/
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
 }
 #buttontuihuo{
     /*padding-left:100px;*/
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
 }
 #buttonshangjia{
     /*padding-left:100px;*/
-   /*border: 1px solid red;*/
+    /*border: 1px solid red;*/
     width: 190px;
     float: left;
 }
 
 #footzhengtu{
-  /*  width: 150px;
-    height: 100px;*/
+    /*  width: 150px;
+      height: 100px;*/
     float: left;
 }
 #footzhengwen{
@@ -310,22 +310,22 @@ body {
 #le{
     margin: 0px;
     padding: 0px;
-   width: 248px;
+    width: 248px;
 }
 #le ul li {
     display: inline-block;
     *display: inline;
     *zoom: 1;
     text-align: left;
-  
+
     /*border: 1px solid red;*/
-   
-    
+
+
 }
 #le ul li a {
-  color:#fff; 
-  text-decoration: none;
-  
+    color:#fff;
+    text-decoration: none;
+
 }
 #jiao{
     position: relative;

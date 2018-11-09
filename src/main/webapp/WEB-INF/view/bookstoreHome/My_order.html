@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>卓越书店</title>
+    <link rel="icon" href="/img/logo.ico" type="img/x-ico" />
     <script src="/js/jquery-1.9.1.min.js"></script>
-
     <link rel="stylesheet" href="/style/index1.css">
     <link rel="stylesheet" href="/style/My_order.css">
     <script>
@@ -18,6 +18,7 @@
                 type:"get",
                 dataType:"json",
                 cache:false,
+                timeout: 1000,
                 xhrFields:{
                     withCredentials:true
                 },
@@ -31,20 +32,52 @@
         }
         function initData(data){
             var list = data.list;
-            var tr_str = "";
+            var tr_str = "<p>所有订单</p>"+
+                "<div id='to'>"+
+                "<ul>"+
+                "<li class='t1'>"+"宝贝"+"</li>"+
+                "<li class='t2'>"+"单价"+"</li>"+
+                "<li class='t2'>"+"数量"+"</li>"+
+                "<li class='t2'>"+"实付款"+"</li>"+
+                "<li class='t2'>"+"交易操作"+"</li>"+
+                "</ul>"+
+                "</div>";
 
             for (var i = 0; i < list.length; i++) {
-                tr_str += "<div id='le' data-id='" + list[i].id + "'>" +
-                    "<ul>"+
-                    "<li >" + "订单号：" + list[i].order_code + "</li>" +
-                    "<li >" + "地址：" + list[i].address + "</li>" +
-                    "<li >" + "用户信息：" + list[i].user_message + "</li>" +
-                    "<li >" + "收货人：" + list[i].receivre + "</li>" +
-                    // "<li >" + "收货信息：" + list[i].delivery_date + "</li>" +
-                    "<li ><a href='#' onclick='deleteItem(this)' >" + "删除" +"</a></li>" +
-                    "<li ><a href='#' onclick='showActivityBox(this)' >" + "确认收货" +"</a></li>" +
+                tr_str += "<div id='div1' data-id='" + list[i].id +"'>"+
+                    "<ul id='u1' >"+
+                    "<li >"+ list[i].create_date + "</li>" +
+                    "<li class='u2'>" + "订单号：" + list[i].order_code + "</li>" +
+                    // "<li >" + "地址：" + list[i].address + "</li>" +
+                    // "<li >" + "用户信息：" + list[i].user_message + "</li>" +
+                    // "<li >" + "收货人：" + list[i].receivre + "</li>" +
+                    // "<li >" + "电话号码：" + list[i].mobile + "</li>" +
+                    "<li class='p1'>"  + list[i].order_enum.desc + "</li>"+
+
+                    "<li class='s1'>"+"<a href='#' onclick='deleteItem(this)' >" + "删除" +"</a>"+"</li>" +
+
+                    "<li class='q1'>"+"<a href='#' onclick='showActivityBox(this)' >" + "确认收货" +"</a>"+"</li>" +
                     "</ul>"+
                     "</div>";
+                var order_items = list[i].order_items;
+                for (var x = 0; x < 1; x++) {
+                    tr_str += "<ul id='u'>"+
+                        // "<li >" + "是否支付：" + order_items[x].order_enum.desc + "</li>";
+                        // "<li >" + "数量：" + order_items[x].id + "</li>" +
+                        "<li class='n1'>" + order_items[x].number + "</li>" +
+                        "<li class='n2'>" + "￥" + order_items[x].product.original_price + "</li>" +
+                        "<li class='n3'>"  + "￥"+ order_items[x].product.promote_price + "</li>" +
+                        "</ul>";
+                    var product_image_list = order_items[x].product.product_image_list;
+                    for (var y = 0; y < 1; y++) {
+                        tr_str += "<ul id='uu'>"+
+                            // "<li >" + "是否支付：" + order_items[x].order_enum.desc + "</li>";
+                            // "<li >" + "数量：" + order_items[x].id + "</li>" +
+                            "<li class='im1'><img src='"+ product_image_list[y].picture +"' class='im' ></li>" +
+                            "</ul>";
+
+                    }
+                }
             }
             $("#container").html(tr_str);
         }
@@ -72,6 +105,7 @@
                             alert(result.msg);
                             var tr = $(item).closest("div");
                             tr.remove();
+                            window.location.href = "My_order.html";
                         }
 
                     }
@@ -185,27 +219,27 @@
 
 </div>
 
+<div id="container">
 
-<div id="banner">
-    <!--   <iframe src="index1.html" name="main" frameborder="0" scrolling="no" style="width: 1200px;  height: 385px;">
-
-          </iframe> -->
-    <div id="container">
-
-    </div>
-    <!--   <div id="left">
-          <nav>
-              商品分类
-          </nav>
-          <div id="left1">
-
-          </div>
-      </div>
-
-      <div id="right">
-          <nav></nav>
-      </div> -->
 </div>
+<!-- <div id="banner"> -->
+<!--   <iframe src="index1.html" name="main" frameborder="0" scrolling="no" style="width: 1200px;  height: 385px;">
+
+      </iframe> -->
+
+<!--   <div id="left">
+      <nav>
+          商品分类
+      </nav>
+      <div id="left1">
+
+      </div>
+  </div>
+
+  <div id="right">
+      <nav></nav>
+  </div> -->
+<!-- </div> -->
 
 
 

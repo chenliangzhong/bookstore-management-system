@@ -1,15 +1,29 @@
 
 #container{
-	
-	text-align: center;
-	padding: 0px;
-	width: 1200px;
+
+    text-align: center;
+    padding: 0px;
+    width: 1200px;
     /*border: 1px solid red;*/
 }
 #container1{
     margin:0 auto;
     text-align: left;
     padding: 0px;
-    width: 300px;
+    width: 500px;
     /*border: 1px solid red;*/
+}
+.span1{
+    position: relative;
+    top:-10px;
+}
+.span2{
+    padding-right: 20px;
+}
+
+.bookNum a{
+
+    color: red;
+    list-style: none;
+    text-decoration: none;
 }

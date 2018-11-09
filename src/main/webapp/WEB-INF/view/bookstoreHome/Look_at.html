@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+    <title>卓越书店</title>
+    <link rel="icon" href="/img/logo.ico" type="img/x-ico" />
 	<script src="/js/jquery-1.9.1.min.js"></script>
     <!-- <script src="jq/jquery.pagination.js"></script> -->
     <link rel="stylesheet" href="/style/Look_at.css">
@@ -49,36 +50,38 @@ function initData(data) {
     var tr_str1="";
 
     for (var i = 0; i < list.length; i++) {
-            // tr_str1= "<div>" + tr_str + "</div>";
-           tr_str += "<div data-id='" + list[i].id + "' id='container3'>" +
+        // tr_str1= "<div>" + tr_str + "</div>";
+        tr_str += "<div data-id='" + list[i].id + "' id='container3'>" +
             // '<li >' + list[i].id + '</li>' +
             "<ul>" +
-             "<li>"+ "书名：" + list[i].name + "</li>"+
-               "<li>"+ "小标题：" + list[i].subtitle + "</li>"+
-             "<li>"+ "原价格：" + list[i].original_price + "</li>"+
-             "<li>"+ "优惠价格：" + list[i].promote_price + "</li>"+
-             "<li>"+ "库存：" + list[i].stock + "</li>"+
-             "<li>"+ "销量(" + list[i].sale_count + ")</li>"+
-             "<li>"+ "评价(" + list[i].review_count + ")</li>"+
-             "<li class='a1'><a onclick='showAddOrder(this)'>" +"立即购买"+ "</a></li>"+
-             "<br>"+
-             "<li class='a1'><a href='#' onclick='showAddCart()'>" +"加入购物车"+ "</a></li>"+
-             "</ul>"+
-             // "<li> <input type='button' value='购买' onclick='javascript:window.location.href='insertOrder.html''></li>" +
-             // "<li><input type='button' value='加入购物车' onclick='showActivityBox(this)'></li>"+
-             "</div>";
-        var product_image_list = list[i].product_image_list;
-        for (var y = 0; y < product_image_list.length; y++) {
-            tr_str +="<div data-id='" + list[i].id + "' id='container4'>" +
-            // "<li >" + product_image_list[y].id + "</li>" +
-            "<ul>"+
-            "<li ><img src='" + product_image_list[y].picture +"' class='tu'></li>" +
+            // "<li>"+ "id：" + list[i].id+ "</li>"+
+            "<li class='ming'>"+ "书名：" + list[i].name + "</li>"+
+            "<li class='yuan'>"+ "原价格：" + list[i].original_price + "</li>"+
+            "<li class='jia'>"+ "优惠价格：" + list[i].promote_price + "</li>"+
+            "<li>"+ "库存：" + list[i].stock + "</li>"+
+            "<li class='a1 a2'><a href='insertOrder.html' >" +"立即购买"+ "</a></li>"+
+
+            "<li class='a1'><a href='#' onclick='showAddCart()'>" +"加入购物车"+ "</a></li>"+
             "</ul>"+
-            "</div>";  
-            } 
+            // "<li> <input type='button' value='购买' onclick='javascript:window.location.href='insertOrder.html''></li>" +
+            // "<li><input type='button' value='加入购物车' onclick='showActivityBox(this)'></li>"+
+            "</div>";
+        var product_image_list = list[i].product_image_list;
+        for (var y = 0; y < 1; y++) {
+            tr_str +="<div data-id='" + product_image_list[y].id + "' id='container4'>" +
+                "<ul>"+
+                "<li ><img src='" + product_image_list[y].picture +"' onclick='tu1' class='tu'></li>" +
+                // "<li ><img src='" + "http://192.168.1.138:8080" + product_image_list[2].picture +"' onclick='tu2' class='tu'></li>" +
+                // "<li ><img src='" + "http://192.168.1.138:8080" + product_image_list[3].picture +"' onclick='tu3' class='tu'></li>" +
+                // "<li ><img src='" + "http://192.168.1.138:8080" + product_image_list[4].picture +"' onclick='tu4' class='tu'></li>" +
+                "</ul>"+
+                "</div>";
         }
+    }
     $("#container").html(tr_str);
 }
+
+
 function showAddCart(){
     if (confirm("确定要添加吗？")) {
             $.ajax({

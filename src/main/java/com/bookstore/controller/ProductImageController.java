@@ -128,8 +128,21 @@ public class ProductImageController extends BaseApiController{
     }
 
     @GetMapping("/listById/{id}")
-    public Map<String, Object> listById(@PathVariable Long id) {
-        return onDataResp(productImageService.listById(id));
+    public void listById(@PathVariable Long id, HttpServletResponse response) throws IOException {
+
+        String path = productImageService.listById(id).getPicture();
+        File file = new File(fileUploadUtils.getBasePath() + path);
+        if (file.exists()){
+            FileInputStream in = new FileInputStream(file);
+            OutputStream os = response.getOutputStream();
+            byte[] b = new byte[1024];
+            while (in.read(b) != -1) {
+                os.write(b);
+            }
+            in.close();
+            os.flush();
+            os.close();
+        }
     }
 
 

@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>卓越书店</title>
+    <link rel="icon" href="/img/logo.ico" type="img/x-ico" />
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/jquery.pagination.js"></script>
     <link rel="stylesheet" href="/style/categoryById.css">
@@ -79,11 +80,11 @@
                 tr_str += "<div data-id='" + list[i].id + "' id='container1'>" +
                     // '<li >' + list[i].id + '</li>' +
                     "<ul>"+
-                    "<li><a href='#' onclick='showActivityBo(this)'>"+ "书名：" + list[i].category_id + "</a></li>"+
-                    "<li><a href='#' onclick='showActivityBo(this)'>"+ "书名：" + list[i].name + "</a></li>"+
-                    "<li><a href='#' onclick='showActivityBo(this)'>"+ "原价格：" + list[i].original_price + "</a></li>"+
-                    "<li><a href='#' onclick='showActivityBo(this)'>"+ "优惠价格：" + list[i].promote_price + "</a></li>"+
-                    "<li><a href='#' onclick='showActivityBo(this)'>"+ "库存：" + list[i].stock + "</a></li>"+
+                    // "<li><a href='#' onclick='showActivityBo(this)'>"+ "书名：" + list[i].category_id + "</a></li>"+
+                    "<li class='ming'><a href='#' onclick='showActivityBo(this)'>"+ "书名：" + list[i].name + "</a></li>"+
+                    "<li class='yuan'><a href='#' onclick='showActivityBo(this)'>"+ "原价格：" + list[i].original_price + "</a></li>"+
+                    "<li class='jia'><a href='#' onclick='showActivityBo(this)'>"+ "优惠价格：" + list[i].promote_price + "</a></li>"+
+                    "<li class='ku'><a href='#' onclick='showActivityBo(this)'>"+ "库存：" + list[i].stock + "</a></li>"+
                     "</ul>"+
 
                     "</div>";
